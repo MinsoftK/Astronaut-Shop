@@ -1,7 +1,9 @@
+/* eslint-disable */
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
 import './App.css';
+import './container/ShoesData';
 
 function App() {
 	return (
@@ -27,12 +29,32 @@ function App() {
 				</div>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-4">a</div>
-						<div className="col-md-4">a</div>
-						<div className="col-md-4">a</div>
+						<div className="col-md-4">
+							<img
+								src="https://cueren.com/wp-content/uploads/2021/03/MQB07-CRES-1.jpg"
+								width="100%"></img>
+							<h4>상품명</h4>
+							<p>상품설명 & 가격</p>
+						</div>
+
+						<div className="col-md-4">
+							<img
+								src="https://cueren.com/wp-content/uploads/2019/10/MBT10-CRES-1.jpg"
+								width="100%"></img>
+							<h4>상품명</h4>
+							<p>상품설명 & 가격</p>
+						</div>
+						<div className="col-md-4">
+							<img
+								src="https://cueren.com/wp-content/uploads/2019/10/MLD09-CRBK-1.jpg"
+								width="100%"></img>
+							<h4>상품명</h4>
+							<p>상품설명 & 가격</p>
+						</div>
 					</div>
 				</div>
 			</>
+			<div class="no-display">화면이 너무 작습니다. </div>
 		</div>
 	);
 }

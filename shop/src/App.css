@@ -1,6 +1,24 @@
 .App {
 	text-align: center;
 }
+
+@media screen and (max-width: 300px) {
+	.no-display {
+		position: absolute;
+		font-size: 20px;
+		font-weight: 600;
+		z-index: 99;
+		height: 100%;
+		width: 100%;
+	}
+	.welcomePage {
+		display: none;
+	}
+	.container {
+		display: none;
+	}
+}
+
 @media screen and (min-width: 300px) {
 	.welcomePage {
 		display: block;
@@ -10,6 +28,9 @@
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
 		color: white;
+	}
+	.no-display {
+		display: none;
 	}
 }
 
