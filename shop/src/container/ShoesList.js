@@ -1,23 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Data from '../Data/ShoesData';
 import Data2 from '../Data/ShoesData2';
 
 import ShoesItem from '../component/ShoesItem';
 import Navigator from '../component/Navbar';
 
-const ShoesList = (num) => {
+const ShoesList = (props) => {
 	let [shoes, setShoes] = useState(Data);
-	{
-		console.log(num);
-	}
+	let [wshoes, setWshoes] = useState(Data2);
+
+	const Man = () => {
+		return (
+			<div className="row">
+				{shoes.map((item, i) => {
+					return <ShoesItem shoes={item} num={i} key={i}></ShoesItem>;
+				})}
+			</div>
+		);
+	};
+	const Woman = () => {
+		return (
+			<div className="row">
+				{wshoes.map((item, i) => {
+					return <ShoesItem shoes={item} num={i} key={i}></ShoesItem>;
+				})}
+			</div>
+		);
+	};
 	return (
 		<>
 			<Navigator></Navigator>
 			<div className="container">
 				<div className="row">
-					{shoes.map((item, i) => {
-						return <ShoesItem shoes={item} num={i} key={i}></ShoesItem>;
-					})}
+					{props.num === 1 ? {wshoes.map((item, i) => {
+					return <ShoesItem shoes={item} num={i} key={i}></ShoesItem>;
+				})} : <Man></Man>}
 				</div>
 			</div>
 		</>
