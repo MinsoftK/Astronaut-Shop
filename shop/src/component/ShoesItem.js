@@ -1,9 +1,10 @@
 /* eslint-disable */
 import './ShoesItem.css';
 import React, { useState } from 'react';
+import ShoesDetail from './ShoesDetail';
+import { Link } from 'react-router-dom';
 
 function ShoesItem(props) {
-	let [modal, setModal] = useState([false, false, false, false]);
 	return (
 		<div className="col-md-4">
 			<img

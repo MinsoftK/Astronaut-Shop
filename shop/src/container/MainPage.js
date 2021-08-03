@@ -22,14 +22,6 @@ const MainPage = () => {
 				</Button>
 			</div>
 
-			<div className="container">
-				<div className="row">
-					{shoes.map((item, i) => {
-						return <ShoesItem shoes={item} num={i} key={i}></ShoesItem>;
-					})}
-				</div>
-			</div>
-
 			<div class="no-display">화면이 너무 작습니다. </div>
 		</>
 	);
