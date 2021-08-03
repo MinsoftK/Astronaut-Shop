@@ -8,7 +8,7 @@ import './App.css';
 import ShoesDetail from './component/ShoesDetail';
 import ShoesList from './container/ShoesList';
 import MainPage from './container/MainPage';
-
+import Detail from './container/Detail';
 const App = () => {
 	let [sex, setSex] = useState(null);
 	return (
@@ -25,7 +25,7 @@ const App = () => {
 					<ShoesList num={1}></ShoesList>
 				</Route>
 				<Route path="/about">
-					<ShoesList></ShoesList>
+					<Detail></Detail>
 				</Route>
 			</Switch>
 		</div>

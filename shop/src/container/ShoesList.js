@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { Route } from 'react-router-dom';
+
+/* Data */
 import Data from '../Data/ShoesData';
 import Data2 from '../Data/ShoesData2';
 
+/* component */
 import ShoesItem from '../component/ShoesItem';
 import Navigator from '../component/Navbar';
+import Detail from './Detail';
 
 const ShoesList = (props) => {
 	let [shoes, setShoes] = useState(Data);

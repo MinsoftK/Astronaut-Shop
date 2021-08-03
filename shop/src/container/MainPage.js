@@ -33,7 +33,10 @@ const MainPage = () => {
 			</div>
 			<br />
 			<br />
-			<h2> Have Special Experience with Astronaut </h2>
+			<h2 class="welcomePage__middle">
+				{' '}
+				Have Special Experience with Astronaut{' '}
+			</h2>
 			<div className="content">
 				<ShoesShow></ShoesShow>
 			</div>
