@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
-const ShoesDetail = () => {
+const About = (props) => {
+	let { id } = useParams();
 	let history = useHistory();
 	return (
 		<div className="container">
@@ -13,7 +14,7 @@ const ShoesDetail = () => {
 					/>
 				</div>
 				<div className="col-md-6 mt-4">
-					<h4 className="pt-5">상품명</h4>
+					<h4 className="pt-5">{props.shoes[id].title}</h4>
 					<p>상품설명</p>
 					<p>120000원</p>
 					<button className="btn btn-danger">주문하기</button>
@@ -29,4 +30,4 @@ const ShoesDetail = () => {
 		</div>
 	);
 };
-export default ShoesDetail;
+export default About;

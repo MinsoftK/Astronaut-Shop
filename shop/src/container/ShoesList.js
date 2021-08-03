@@ -8,7 +8,7 @@ import Data2 from '../Data/ShoesData2';
 /* component */
 import ShoesItem from '../component/ShoesItem';
 import Navigator from '../component/Navbar';
-import Detail from './Detail';
+import About from './About';
 
 const ShoesList = (props) => {
 	let [shoes, setShoes] = useState(Data);
