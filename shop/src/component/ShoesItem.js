@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+/* eslint-disable */
+import React from 'react';
 
-const Modal = () => {
-	return <div></div>;
-};
-
-const ShoesItem = (props) => {
-	let [modal, setModal] = useState(false);
+function ShoesItem(props) {
 	return (
 		<div className="col-md-4">
-			<img src={props.imageUrl} width="100%"></img>
-			<h4>{props.title}</h4>
-			<p>가격:{props.price}</p>
+			{console.log('test', props)}
+			<img src={'./img/cshoes' + props.num + 'jpg'} width="100%"></img>
+			<h4>{props.shoes.title}</h4>
+			<h5>가격:{props.shoes.price}</h5>
 			<h5
 				onClick={() => {
 					setModal(!modal);
 				}}>
 				상세설명
 			</h5>
-			{modal ? <Modal des={props.des}></Modal> : null}
 		</div>
 	);
-};
+}
 
 export default ShoesItem;

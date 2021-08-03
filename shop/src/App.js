@@ -25,33 +25,9 @@ const App = () => {
 				</div>
 				<div className="container">
 					<div className="row">
-						{Data.map((Data, i) => {
-							<ShoesItem
-								imageUrl={Data[i].imageUrl}
-								title={Data[i].title}
-								price={Data[i].price}
-								des={Data[i].description}></ShoesItem>;
+						{shoes.map((item, i) => {
+							return <ShoesItem shoes={item} num={i}></ShoesItem>;
 						})}
-						<ShoesItem
-							imageUrl={Data[0].imageUrl}
-							title={Data[0].title}
-							price={Data[0].price}
-							des={Data[0].description}></ShoesItem>
-
-						<div className="col-md-4">
-							<img
-								src="https://cueren.com/wp-content/uploads/2019/10/MBT10-CRES-1.jpg"
-								width="100%"></img>
-							<h4>상품명</h4>
-							<p>상품설명 & 가격</p>
-						</div>
-						<div className="col-md-4">
-							<img
-								src="https://cueren.com/wp-content/uploads/2019/10/MLD09-CRBK-1.jpg"
-								width="100%"></img>
-							<h4>상품명</h4>
-							<p>상품설명 & 가격</p>
-						</div>
 					</div>
 				</div>
 			</>
