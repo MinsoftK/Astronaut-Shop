@@ -1,14 +1,24 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import './Navbar.css';
 
 const Navigator = () => {
 	return (
 		<Navbar bg="dark" variant="dark">
 			<Container>
-				<Navbar.Brand href="#home">Astronaut</Navbar.Brand>
+				<Navbar.Brand>
+					<Link to="/">Astronaut</Link>
+				</Navbar.Brand>
 				<Nav className="me-auto">
-					<Nav.Link href="#home">Men's Shoes</Nav.Link>
-					<Nav.Link href="#features">Woman's Shoes</Nav.Link>
-					<Nav.Link href="#pricing">About</Nav.Link>
+					<Nav.Link>
+						<Link to="/menshoes">Men's Shoes</Link>
+					</Nav.Link>
+					<Nav.Link>
+						<Link to="womenshoes">Woman's Shoes</Link>
+					</Nav.Link>
+					<Nav.Link>
+						<Link to="/about">About</Link>
+					</Nav.Link>
 				</Nav>
 			</Container>
 		</Navbar>

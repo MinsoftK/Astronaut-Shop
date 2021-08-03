@@ -1,0 +1,9 @@
+.col-md-4 {
+	cursor: pointer;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.col-md-4:hover {
+	cursor: pointer;
+	opacity: 0.6;
+}

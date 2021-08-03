@@ -1,7 +1,9 @@
 /* eslint-disable */
-import React from 'react';
+import './ShoesItem.css';
+import React, { useState } from 'react';
 
 function ShoesItem(props) {
+	let [modal, setModal] = useState([false, false, false, false]);
 	return (
 		<div className="col-md-4">
 			<img
@@ -12,13 +14,7 @@ function ShoesItem(props) {
 				}
 				width="100%"></img>
 			<h4>{props.shoes.title}</h4>
-			<h5>가격:{props.shoes.price}</h5>
-			<h5
-				onClick={() => {
-					setModal(!modal);
-				}}>
-				상세설명
-			</h5>
+			<h5>₩ {props.shoes.price}</h5>
 		</div>
 	);
 }

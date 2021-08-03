@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React, { useState } from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
 /* component container */
@@ -12,12 +12,14 @@ const App = () => {
 	return (
 		<div className="App">
 			<div class="no-display">화면이 너무 작습니다. </div>
-			<Route exact path="/">
-				<MainPage></MainPage>
-			</Route>
-			<Route path="/detail">
-				<ShoesDetail></ShoesDetail>
-			</Route>
+			<Switch>
+				<Route exact path="/">
+					<MainPage></MainPage>
+				</Route>
+				<Route path="/detail">
+					<ShoesDetail></ShoesDetail>
+				</Route>
+			</Switch>
 		</div>
 	);
 };
