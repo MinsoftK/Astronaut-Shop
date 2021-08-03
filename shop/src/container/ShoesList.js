@@ -32,9 +32,7 @@ const ShoesList = (props) => {
 			<Navigator></Navigator>
 			<div className="container">
 				<div className="row">
-					{props.num === 1 ? {wshoes.map((item, i) => {
-					return <ShoesItem shoes={item} num={i} key={i}></ShoesItem>;
-				})} : <Man></Man>}
+					{props.num === 1 ? <Woman></Woman> : <Man></Man>}
 				</div>
 			</div>
 		</>
