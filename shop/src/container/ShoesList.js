@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
+import axios from 'axios';
 
 /* Data */
 import Data from '../Data/ShoesData';
 import Data2 from '../Data/ShoesData2';
 
 /* component */
+import { Button } from 'antd';
 import ShoesItem from '../component/ShoesItem';
 import Navigator from '../component/Navbar';
 import About from './About';
@@ -39,6 +41,21 @@ const ShoesList = (props) => {
 				<div className="row">
 					{props.num === 1 ? <Woman></Woman> : <Man></Man>}
 				</div>
+				<Button
+					type="primary"
+					style={{ margin: '4rem' }}
+					onClick={() => {
+						axios
+							.get('https://codingapple1.github.io/shop/data2.json')
+							.then((result) => {
+								console.log(result.data);
+							})
+							.catch(() => {
+								console.log('실패');
+							});
+					}}>
+					더보기
+				</Button>
 			</div>
 		</>
 	);
