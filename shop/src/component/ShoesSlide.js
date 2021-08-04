@@ -9,9 +9,9 @@ const Title = styled.h5`
 const ShoesSlide = (props) => {
 	return (
 		<Carousel>
-			{props.img.map((url) => {
+			{props.img.map((url, i) => {
 				return (
-					<Carousel.Item>
+					<Carousel.Item key={i}>
 						<img
 							className="d-block w-100"
 							src={url}

@@ -10,9 +10,15 @@ const Navigator = () => {
 					<Link to="/">Astronaut</Link>
 				</Navbar.Brand>
 				<Nav className="me-auto">
-					<Nav.Link to="/menshoes">Men's Shoes</Nav.Link>
-					<Nav.Link to="womenshoes">Woman's Shoes</Nav.Link>
-					<Nav.Link to="/about">About</Nav.Link>
+					<Nav.Link as={Link} to="/menshoes">
+						Men's Shoes
+					</Nav.Link>
+					<Nav.Link as={Link} to="womenshoes">
+						Woman's Shoes
+					</Nav.Link>
+					<Nav.Link as={Link} to="/about">
+						About
+					</Nav.Link>
 				</Nav>
 			</Container>
 		</Navbar>
