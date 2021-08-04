@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../component/Navbar';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ let Box = styled.div`
 	padding: 30px;
 `;
 
-let Box__title = styled.h4`
+let Boxtitle = styled.h4`
 	font-size: 25px;
 	color: ${(props) => props.color};
 `;
@@ -17,12 +17,13 @@ const About = (props) => {
 	let { id } = useParams();
 	let history = useHistory();
 	let findItem = props.shoes.find((item) => item.id === parseInt(id));
+	useEffect(() => {});
 	return (
 		<>
 			<Navbar></Navbar>
 			<div className="container">
 				<Box>
-					<Box__title>About Astronaut's Shoes</Box__title>
+					<Boxtitle>About Astronaut's Shoes</Boxtitle>
 				</Box>
 				<div className="shose-alert">
 					<p>재고가 많이 남지 않았습니다.</p>

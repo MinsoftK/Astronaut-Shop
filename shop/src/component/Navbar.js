@@ -13,10 +13,10 @@ const Navigator = () => {
 					<Nav.Link as={Link} to="/menshoes">
 						Men's Shoes
 					</Nav.Link>
-					<Nav.Link as={Link} to="womenshoes">
+					<Nav.Link as={Link} to="/womenshoes">
 						Woman's Shoes
 					</Nav.Link>
-					<Nav.Link as={Link} to="/about">
+					<Nav.Link as={Link} to="/about/0">
 						About
 					</Nav.Link>
 				</Nav>
