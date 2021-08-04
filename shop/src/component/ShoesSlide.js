@@ -1,9 +1,14 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
+import styled from 'styled-components';
+
+const Title = styled.h5`
+	color: white;
+`;
 
 const ShoesSlide = (props) => {
 	return (
-		<Carousel variant="dark">
+		<Carousel>
 			{props.img.map((url) => {
 				return (
 					<Carousel.Item>
@@ -15,7 +20,7 @@ const ShoesSlide = (props) => {
 							height="100%"
 						/>
 						<Carousel.Caption>
-							<h5>Astronuat's story</h5>
+							<Title>Astronuat's story</Title>
 							<p>We are Free in Universe</p>
 						</Carousel.Caption>
 					</Carousel.Item>

@@ -7,19 +7,10 @@ import ShoesShow from './ShoesShow';
 import 'antd/dist/antd.css';
 import { Button, Carousel } from 'antd';
 
-import './MainPage.css';
+import './MainPage.scss';
 import ShoesList from './ShoesList';
 
 const MainPage = () => {
-	const contentStyle = {
-		display: 'flex',
-		height: '30vh',
-		color: '#fff',
-		lineHeight: '160px',
-		textAlign: 'center',
-		background: '#364d79',
-	};
-
 	return (
 		<>
 			<Navigator></Navigator>
@@ -33,10 +24,7 @@ const MainPage = () => {
 			</div>
 			<br />
 			<br />
-			<h2 class="welcomePage__middle">
-				{' '}
-				Have Special Experience with Astronaut{' '}
-			</h2>
+			<h2 class="welcomePage__middle">Special Experience</h2>
 			<div className="content">
 				<ShoesShow></ShoesShow>
 			</div>
