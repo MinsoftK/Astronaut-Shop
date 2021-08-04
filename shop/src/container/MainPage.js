@@ -28,7 +28,6 @@ const MainPage = () => {
 			<div className="content">
 				<ShoesShow></ShoesShow>
 			</div>
-			<div className="no-display">화면이 너무 작습니다. </div>
 		</>
 	);
 };
