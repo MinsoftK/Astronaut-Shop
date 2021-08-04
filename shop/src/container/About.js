@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import Navbar from '../component/Navbar';
 import { useHistory, useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import './About.scss';
+
+let Box = styled.div`
+	padding: 30px;
+`;
+
+let Box__title = styled.h4`
+	font-size: 25px;
+	color: ${(props) => props.color};
+`;
 
 const About = (props) => {
 	let { id } = useParams();
@@ -10,6 +21,9 @@ const About = (props) => {
 		<>
 			<Navbar></Navbar>
 			<div className="container">
+				<Box>
+					<Box__title>상세페이지</Box__title>
+				</Box>
 				<div className="row">
 					<div className="col-md-6">
 						<img src={findItem.imageUrl} width="100%" />

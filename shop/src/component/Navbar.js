@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import './Navbar.scss';
 
 const Navigator = () => {
 	return (
