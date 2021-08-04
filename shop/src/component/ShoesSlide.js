@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 
-const Slide = (props) => {
+const ShoesSlide = (props) => {
 	return (
 		<Carousel variant="dark">
 			{props.img.map((url) => {
@@ -15,8 +15,8 @@ const Slide = (props) => {
 							height="100%"
 						/>
 						<Carousel.Caption>
-							<h5>First slide label</h5>
-							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+							<h5>Astronuat's story</h5>
+							<p>We are Free in Universe</p>
 						</Carousel.Caption>
 					</Carousel.Item>
 				);
@@ -24,4 +24,4 @@ const Slide = (props) => {
 		</Carousel>
 	);
 };
-export default Slide;
+export default ShoesSlide;
