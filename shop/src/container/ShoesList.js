@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 
@@ -10,7 +10,6 @@ import Data2 from '../Data/ShoesData2';
 import { Button } from 'antd';
 import ShoesItem from '../component/ShoesItem';
 import Navigator from '../component/Navbar';
-import About from './About';
 
 const ShoesList = (props) => {
 	let [shoes, setShoes] = useState(Data);

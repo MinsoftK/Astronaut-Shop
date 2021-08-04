@@ -18,12 +18,7 @@ const About = (props) => {
 	let history = useHistory();
 	let findItem = props.shoes.find((item) => item.id === parseInt(id));
 	let [alert, setAlert] = useState(1);
-	let [inputData, setInputData] = useState('');
 
-	let onChange = (e) => {
-		console.log(e.target.value);
-		setInputData(e.target.value);
-	};
 	useEffect(() => {
 		console.log('test');
 		let Timer = setTimeout(() => {
@@ -32,6 +27,7 @@ const About = (props) => {
 		//컴포넌트가 사라질때 실행할 코드는 return
 		return function getout() {
 			console.log('함수종료');
+			clearTimeout(Timer);
 		};
 	}, []);
 	return (
