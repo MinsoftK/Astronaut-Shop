@@ -46,7 +46,9 @@ const ShoesList = (props) => {
 					style={{ margin: '4rem' }}
 					onClick={() => {
 						axios
-							.get('https://codingapple1.github.io/shop/data2.json')
+							.get(
+								'https://github.com/MinsoftK/react/blob/main/shop/src/Data/addManShoes.json'
+							)
 							.then((result) => {
 								console.log(result.data);
 							})
