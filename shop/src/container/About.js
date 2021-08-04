@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../component/Navbar';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -22,8 +22,11 @@ const About = (props) => {
 			<Navbar></Navbar>
 			<div className="container">
 				<Box>
-					<Box__title>상세페이지</Box__title>
+					<Box__title>About Astronaut's Shoes</Box__title>
 				</Box>
+				<div className="shose-alert">
+					<p>재고가 많이 남지 않았습니다.</p>
+				</div>
 				<div className="row">
 					<div className="col-md-6">
 						<img src={findItem.imageUrl} width="100%" />
