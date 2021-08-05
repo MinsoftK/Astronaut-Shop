@@ -35,9 +35,11 @@ const ShoesList = (props) => {
 
 	const fetchData = (i) => {
 		axios
-			.get('https://minsoftk.github.io/json/test' + i + '.json')
+			.get('https://minsoftk.github.io/jsontest/test' + i + '.json')
 			.then((result) => {
 				console.log(result.data);
+				let newObj = [...shoes, ...result.data];
+				setShoes(newObj);
 			})
 			.catch(() => {
 				console.log('실패');
@@ -54,7 +56,7 @@ const ShoesList = (props) => {
 					type="primary"
 					style={{ margin: '4rem' }}
 					onClick={() => {
-						props.num ? fetchData(props.num) : fetchData(props.num);
+						fetchData(props.num);
 					}}>
 					더보기
 				</Button>
