@@ -30,8 +30,14 @@ const App = () => {
 				<Route path="/womenshoes">
 					<ShoesList num={1}></ShoesList>
 				</Route>
-				<Route path="/about/0">
+				<Route path="/about/">
 					<About shoes={shoes}></About>
+				</Route>
+				<Route path="/about/man/:id">
+					<About shoes={shoes}></About>
+				</Route>
+				<Route path="/about/woman/:id">
+					<About shoes={wshoes}></About>
 				</Route>
 			</Switch>
 		</div>
