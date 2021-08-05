@@ -12,7 +12,7 @@ import Navigator from '../component/Navbar';
 
 const ShoesList = (props) => {
 	let [shoes, setShoes] = useState(Data);
-	let [wshoes, setWshoes] = useState(Data2);
+	let [wshoes, setWShoes] = useState(Data2);
 
 	const Man = () => {
 		return (
@@ -38,8 +38,8 @@ const ShoesList = (props) => {
 			.get('https://minsoftk.github.io/jsontest/test' + i + '.json')
 			.then((result) => {
 				console.log(result.data);
-				let newObj = [...shoes, ...result.data];
-				setShoes(newObj);
+				let newObj = [...wshoes, ...result.data];
+				setWShoes(newObj);
 			})
 			.catch(() => {
 				console.log('실패');
