@@ -5,10 +5,9 @@ import Navigator from '../component/Navbar';
 import ShoesShow from './ShoesShow';
 /* bootstrap, antd */
 import 'antd/dist/antd.css';
-import { Button, Carousel } from 'antd';
+import { Button } from 'antd';
 
 import './MainPage.scss';
-import ShoesList from './ShoesList';
 
 const MainPage = () => {
 	return (

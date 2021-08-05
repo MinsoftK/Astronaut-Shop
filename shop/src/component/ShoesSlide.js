@@ -8,17 +8,11 @@ const Title = styled.h5`
 
 const ShoesSlide = (props) => {
 	return (
-		<Carousel>
+		<Carousel style={{ width: '80%', height: '80%', margin: 'auto' }}>
 			{props.img.map((url, i) => {
 				return (
 					<Carousel.Item key={i}>
-						<img
-							className="d-block w-100"
-							src={url}
-							alt="First slide"
-							width="100%"
-							height="100%"
-						/>
+						<img className="d-block w-100" src={url} alt="{i}slide" />
 						<Carousel.Caption>
 							<Title>Astronuat's story</Title>
 							<p>We are Free in Universe</p>

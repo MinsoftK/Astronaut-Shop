@@ -7,7 +7,6 @@ const ShoesShow = () => {
 		'https://github.com/MinsoftK/react/blob/main/shop/src/img/shoes1.jpg?raw=true',
 		'https://github.com/MinsoftK/react/blob/main/shop/src/img/shoes2.jpg?raw=true',
 		'https://github.com/MinsoftK/react/blob/main/shop/src/img/shoes3.jpg?raw=true',
-		'https://github.com/MinsoftK/react/blob/main/shop/src/img/shoes4.jpg?raw=true',
 	]);
 
 	return <ShoesSlide img={img}></ShoesSlide>;
