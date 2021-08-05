@@ -32,6 +32,17 @@ const ShoesList = (props) => {
 			</div>
 		);
 	};
+
+	const fetchData = (i) => {
+		axios
+			.get('https://minsoftk.github.io/json/test' + i + '.json')
+			.then((result) => {
+				console.log(result.data);
+			})
+			.catch(() => {
+				console.log('실패');
+			});
+	};
 	return (
 		<>
 			<Navigator></Navigator>
@@ -43,16 +54,7 @@ const ShoesList = (props) => {
 					type="primary"
 					style={{ margin: '4rem' }}
 					onClick={() => {
-						axios
-							.get(
-								'https://github.com/MinsoftK/react/blob/main/shop/src/Data/addManShoes.json'
-							)
-							.then((result) => {
-								console.log(result.data);
-							})
-							.catch(() => {
-								console.log('실패');
-							});
+						props.num ? fetchData(props.num) : fetchData(props.num);
 					}}>
 					더보기
 				</Button>
