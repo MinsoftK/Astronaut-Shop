@@ -16,7 +16,10 @@ let Boxtitle = styled.h4`
 const About = (props) => {
 	let { id } = useParams();
 	let history = useHistory();
-	let findItem = props.shoes.find((item) => item.id === parseInt(id));
+	let findItem = props.shoes.find((item) => item.id == id);
+	console.log({ id });
+	console.log(findItem);
+	console.log(props.shoes);
 	let [alert, setAlert] = useState(1);
 
 	useEffect(() => {
