@@ -42,14 +42,14 @@ const ShoesList = (props) => {
 		);
 	};
 	//더보기 버튼 UI  남자, 여자 버튼의 각각의 State를 props로 받는다.
-	const ButtonUI = (i, whosebtn) => {
+	const ButtonUI = (props) => {
 		return (
 			<Button
-				disabled={whosebtn}
+				disabled={props.whosebtn}
 				type="primary"
 				style={{ margin: '4rem' }}
 				onClick={() => {
-					fetchData(i);
+					fetchData(props.i);
 				}}>
 				더보기
 			</Button>
@@ -95,15 +95,7 @@ const ShoesList = (props) => {
 				{props.num === 1 ? (
 					<ButtonUI i={props.num} whosebtn={wbtndisable}></ButtonUI>
 				) : (
-					<Button
-						disabled={btndisable}
-						type="primary"
-						style={{ margin: '4rem' }}
-						onClick={() => {
-							fetchData(props.num);
-						}}>
-						더보기
-					</Button>
+					<ButtonUI i={props.num} whosebtn={btndisable}></ButtonUI>
 				)}
 			</div>
 		</>
