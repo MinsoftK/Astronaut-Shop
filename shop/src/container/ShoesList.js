@@ -25,7 +25,7 @@ const ShoesList = (props) => {
 			<div className="row">
 				{shoes.map((item, i) => {
 					//컴포넌트 반복
-					return <ShoesItem shoes={item} num={i} key={i}></ShoesItem>;
+					return <ShoesItem shoes={item} num={i} sex="man" key={i}></ShoesItem>;
 				})}
 			</div>
 		);
@@ -36,7 +36,9 @@ const ShoesList = (props) => {
 			<div className="row">
 				{wshoes.map((item, i) => {
 					//컴포넌트 반복
-					return <ShoesItem shoes={item} num={i} key={i}></ShoesItem>;
+					return (
+						<ShoesItem shoes={item} num={i} key={i} sex="woman"></ShoesItem>
+					);
 				})}
 			</div>
 		);
