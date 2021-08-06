@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function ShoesItem(props) {
-	let src = props.sex
-		? '/womanshoes/' + props.shoes.id
-		: '/manshoes/' + props.shoes.id;
+	console.log(props);
+	let src =
+		props.sex === 'woman'
+			? '/womanshoes/' + props.shoes.id
+			: '/manshoes/' + props.shoes.id;
 	return (
 		<div className="col-md-4">
 			<Link to={src}>

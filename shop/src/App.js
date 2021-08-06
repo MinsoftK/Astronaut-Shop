@@ -13,6 +13,8 @@ import Astronaut from './container/Astronaut';
 /* data */
 import Data from './Data/ShoesData';
 import Data2 from './Data/ShoesData2';
+import addData from './Data/addManShoes';
+import addData2 from './Data/addManShoes';
 
 const App = () => {
 	let [shoes, setShoes] = useState(Data);
@@ -31,10 +33,10 @@ const App = () => {
 				<Route path="/womanshoes/:id">
 					<About shoes={wshoes}></About>
 				</Route>
-				<Route path="/manshoes">
+				<Route exact path="/manshoes">
 					<ShoesList shoes={shoes} num={0}></ShoesList>
 				</Route>
-				<Route path="/womanshoes">
+				<Route exact path="/womanshoes">
 					<ShoesList shoes={wshoes} num={1}></ShoesList>
 				</Route>
 				<Route path="/description">

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-
 import Navbar from '../component/Navbar';
 import './About.scss';
+
+/**** about에 넣어줄 방법이 없음. *****/
 
 /* box styled 컴포넌트 */
 let Box = styled.div`
@@ -16,17 +17,14 @@ let Boxtitle = styled.h4`
 `;
 
 const About = (props) => {
+	console.log(props.shoes);
 	let { id } = useParams();
 	let history = useHistory();
 	let [alert, setAlert] = useState(1);
-	// let findItem = props.shoes.find((item) => item.id === parseInt(id));
+	let findItem = props.shoes.find((item) => item.id === parseInt(id));
 
 	//findItem이 계속 2번씩 렌더링 된다. useEffect 활용하기.
-	useEffect(() => {
-		//find
-		console.log(props.shoes[id]);
-		// console.log(findItem);
-	}, []);
+	console.log(findItem);
 
 	useEffect(() => {
 		console.log('test');
@@ -54,12 +52,13 @@ const About = (props) => {
 
 				<div className="row">
 					<div className="col-md-6">
-						<img src={props.shoes.imageUrl} width="100%" />
+						<img src={findItem.imageUrl} width="100%" />
 					</div>
 					<div className="col-md-6 mt-4">
-						<h4 className="pt-5">{props.shoes.title}</h4>
-						<h4>₩ {props.price}</h4>
-						<p>{props.description}</p>
+						<h4 className="pt-5">{findItem.title}</h4>
+						<h4>₩ {findItem.price}</h4>
+						<p>{findItem.description}</p>
+						<Remain remain={findItem.remain}> </Remain>
 						<button className="btn btn-danger">주문하기</button>
 						<button
 							className="btn btn-danger"
@@ -73,5 +72,9 @@ const About = (props) => {
 			</div>
 		</>
 	);
+};
+
+const Remain = (props) => {
+	return <p>재고 :{props.remain} </p>;
 };
 export default About;
