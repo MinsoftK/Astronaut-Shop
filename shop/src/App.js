@@ -19,7 +19,6 @@ import addData2 from './Data/addManShoes';
 const App = () => {
 	let [shoes, setShoes] = useState(Data);
 	let [wshoes, setWshoes] = useState(Data2);
-
 	return (
 		<div className="App">
 			<div className="no-display">화면이 너무 작습니다. </div>

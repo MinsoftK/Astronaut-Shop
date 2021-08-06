@@ -59,39 +59,33 @@ const ShoesList = (props) => {
 	/************** 더보기 버튼 클릭시 axios 작동 **************/
 	//axios로 추가데이터 받아오기 num:0 남자 num:1 여자
 	const fetchData = (props) => {
-		console.log('fetch', props);
-		props.i
-			? axios // i === 1일때 여자 카테고리 더보기 버튼 클릭시
-					.get('https://minsoftk.github.io/jsontest/test' + props.i + '.json')
-					.then((result) => {
-						let newObj = [...wshoes, ...result.data]; //데이터 합치기
-						setWShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
-						if (newObj.length >= wshoesNum) setWBtnDisable(true); //합친 데이터의 길이가 더 크다면 여자 카테고리 버튼 비활성화
-						setWShoes(newObj);
-					})
-					.catch(() => {
-						console.log('실패');
-					})
-			: axios // i === 0일때 남자 카테고리 더보기 버튼 클릭시
-					.get('https://minsoftk.github.io/jsontest/test' + props.i + '.json')
-					.then((result) => {
-						let newObj = [...shoes, ...result.data]; //데이터 합치기
-						setShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
-						if (newObj.length >= shoesNum) setBtnDisable(true); //합친 데이터의 길이가 더 크다면 남자 카테고리 버튼 비활성화
-						setShoes(newObj);
-					})
-					.catch(() => {
-						console.log('실패');
-					});
+		axios
+			.get('YOUR_LINK')
+			.then((result) => {
+				let newObj = [...props.shoes, ...result.data]; //데이터 합치기
+				console.log(newObj);
+				props.i // 원래 Data와 추가된 데이터의 길이
+					? setWShoesNum(props.length + result.data.length)
+					: setShoesNum(props.length + result.data.length);
+				if (newObj.length >= wshoesNum) {
+					props.i // 합친 데이터의 길이가 더 크다면 각각 카테고리 버튼 비활성화
+						? setWBtnDisable(true)
+						: setBtnDisable(true); //합친 데이터의 길이가 더 크다면 여자 카테고리 버튼 비활성화
+				}
+			})
+			.catch((e) => {
+				console.log('실패', e);
+			});
 	};
-	useEffect(() => {}, [shoes]);
-
 	return (
 		<>
 			<Navigator></Navigator>
 			<div className="container">
 				<div className="row">
-					{props.num === 1 ? <Woman></Woman> : <Man></Man>}
+					{shoes.map((item, i) => {
+						//컴포넌트 반복
+						return <ShoesItem shoes={item} key={i}></ShoesItem>;
+					})}
 				</div>
 				{props.num === 1 ? (
 					<ButtonUI

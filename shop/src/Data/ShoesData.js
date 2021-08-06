@@ -8,6 +8,7 @@ let Data = [
 		price: 148000,
 		imageUrl:
 			'https://github.com/MinsoftK/react/blob/main/shop/src/img/cshoes3.jpg?raw=true',
+		remain: 13,
 	},
 	{
 		id: 1,
@@ -17,6 +18,7 @@ let Data = [
 		price: 163000,
 		imageUrl:
 			'https://github.com/MinsoftK/react/blob/main/shop/src/img/cshoes2.jpg?raw=true',
+		remain: 104,
 	},
 	{
 		id: 2,
@@ -26,6 +28,7 @@ let Data = [
 		price: 163000,
 		imageUrl:
 			'https://github.com/MinsoftK/react/blob/main/shop/src/img/cshoes1.jpg?raw=true',
+		remain: 102,
 	},
 	{
 		id: 3,
@@ -35,6 +38,7 @@ let Data = [
 		price: 148000,
 		imageUrl:
 			'https://github.com/MinsoftK/react/blob/main/shop/src/img/cshoes0.jpg?raw=true',
+		remain: 1,
 	},
 ];
 

@@ -52,7 +52,7 @@ const About = (props) => {
 
 				<div className="row">
 					<div className="col-md-6">
-						<img src={findItem.imageUrl} width="100%" />
+						<img src={findItem.imageUrl} width="100%" alt="..." />
 					</div>
 					<div className="col-md-6 mt-4">
 						<h4 className="pt-5">{findItem.title}</h4>
