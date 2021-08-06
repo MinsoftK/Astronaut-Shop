@@ -1,7 +1,7 @@
 # 🚀 Astronaut's Shop
 
 > 쇼핑몰
-> https://minsoftk.github.io/Astronautshop-test-/
+
 > </br>
 
 ## 1. 제작 기간 & 참여 인원
