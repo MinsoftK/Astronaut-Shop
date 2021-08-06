@@ -8,6 +8,7 @@ import './App.css';
 import ShoesList from './container/ShoesList';
 import MainPage from './container/MainPage';
 import About from './container/About';
+import Astronaut from './container/Astronaut';
 
 /* data */
 import Data from './Data/ShoesData';
@@ -30,12 +31,18 @@ const App = () => {
 				<Route path="/womanshoes">
 					<ShoesList num={1}></ShoesList>
 				</Route>
+				<Route path="/description">
+					<Astronaut></Astronaut>
+				</Route>
 				<Route path="/manshoes/:id">
 					<About shoes={shoes}></About>
 				</Route>
 				<Route path="/womanshoes/:id">
 					<About shoes={shoes}></About>
 				</Route>
+				{/* <Route path="/womanshoes/:id">
+					<About shoes={shoes}></About>
+				</Route> */}
 			</Switch>
 		</div>
 	);

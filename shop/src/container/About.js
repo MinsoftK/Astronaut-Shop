@@ -18,15 +18,15 @@ let Boxtitle = styled.h4`
 const About = (props) => {
 	let { id } = useParams();
 	let history = useHistory();
-	let findItem = props.shoes.find((item) => item.id === parseInt(id));
+	// let findItem = props.shoes.find((item) => item.id === parseInt(id));
 	let [alert, setAlert] = useState(1);
 	console.log(props);
-	console.log(findItem);
+	// console.log(findItem);
 	//findItem이 계속 2번씩 렌더링 된다. useEffect 활용하기.
 	useEffect(() => {
 		//find
-		console.log(props);
-		console.log(findItem);
+		console.log(props.shoes[id]);
+		// console.log(findItem);
 	}, []);
 	useEffect(() => {
 		console.log('test');
@@ -54,12 +54,12 @@ const About = (props) => {
 
 				<div className="row">
 					<div className="col-md-6">
-						<img src={findItem.imageUrl} width="100%" />
+						<img src={props.shoes.imageUrl} width="100%" />
 					</div>
 					<div className="col-md-6 mt-4">
-						<h4 className="pt-5">{findItem.title}</h4>
-						<h4>₩ {findItem.price}</h4>
-						<p>{findItem.description}</p>
+						<h4 className="pt-5">{props.shoes.title}</h4>
+						<h4>₩ {props.price}</h4>
+						<p>{props.description}</p>
 						<button className="btn btn-danger">주문하기</button>
 						<button
 							className="btn btn-danger"

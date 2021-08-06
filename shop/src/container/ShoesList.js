@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Route, useParams, useHistory } from 'react-router-dom';
+import { Route, useParams, useHistory, Link } from 'react-router-dom';
 
 /* Data */
 import Data from '../Data/ShoesData';
@@ -26,20 +26,12 @@ const ShoesList = (props) => {
 	//props.num이 0이면 남자 화면 렌더링
 	const Man = () => {
 		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
-		const manClick = () => {
-			history.push('/manshoes/{props.shoes.id}');
-		};
 		return (
 			<div className="row">
 				{shoes.map((item, i) => {
 					//컴포넌트 반복
 					return (
-						<ShoesItem
-							shoes={item}
-							num={i}
-							sex="man"
-							key={i}
-							onClick={manClick}></ShoesItem>
+						<ShoesItem shoes={item} num={i} sex="manshoes" key={i}></ShoesItem>
 					);
 				})}
 			</div>
@@ -47,11 +39,6 @@ const ShoesList = (props) => {
 	};
 	//props.num이 1이면 여자 화면 렌더링
 	const Woman = () => {
-		const womanClick = () => {
-			<Route path="/womanshoes/:id">
-				<About shoes={wshoes}></About>
-			</Route>;
-		};
 		return (
 			<div className="row">
 				{wshoes.map((item, i) => {
@@ -61,8 +48,7 @@ const ShoesList = (props) => {
 							shoes={item}
 							num={i}
 							key={i}
-							sex="woman"
-							onClick={womanClick}></ShoesItem>
+							sex="womanshoes"></ShoesItem>
 					);
 				})}
 			</div>
