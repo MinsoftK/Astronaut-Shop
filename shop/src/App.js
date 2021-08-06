@@ -26,10 +26,10 @@ const App = () => {
 					<MainPage></MainPage>
 				</Route>
 				<Route exact path="/manshoes">
-					<ShoesList num={0}></ShoesList>
+					<ShoesList num={shoes}></ShoesList>
 				</Route>
 				<Route exact path="/womanshoes">
-					<ShoesList num={1}></ShoesList>
+					<ShoesList num={wshoes}></ShoesList>
 				</Route>
 				<Route path="/description">
 					<Astronaut></Astronaut>
@@ -38,11 +38,8 @@ const App = () => {
 					<About shoes={shoes}></About>
 				</Route>
 				<Route path="/womanshoes/:id">
-					<About shoes={shoes}></About>
+					<About shoes={wshoes}></About>
 				</Route>
-				{/* <Route path="/womanshoes/:id">
-					<About shoes={shoes}></About>
-				</Route> */}
 			</Switch>
 		</div>
 	);
