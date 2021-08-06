@@ -33,12 +33,6 @@ const App = () => {
 				<Route path="/about/0">
 					<About shoes={shoes}></About>
 				</Route>
-				<Route path="/about/man/:id">
-					<About shoes={shoes}></About>
-				</Route>
-				<Route path="/about/woman/:id">
-					<About shoes={wshoes}></About>
-				</Route>
 			</Switch>
 		</div>
 	);

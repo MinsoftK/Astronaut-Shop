@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Route } from 'react-router-dom';
 
 /* Data */
 import Data from '../Data/ShoesData';
@@ -9,6 +10,7 @@ import Data2 from '../Data/ShoesData2';
 import { Button } from 'antd';
 import ShoesItem from '../component/ShoesItem';
 import Navigator from '../component/Navbar';
+import About from './About';
 
 const ShoesList = (props) => {
 	let [shoes, setShoes] = useState(Data); //남자 상품의 데이터
@@ -21,23 +23,42 @@ const ShoesList = (props) => {
 	/************** 렌더링 관련 컴포넌트 **************/
 	//props.num이 0이면 남자 화면 렌더링
 	const Man = () => {
+		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
+		const manClick = () => {
+			<Route path="/about/man/:id">
+				<About shoes={shoes}></About>
+			</Route>;
+		};
 		return (
 			<div className="row">
 				{shoes.map((item, i) => {
 					//컴포넌트 반복
-					return <ShoesItem shoes={item} num={i} sex="man" key={i}></ShoesItem>;
+					return (
+						<ShoesItem
+							shoes={item}
+							num={i}
+							sex="man"
+							key={i}
+							onClick={manClick}></ShoesItem>
+					);
 				})}
 			</div>
 		);
 	};
 	//props.num이 1이면 여자 화면 렌더링
 	const Woman = () => {
+		const womanClick = () => {};
 		return (
 			<div className="row">
 				{wshoes.map((item, i) => {
 					//컴포넌트 반복
 					return (
-						<ShoesItem shoes={item} num={i} key={i} sex="woman"></ShoesItem>
+						<ShoesItem
+							shoes={item}
+							num={i}
+							key={i}
+							sex="woman"
+							onClick={womanClick}></ShoesItem>
 					);
 				})}
 			</div>
@@ -45,6 +66,7 @@ const ShoesList = (props) => {
 	};
 	//더보기 버튼 UI  남자, 여자 버튼의 각각의 State를 props로 받는다.
 	const ButtonUI = (props) => {
+		console.log(props);
 		return (
 			<Button
 				disabled={props.whosebtn}
@@ -95,9 +117,9 @@ const ShoesList = (props) => {
 					{props.num === 1 ? <Woman></Woman> : <Man></Man>}
 				</div>
 				{props.num === 1 ? (
-					<ButtonUI i={props.num} whosebtn={wbtndisable}></ButtonUI>
+					<ButtonUI i={props} whosebtn={wbtndisable}></ButtonUI>
 				) : (
-					<ButtonUI i={props.num} whosebtn={btndisable}></ButtonUI>
+					<ButtonUI i={props} whosebtn={btndisable}></ButtonUI>
 				)}
 			</div>
 		</>

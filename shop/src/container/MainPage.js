@@ -17,7 +17,11 @@ const MainPage = () => {
 				<div className="container">
 					<h1>Hello Astronaut!</h1>
 					<h2>We are Astronaut in Universe.</h2>
-					<Button className="welcomePage__btn" type="primary">
+					<Button
+						className="welcomePage__btn"
+						type="primary"
+						size="large"
+						shape="round">
 						<Link to="/menshoes">See Astronaut Product!</Link>
 					</Button>
 				</div>
