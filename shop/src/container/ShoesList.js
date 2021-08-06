@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Route } from 'react-router-dom';
+import { Route, useParams, useHistory } from 'react-router-dom';
 
 /* Data */
 import Data from '../Data/ShoesData';
@@ -13,6 +13,8 @@ import Navigator from '../component/Navbar';
 import About from './About';
 
 const ShoesList = (props) => {
+	let { id } = useParams();
+	let history = useHistory();
 	let [shoes, setShoes] = useState(Data); //남자 상품의 데이터
 	let [wshoes, setWShoes] = useState(Data2); //여자 상품의 데이터
 	let [shoesNum, setShoesNum] = useState(Object.keys(Data).length); //남자 상품의 개수
@@ -25,9 +27,7 @@ const ShoesList = (props) => {
 	const Man = () => {
 		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
 		const manClick = () => {
-			<Route path="/about/man/:id">
-				<About shoes={shoes}></About>
-			</Route>;
+			history.push('/about/man/{props.shoes.id}');
 		};
 		return (
 			<div className="row">
@@ -47,7 +47,11 @@ const ShoesList = (props) => {
 	};
 	//props.num이 1이면 여자 화면 렌더링
 	const Woman = () => {
-		const womanClick = () => {};
+		const womanClick = () => {
+			<Route path="/about/woman/:id">
+				<About shoes={wshoes}></About>
+			</Route>;
+		};
 		return (
 			<div className="row">
 				{wshoes.map((item, i) => {
@@ -66,13 +70,14 @@ const ShoesList = (props) => {
 	};
 	//더보기 버튼 UI  남자, 여자 버튼의 각각의 State를 props로 받는다.
 	const ButtonUI = (props) => {
-		console.log(props);
+		console.log('ButtonUI props', props);
 		return (
 			<Button
 				disabled={props.whosebtn}
 				type="primary"
 				style={{ margin: '4rem' }}
 				onClick={() => {
+					console.log(props.num);
 					fetchData(props.i);
 				}}>
 				더보기
@@ -117,9 +122,9 @@ const ShoesList = (props) => {
 					{props.num === 1 ? <Woman></Woman> : <Man></Man>}
 				</div>
 				{props.num === 1 ? (
-					<ButtonUI i={props} whosebtn={wbtndisable}></ButtonUI>
+					<ButtonUI i={props.num} whosebtn={wbtndisable}></ButtonUI>
 				) : (
-					<ButtonUI i={props} whosebtn={btndisable}></ButtonUI>
+					<ButtonUI i={props.num} whosebtn={btndisable}></ButtonUI>
 				)}
 			</div>
 		</>
