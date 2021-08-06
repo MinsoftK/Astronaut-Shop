@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 /* Data */
 import Data from '../Data/ShoesData';
@@ -13,6 +13,7 @@ import Navigator from '../component/Navbar';
 
 const ShoesList = (props) => {
 	let { id } = useParams();
+
 	let [shoes, setShoes] = useState(Data); //남자 상품의 데이터
 	let [wshoes, setWShoes] = useState(Data2); //여자 상품의 데이터
 	let [shoesNum, setShoesNum] = useState(Object.keys(Data).length); //남자 상품의 개수
