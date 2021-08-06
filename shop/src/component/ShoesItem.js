@@ -8,7 +8,10 @@ import About from '../container/About';
 
 function ShoesItem(props) {
 	let history = useHistory();
-	let src = '/' + props.sex + '/' + props.shoes.id;
+	let src = props.sex
+		? '/womanshoes/' + props.shoes.id
+		: '/manshoes/' + props.shoes.id;
+	console.log('ShoesItem', props);
 
 	return (
 		<div className="col-md-4">

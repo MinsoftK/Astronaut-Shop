@@ -25,20 +25,20 @@ const App = () => {
 				<Route exact path="/">
 					<MainPage></MainPage>
 				</Route>
-				<Route exact path="/manshoes">
-					<ShoesList shoes={shoes} num={0}></ShoesList>
-				</Route>
-				<Route exact path="/womanshoes">
-					<ShoesList shoes={wshoes} num={1}></ShoesList>
-				</Route>
-				<Route path="/description">
-					<Astronaut></Astronaut>
-				</Route>
 				<Route path="/manshoes/:id">
 					<About shoes={shoes}></About>
 				</Route>
 				<Route path="/womanshoes/:id">
 					<About shoes={wshoes}></About>
+				</Route>
+				<Route path="/manshoes">
+					<ShoesList shoes={shoes} num={0}></ShoesList>
+				</Route>
+				<Route path="/womanshoes">
+					<ShoesList shoes={wshoes} num={1}></ShoesList>
+				</Route>
+				<Route path="/description">
+					<Astronaut></Astronaut>
 				</Route>
 			</Switch>
 		</div>

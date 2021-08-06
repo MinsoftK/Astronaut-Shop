@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 /* component */
@@ -53,6 +53,9 @@ const ShoesList = (props) => {
 				console.log('실패');
 			});
 	};
+	useEffect(() => {
+		console.log('test');
+	}, [shoes, wshoes]);
 	return (
 		<>
 			<Navigator></Navigator>
@@ -60,7 +63,7 @@ const ShoesList = (props) => {
 				<div className="row">
 					{props.shoes.map((item, i) => {
 						//컴포넌트 반복
-						return <ShoesItem shoes={item} key={i}></ShoesItem>;
+						return <ShoesItem shoes={item} sex={props.num} key={i}></ShoesItem>;
 					})}
 				</div>
 				{props.num === 1 ? (
