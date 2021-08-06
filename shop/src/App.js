@@ -25,10 +25,10 @@ const App = () => {
 				<Route exact path="/">
 					<MainPage></MainPage>
 				</Route>
-				<Route path="/manshoes">
+				<Route exact path="/manshoes">
 					<ShoesList num={0}></ShoesList>
 				</Route>
-				<Route path="/womanshoes">
+				<Route exact path="/womanshoes">
 					<ShoesList num={1}></ShoesList>
 				</Route>
 				<Route path="/description">

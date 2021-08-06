@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Route, useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 /* Data */
 import Data from '../Data/ShoesData';
@@ -10,11 +10,9 @@ import Data2 from '../Data/ShoesData2';
 import { Button } from 'antd';
 import ShoesItem from '../component/ShoesItem';
 import Navigator from '../component/Navbar';
-import About from './About';
 
 const ShoesList = (props) => {
 	let { id } = useParams();
-	let history = useHistory();
 	let [shoes, setShoes] = useState(Data); //남자 상품의 데이터
 	let [wshoes, setWShoes] = useState(Data2); //여자 상품의 데이터
 	let [shoesNum, setShoesNum] = useState(Object.keys(Data).length); //남자 상품의 개수
