@@ -1,18 +1,12 @@
 /* eslint-disable */
 import './ShoesItem.css';
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-
-/* component */
-import About from '../container/About';
+import { Link } from 'react-router-dom';
 
 function ShoesItem(props) {
-	let history = useHistory();
 	let src = props.sex
 		? '/womanshoes/' + props.shoes.id
 		: '/manshoes/' + props.shoes.id;
-	console.log('ShoesItem', props);
-
 	return (
 		<div className="col-md-4">
 			<Link to={src}>

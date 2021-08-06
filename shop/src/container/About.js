@@ -18,16 +18,16 @@ let Boxtitle = styled.h4`
 const About = (props) => {
 	let { id } = useParams();
 	let history = useHistory();
-	// let findItem = props.shoes.find((item) => item.id === parseInt(id));
 	let [alert, setAlert] = useState(1);
-	console.log(props);
-	// console.log(findItem);
+	// let findItem = props.shoes.find((item) => item.id === parseInt(id));
+
 	//findItem이 계속 2번씩 렌더링 된다. useEffect 활용하기.
 	useEffect(() => {
 		//find
 		console.log(props.shoes[id]);
 		// console.log(findItem);
 	}, []);
+
 	useEffect(() => {
 		console.log('test');
 		let Timer = setTimeout(() => {
