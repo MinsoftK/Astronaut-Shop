@@ -7,23 +7,23 @@ import ShoesShow from './ShoesShow';
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
 
-import './MainPage.scss';
+import './MainPage.css';
 
 const MainPage = () => {
 	return (
 		<>
 			<Navigator></Navigator>
-			<br />
 			<div className="welcomePage">
-				<h1>Hello Astronaut!</h1>
-				<h2>We are Astronaut in Universe.</h2>
-				<Button className="welcomePage__btn" type="primary">
-					<Link to="/menshoes">See Astronaut Product!</Link>
-				</Button>
+				<div className="container">
+					<h1>Hello Astronaut!</h1>
+					<h2>We are Astronaut in Universe.</h2>
+					<Button className="welcomePage__btn" type="primary">
+						<Link to="/menshoes">See Astronaut Product!</Link>
+					</Button>
+				</div>
+				<br />
 			</div>
-			<br />
-			<br />
-			<h2 className="welcomePage__middle">Special Experience</h2>
+			<h2 className="welcomePage__middle">Special Experience with Astronaut</h2>
 			<div className="content">
 				<ShoesShow></ShoesShow>
 			</div>
