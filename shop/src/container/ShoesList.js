@@ -101,7 +101,10 @@ const ShoesList = (props) => {
 			<Navigator></Navigator>
 			<div className="container">
 				<div className="row">
-					{props.num === 1 ? <Woman></Woman> : <Man></Man>}
+					{props.shoes.map((item, i) => {
+						//컴포넌트 반복
+						return <ShoesItem shoes={item} key={i}></ShoesItem>;
+					})}
 				</div>
 				{props.num === 1 ? (
 					<ButtonUI i={props.num} whosebtn={wbtndisable}></ButtonUI>
