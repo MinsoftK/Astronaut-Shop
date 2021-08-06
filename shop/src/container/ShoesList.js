@@ -27,7 +27,7 @@ const ShoesList = (props) => {
 	const Man = () => {
 		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
 		const manClick = () => {
-			history.push('/about/man/{props.shoes.id}');
+			history.push('/manshoes/{props.shoes.id}');
 		};
 		return (
 			<div className="row">
@@ -48,7 +48,7 @@ const ShoesList = (props) => {
 	//props.num이 1이면 여자 화면 렌더링
 	const Woman = () => {
 		const womanClick = () => {
-			<Route path="/about/woman/:id">
+			<Route path="/womanshoes/:id">
 				<About shoes={wshoes}></About>
 			</Route>;
 		};

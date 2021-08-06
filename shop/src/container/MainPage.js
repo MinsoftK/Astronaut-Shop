@@ -22,7 +22,7 @@ const MainPage = () => {
 						type="primary"
 						size="large"
 						shape="round">
-						<Link to="/menshoes">See Astronaut Product!</Link>
+						<Link to="/manshoes">See Astronaut Product!</Link>
 					</Button>
 				</div>
 				<br />

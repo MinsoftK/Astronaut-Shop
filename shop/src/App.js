@@ -24,13 +24,16 @@ const App = () => {
 				<Route exact path="/">
 					<MainPage></MainPage>
 				</Route>
-				<Route path="/menshoes">
+				<Route path="/manshoes">
 					<ShoesList num={0}></ShoesList>
 				</Route>
-				<Route path="/womenshoes">
+				<Route path="/womanshoes">
 					<ShoesList num={1}></ShoesList>
 				</Route>
-				<Route path="/about/0">
+				<Route path="/manshoes/:id">
+					<About shoes={shoes}></About>
+				</Route>
+				<Route path="/womanshoes/:id">
 					<About shoes={shoes}></About>
 				</Route>
 			</Switch>

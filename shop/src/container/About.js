@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../component/Navbar';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+
+import Navbar from '../component/Navbar';
 import './About.scss';
 
+/* box styled 컴포넌트 */
 let Box = styled.div`
 	padding: 30px;
 `;
