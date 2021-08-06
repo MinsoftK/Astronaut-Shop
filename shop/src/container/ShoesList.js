@@ -39,6 +39,7 @@ const ShoesList = (props) => {
 				//새로운 상품 데이터 입력
 				console.log(newObj);
 				setShoes(newObj);
+				console.log(shoes);
 				props.i // 원래 Data와 추가된 데이터의 길이
 					? setWShoesNum(props.length + result.data.length)
 					: setShoesNum(props.length + result.data.length);
