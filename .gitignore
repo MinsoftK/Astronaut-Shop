@@ -1,2 +1,5 @@
 # 간단한 blog
 /blog
+/node_modules
+.vscode
+yarn.lock
