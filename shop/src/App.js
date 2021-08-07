@@ -18,7 +18,8 @@ import addData2 from './Data/addManShoes';
 
 const App = () => {
 	let [shoes, setShoes] = useState(Data);
-	let [wshoes, setWshoes] = useState(Data2);
+	let [wshoes, setWShoes] = useState(Data2);
+	console.log('최상단', shoes, wshoes);
 	return (
 		<div className="App">
 			<div className="no-display">화면이 너무 작습니다. </div>
@@ -33,10 +34,10 @@ const App = () => {
 					<About shoes={wshoes}></About>
 				</Route>
 				<Route exact path="/manshoes">
-					<ShoesList shoes={shoes} num={0}></ShoesList>
+					<ShoesList shoes={shoes} setshoes={setShoes} num={0}></ShoesList>
 				</Route>
 				<Route exact path="/womanshoes">
-					<ShoesList shoes={wshoes} num={1}></ShoesList>
+					<ShoesList shoes={wshoes} setshoes={setWShoes} num={1}></ShoesList>
 				</Route>
 				<Route path="/description">
 					<Astronaut></Astronaut>
