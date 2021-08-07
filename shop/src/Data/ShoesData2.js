@@ -5,7 +5,7 @@ let Data = [
 		title: 'VENICE SANDAL 09',
 		description:
 			'위빙 샌들 위빙 디테일로 표현된 발등이 독특한 포인트가 되는 베니스 샌들입니다. 발등과 발뒤꿈치를 안정적으로 감싸는 실루엣이 안정적이며 라텍스를 삽입한 홍창을 사용해 바닥이 유연하고 가벼워 오래 걸어도 편안한 착용감을 느끼실 수 있습니다. 위빙 소재로 통기성이 좋아 더운 날에도 깔끔하고 시원합니다.',
-		price: 14800,
+		price: 148000,
 		imageUrl:
 			'https://github.com/MinsoftK/jsontest/blob/master/wcshoes0.jpg?raw=true',
 		remain: 1,

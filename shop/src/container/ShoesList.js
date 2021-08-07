@@ -14,8 +14,7 @@ import Navigator from '../component/Navbar';
 const ShoesList = (props) => {
 	console.log(props);
 	console.log('props.shoes', props.shoes);
-	let [shoes, setShoes] = useState(props.shoes); //남자 상품 데이터 State
-	let [wshoes, setWShoes] = useState(props.wshoes); //여자 상품 데이터 State
+
 	let [shoesNum, setShoesNum] = useState(Object.keys(Data).length); //남자 상품의 개수
 	let [wshoesNum, setWShoesNum] = useState(Object.keys(Data2).length); //여자 상품의 개수
 	let [btndisable, setBtnDisable] = useState(false); //상품의 개수가 넘어가면 남자카테고리 더보기 버튼 비활성화
@@ -73,12 +72,6 @@ const ShoesList = (props) => {
 	//axios로 추가데이터 받아오기 num:0 남자 num:1 여자
 	const fetchData = (props) => {
 		console.log('axios 시작', props);
-		console.log('axios 시작', props);
-		console.log(
-			'axios 시작',
-			'https://minsoftk.github.io/jsontest/test' + props.num + '.json'
-		);
-
 		props.num
 			? axios // i === 1일때 여자 카테고리 더보기 버튼 클릭시
 					.get('https://minsoftk.github.io/jsontest/test' + props.num + '.json')
@@ -87,7 +80,8 @@ const ShoesList = (props) => {
 						let newObj = [...props.wshoes, ...result.data]; //데이터 합치기
 						setWShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
 						if (newObj.length >= wshoesNum) setWBtnDisable(true); //합친 데이터의 길이가 더 크다면 여자 카테고리 버튼 비활성화
-						props.setWShoes(newObj);
+						if (props.num) props.setWShoes(newObj);
+						else props.setShoes(newObj);
 						console.log('axios 데이터 바인딩 성공');
 					})
 					.catch((e) => {
