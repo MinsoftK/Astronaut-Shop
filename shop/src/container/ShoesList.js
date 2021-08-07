@@ -13,8 +13,9 @@ import Navigator from '../component/Navbar';
 
 const ShoesList = (props) => {
 	console.log(props);
-	let [shoes, setShoes] = useState(Data); //남자 상품의 데이터
-	let [wshoes, setWShoes] = useState(Data2); //여자 상품의 데이터
+	console.log('props.shoes', props.shoes);
+	let [shoes, setShoes] = useState(props.shoes); //남자 상품 데이터 State
+	let [wshoes, setWShoes] = useState(props.wshoes); //여자 상품 데이터 State
 	let [shoesNum, setShoesNum] = useState(Object.keys(Data).length); //남자 상품의 개수
 	let [wshoesNum, setWShoesNum] = useState(Object.keys(Data2).length); //여자 상품의 개수
 	let [btndisable, setBtnDisable] = useState(false); //상품의 개수가 넘어가면 남자카테고리 더보기 버튼 비활성화
@@ -26,7 +27,7 @@ const ShoesList = (props) => {
 		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
 		return (
 			<div className="row">
-				{shoes.map((item, i) => {
+				{props.shoes.map((item, i) => {
 					//컴포넌트 반복
 					return (
 						<ShoesItem shoes={item} num={i} sex="manshoes" key={i}></ShoesItem>
@@ -39,7 +40,7 @@ const ShoesList = (props) => {
 	const Woman = () => {
 		return (
 			<div className="row">
-				{wshoes.map((item, i) => {
+				{props.wshoes.map((item, i) => {
 					//컴포넌트 반복
 					return (
 						<ShoesItem
@@ -54,14 +55,14 @@ const ShoesList = (props) => {
 	};
 	//더보기 버튼 UI  남자, 여자 버튼의 각각의 State를 props로 받는다.
 	const ButtonUI = (props) => {
-		console.log('더보기 버튼 클릭'); // shoes 데이터만큼 반복된다.
+		console.log('더보기 버튼 클릭', props); // shoes 데이터만큼 반복된다.
 		return (
 			<Button
 				disabled={props.whosebtn}
 				type="primary"
 				style={{ margin: '4rem' }}
 				onClick={() => {
-					fetchData(props);
+					fetchData(props.all);
 				}}>
 				더보기
 			</Button>
@@ -72,32 +73,37 @@ const ShoesList = (props) => {
 	//axios로 추가데이터 받아오기 num:0 남자 num:1 여자
 	const fetchData = (props) => {
 		console.log('axios 시작', props);
-		props.i
+		console.log('axios 시작', props);
+		console.log(
+			'axios 시작',
+			'https://minsoftk.github.io/jsontest/test' + props.num + '.json'
+		);
+
+		props.num
 			? axios // i === 1일때 여자 카테고리 더보기 버튼 클릭시
-					.get('https://minsoftk.github.io/jsontest/test' + props.i + '.json')
+					.get('https://minsoftk.github.io/jsontest/test' + props.num + '.json')
 					.then((result) => {
-						let newObj = [...wshoes, ...result.data]; //데이터 합치기
+						console.log(result);
+						let newObj = [...props.wshoes, ...result.data]; //데이터 합치기
 						setWShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
 						if (newObj.length >= wshoesNum) setWBtnDisable(true); //합친 데이터의 길이가 더 크다면 여자 카테고리 버튼 비활성화
-						setWShoes(newObj);
 						props.setWShoes(newObj);
 						console.log('axios 데이터 바인딩 성공');
 					})
-					.catch(() => {
-						console.log('실패');
+					.catch((e) => {
+						console.log(e);
 					})
 			: axios // i === 0일때 남자 카테고리 더보기 버튼 클릭시
-					.get('https://minsoftk.github.io/jsontest/test' + props.i + '.json')
+					.get('https://minsoftk.github.io/jsontest/test' + props.num + '.json')
 					.then((result) => {
-						let newObj = [...shoes, ...result.data]; //데이터 합치기
+						let newObj = [...props.shoes, ...result.data]; //데이터 합치기
 						setShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
 						if (newObj.length >= shoesNum) setBtnDisable(true); //합친 데이터의 길이가 더 크다면 남자 카테고리 버튼 비활성화
-						setShoes(newObj);
 						props.setShoes(newObj);
-						console.log(btndisable);
+						console.log('axios 데이터 바인딩 성공');
 					})
-					.catch(() => {
-						console.log('실패');
+					.catch((e) => {
+						console.log('실패', e);
 					});
 	};
 	return (
@@ -105,18 +111,16 @@ const ShoesList = (props) => {
 			<Navigator></Navigator>
 			<div className="container">
 				<div className="row">
-					{props.num === 1 ? <Woman></Woman> : <Man></Man>}
+					{props.num === 1 ? (
+						<Woman shoes={props}></Woman>
+					) : (
+						<Man shoes={props}></Man>
+					)}
 				</div>
 				{props.num === 1 ? (
-					<ButtonUI
-						i={props.num}
-						whosebtn={wbtndisable}
-						setWShoes={props.setWShoes}></ButtonUI>
+					<ButtonUI all={props} whosebtn={wbtndisable}></ButtonUI>
 				) : (
-					<ButtonUI
-						i={props.num}
-						whosebtn={btndisable}
-						setShoes={props.setShoes}></ButtonUI>
+					<ButtonUI all={props} whosebtn={btndisable}></ButtonUI>
 				)}
 			</div>
 		</>

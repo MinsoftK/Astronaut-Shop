@@ -34,10 +34,18 @@ const App = () => {
 					<About shoes={wshoes}></About>
 				</Route>
 				<Route exact path="/manshoes">
-					<ShoesList shoes={shoes} setshoes={setShoes} num={0}></ShoesList>
+					<ShoesList
+						shoes={shoes}
+						wshoes={wshoes}
+						setShoes={setShoes}
+						num={0}></ShoesList>
 				</Route>
 				<Route exact path="/womanshoes">
-					<ShoesList shoes={wshoes} setshoes={setWShoes} num={1}></ShoesList>
+					<ShoesList
+						shoes={shoes}
+						wshoes={wshoes}
+						setWShoes={setWShoes}
+						num={1}></ShoesList>
 				</Route>
 				<Route path="/description">
 					<Astronaut></Astronaut>
