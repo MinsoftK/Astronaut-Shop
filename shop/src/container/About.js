@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+
+/** React bootstrap **/
+import { Nav } from 'react-bootstrap';
+/** component **/
 import Navbar from '../component/Navbar';
-import './About.scss';
 
 /**** about에 넣어줄 방법이 없음. *****/
 
@@ -21,7 +24,6 @@ const About = (props) => {
 	let { id } = useParams();
 	let history = useHistory();
 	let [alert, setAlert] = useState(1);
-	let [temp, setTemp] = useState('');
 	let findItem = props.num
 		? props.wshoes.find((item) => item.id === parseInt(id))
 		: props.shoes.find((item) => item.id === parseInt(id));
@@ -73,11 +75,19 @@ const About = (props) => {
 					</div>
 				</div>
 			</div>
+			<Nav className="mb-5" fill variant="tabs" defaultActiveKey="/home">
+				<Nav.Item>
+					<Nav.Link eventKey="link-0">Active</Nav.Link>
+				</Nav.Item>
+				<Nav.Item>
+					<Nav.Link eventKey="link-1">Option 2</Nav.Link>
+				</Nav.Item>
+			</Nav>
 		</>
 	);
 };
 
 const Remain = (props) => {
-	return <p>재고 :{props.remain} </p>;
+	return <h5>재고 :{props.remain} </h5>;
 };
 export default About;

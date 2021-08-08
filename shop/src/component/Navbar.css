@@ -1,7 +1,7 @@
-a:link {
+.Navbar a:link {
 	color: white;
 	text-decoration: none;
 }
-a:visited {
+.Navbar a:visited {
 	color: white;
 }

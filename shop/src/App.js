@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 /* component container */
 import ShoesList from './container/ShoesList';
 import MainPage from './container/MainPage';

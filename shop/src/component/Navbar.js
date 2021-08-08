@@ -1,11 +1,11 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './Navbar.scss';
+import './Navbar.css';
 
 const Navigator = () => {
 	return (
 		<Navbar bg="dark" variant="dark">
-			<Container>
+			<Container className="Navbar">
 				<Navbar.Brand>
 					<Link to="/">Astronaut</Link>
 				</Navbar.Brand>
