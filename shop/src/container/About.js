@@ -75,14 +75,16 @@ const About = (props) => {
 					</div>
 				</div>
 			</div>
-			<Nav className="mb-5" fill variant="tabs" defaultActiveKey="/home">
-				<Nav.Item>
-					<Nav.Link eventKey="link-0">Active</Nav.Link>
-				</Nav.Item>
-				<Nav.Item>
-					<Nav.Link eventKey="link-1">Option 2</Nav.Link>
-				</Nav.Item>
-			</Nav>
+			<div className="About__tabs">
+				<Nav className="mb-5" fill variant="pills" defaultActiveKey="/home">
+					<Nav.Item>
+						<Nav.Link eventKey="link-0">Active</Nav.Link>
+					</Nav.Item>
+					<Nav.Item>
+						<Nav.Link eventKey="link-1">Option 2</Nav.Link>
+					</Nav.Item>
+				</Nav>
+			</div>
 		</>
 	);
 };
