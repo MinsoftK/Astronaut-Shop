@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import './About.scss';
 
 /** React bootstrap **/
 import { Nav } from 'react-bootstrap';
 /** component **/
 import Navbar from '../component/Navbar';
 
-/**** about에 넣어줄 방법이 없음. *****/
+/** transition 라이브러리 **/
+import { CSSTransition } from 'react-transition-group';
 
 /* box styled 컴포넌트 */
 let Box = styled.div`
@@ -24,6 +26,8 @@ const About = (props) => {
 	let { id } = useParams();
 	let history = useHistory();
 	let [alert, setAlert] = useState(1);
+	let [tab, setTab] = useState('');
+	let [switchOn, setSwitchOn] = useState(false);
 	let findItem = props.num
 		? props.wshoes.find((item) => item.id === parseInt(id))
 		: props.shoes.find((item) => item.id === parseInt(id));
@@ -75,18 +79,43 @@ const About = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="About__tabs">
-				<Nav className="mb-5" fill variant="pills" defaultActiveKey="/home">
-					<Nav.Item>
-						<Nav.Link eventKey="link-0">Active</Nav.Link>
-					</Nav.Item>
-					<Nav.Item>
-						<Nav.Link eventKey="link-1">Option 2</Nav.Link>
-					</Nav.Item>
-				</Nav>
-			</div>
+
+			<Nav className="mb-5" fill variant="pills" defaultActiveKey="/home">
+				<Nav.Item>
+					<Nav.Link
+						eventKey="link-0"
+						onClick={() => {
+							setSwitchOn(false);
+							setTab(0);
+						}}>
+						Active
+					</Nav.Link>
+				</Nav.Item>
+				<Nav.Item>
+					<Nav.Link
+						eventKey="link-1"
+						onClick={() => {
+							setSwitchOn(false);
+							setTab(1);
+						}}>
+						Option 2
+					</Nav.Link>
+				</Nav.Item>
+			</Nav>
+			<CSSTransition in={true} className="wow" timeout={500}>
+				<TabContent tab={tab} setSwitchOn={setSwitchOn} />
+			</CSSTransition>
 		</>
 	);
+};
+
+const TabContent = (props) => {
+	useEffect(() => {
+		props.setSwitchOn(true);
+	});
+	if (props.tab === 0) return <div>0번째 내용입니다.</div>;
+	else if (props.tab === 1) return <div>1번째 내용입니다.</div>;
+	else return <div>2번째 내용입니다.</div>;
 };
 
 const Remain = (props) => {
