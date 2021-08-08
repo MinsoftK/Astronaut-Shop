@@ -21,7 +21,10 @@ const About = (props) => {
 	let { id } = useParams();
 	let history = useHistory();
 	let [alert, setAlert] = useState(1);
-	let findItem = props.shoes.find((item) => item.id === parseInt(id));
+	let [temp, setTemp] = useState('');
+	let findItem = props.num
+		? props.wshoes.find((item) => item.id === parseInt(id))
+		: props.shoes.find((item) => item.id === parseInt(id));
 
 	//findItem이 계속 2번씩 렌더링 된다. useEffect 활용하기.
 	// console.log(findItem);

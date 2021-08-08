@@ -16,7 +16,7 @@ const MainPage = () => {
 			<div className="welcomePage">
 				<div className="container">
 					<h1>Hello Astronaut!</h1>
-					<h2>We are Astronaut in Universe.</h2>
+					<h2>We are astronauts traveling through space.</h2>
 					<Button
 						className="welcomePage__btn"
 						type="primary"

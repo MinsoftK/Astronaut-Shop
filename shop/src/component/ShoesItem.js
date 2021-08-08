@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function ShoesItem(props) {
 	console.log(props);
 	let src =
-		props.sex === 'woman'
+		props.sex === 'womanshoes'
 			? '/womanshoes/' + props.shoes.id
 			: '/manshoes/' + props.shoes.id;
 	return (
