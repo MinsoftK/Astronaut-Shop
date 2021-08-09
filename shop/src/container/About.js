@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import './About.scss';
 
@@ -65,7 +66,17 @@ const About = (props) => {
 						<h4>₩ {findItem.price}</h4>
 						<p>{findItem.description}</p>
 						<Remain remain={findItem.remain}> </Remain>
-						<button className="btn btn-danger">장바구니</button>
+						<button
+							className="btn btn-danger"
+							onClick={() => {
+								props.dispatch({
+									type: '항목추가',
+									payload: { id: 2, name: '새로운 상품', remain: 1 },
+								});
+								history.push('/cart');
+							}}>
+							장바구니
+						</button>
 						<button
 							className="btn btn-danger"
 							onClick={() => {
@@ -118,4 +129,12 @@ const TabContent = (props) => {
 const Remain = (props) => {
 	return <h5>재고 :{props.remain} </h5>;
 };
-export default About;
+
+const redux = (state) => {
+	console.log(state);
+	return {
+		state: state,
+	};
+};
+
+export default connect(redux)(About);

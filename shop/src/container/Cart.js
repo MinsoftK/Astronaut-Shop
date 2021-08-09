@@ -31,7 +31,10 @@ const Cart = (props) => {
 									</button>
 									<button
 										onClick={() => {
-											props.dispatch({ type: '수량감소' });
+											props.dispatch({
+												type: '수량감소',
+												payload: { name: 'kim' },
+											});
 										}}>
 										-
 									</button>
