@@ -5,11 +5,13 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 /* component container */
+import Navigator from './component/Navbar';
 import ShoesList from './container/ShoesList';
 import MainPage from './container/MainPage';
 import About from './container/About';
 import Astronaut from './container/Astronaut';
-import Cart from './component/Cart';
+import Cart from './container/Cart';
+
 /* data */
 import Data from './Data/ShoesData';
 import Data2 from './Data/ShoesData2';
@@ -23,6 +25,7 @@ const App = () => {
 	return (
 		<div className="App">
 			<div className="no-display">화면이 너무 작습니다. </div>
+			<Navigator></Navigator>
 			<Switch>
 				<Route exact path="/">
 					<MainPage></MainPage>

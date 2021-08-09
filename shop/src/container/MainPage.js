@@ -12,7 +12,6 @@ import './MainPage.css';
 const MainPage = () => {
 	return (
 		<>
-			<Navigator></Navigator>
 			<div className="welcomePage">
 				<div className="container">
 					<h1>Hello Astronaut!</h1>

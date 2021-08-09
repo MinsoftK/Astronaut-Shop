@@ -102,7 +102,6 @@ const ShoesList = (props) => {
 	};
 	return (
 		<>
-			<Navigator></Navigator>
 			<div className="container">
 				<div className="row">
 					{props.num === 1 ? (
