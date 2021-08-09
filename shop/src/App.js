@@ -9,7 +9,7 @@ import ShoesList from './container/ShoesList';
 import MainPage from './container/MainPage';
 import About from './container/About';
 import Astronaut from './container/Astronaut';
-
+import Cart from './component/Cart';
 /* data */
 import Data from './Data/ShoesData';
 import Data2 from './Data/ShoesData2';
@@ -46,6 +46,9 @@ const App = () => {
 						wshoes={wshoes}
 						setWShoes={setWShoes}
 						num={1}></ShoesList>
+				</Route>
+				<Route path="/cart">
+					<Cart></Cart>
 				</Route>
 				<Route path="/description">
 					<Astronaut></Astronaut>
