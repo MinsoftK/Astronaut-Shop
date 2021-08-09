@@ -8,9 +8,9 @@ const Cart = () => {
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Username</th>
+						<th>상품명</th>
+						<th>수량</th>
+						<th>변경</th>
 					</tr>
 				</thead>
 				<tbody>

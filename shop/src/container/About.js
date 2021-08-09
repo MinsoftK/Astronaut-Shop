@@ -5,8 +5,6 @@ import './About.scss';
 
 /** React bootstrap **/
 import { Nav } from 'react-bootstrap';
-/** component **/
-import Navbar from '../component/Navbar';
 
 /** transition 라이브러리 **/
 import { CSSTransition } from 'react-transition-group';
@@ -48,7 +46,6 @@ const About = (props) => {
 	}, []);
 	return (
 		<>
-			<Navbar></Navbar>
 			<div className="container">
 				<Box>
 					<Boxtitle>About Astronaut's Shoes</Boxtitle>
@@ -68,7 +65,7 @@ const About = (props) => {
 						<h4>₩ {findItem.price}</h4>
 						<p>{findItem.description}</p>
 						<Remain remain={findItem.remain}> </Remain>
-						<button className="btn btn-danger">주문하기</button>
+						<button className="btn btn-danger">장바구니</button>
 						<button
 							className="btn btn-danger"
 							onClick={() => {
