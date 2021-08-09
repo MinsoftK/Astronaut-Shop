@@ -1,7 +1,8 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-const Cart = () => {
+const Cart = (props) => {
 	return (
 		<>
 			<Table striped bordered hover>
@@ -14,27 +15,34 @@ const Cart = () => {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>@mdo</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td colSpan="2">Larry the Bird</td>
-						<td>@twitter</td>
-					</tr>
+					{props.state.map((item, i) => {
+						return (
+							<tr key={i}>
+								<td>{i + 1}</td>
+								<td>{item.name}</td>
+								<td>{item.remain}</td>
+
+								<td>
+									<button
+										onClick={() => {
+											props.dispatch({ type: '수량증가' });
+										}}>
+										+
+									</button>
+								</td>
+							</tr>
+						);
+					})}
 				</tbody>
 			</Table>
 		</>
 	);
 };
-
-export default Cart;
+const 함수명 = (state) => {
+	console.log('state', state);
+	return {
+		state: state[2],
+	};
+};
+export default connect(함수명)(Cart);
+// export default Cart;
