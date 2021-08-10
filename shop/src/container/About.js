@@ -27,6 +27,7 @@ const About = (props) => {
 	let [alert, setAlert] = useState(1);
 	let [tab, setTab] = useState('');
 	let [switchOn, setSwitchOn] = useState(false);
+	let [goCartPage, setGoCartPage] = useState(false);
 	let findItem = props.num
 		? props.wshoes.find((item) => item.id === parseInt(id))
 		: props.shoes.find((item) => item.id === parseInt(id));
@@ -71,11 +72,17 @@ const About = (props) => {
 							onClick={() => {
 								props.dispatch({
 									type: '항목추가',
-									payload: { id: 2, name: '새로운 상품', remain: 1 },
+									payload: {
+										id: findItem.id,
+										sex: props.num,
+										name: findItem.title,
+										remain: findItem.remain,
+										url: findItem.imageUrl,
+									},
 								});
 								history.push('/cart');
 							}}>
-							장바구니
+							장바구니에 추가
 						</button>
 						<button
 							className="btn btn-danger"
@@ -88,7 +95,12 @@ const About = (props) => {
 				</div>
 			</div>
 
-			<Nav className="mb-5" fill variant="pills" defaultActiveKey="/home">
+			<Nav
+				className="mb-5"
+				fill
+				variant="pills"
+				defaultActiveKey="/home"
+				style={{ marginTop: '50px' }}>
 				<Nav.Item>
 					<Nav.Link
 						eventKey="link-0"
@@ -96,7 +108,7 @@ const About = (props) => {
 							setSwitchOn(false);
 							setTab(0);
 						}}>
-						Active
+						상품 설명
 					</Nav.Link>
 				</Nav.Item>
 				<Nav.Item>
@@ -106,7 +118,7 @@ const About = (props) => {
 							setSwitchOn(false);
 							setTab(1);
 						}}>
-						Option 2
+						배송정보
 					</Nav.Link>
 				</Nav.Item>
 			</Nav>

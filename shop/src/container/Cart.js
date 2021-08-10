@@ -25,14 +25,14 @@ const Cart = (props) => {
 					{state.map((item, i) => {
 						return (
 							<tr key={i}>
-								<td>{item.id}</td>
+								<td>{i}</td>
 								<td>{item.name}</td>
 								<td>{item.remain}</td>
 
 								<td>
 									<button
 										onClick={() => {
-											dispatch({ type: '수량증가' });
+											dispatch({ type: '수량증가', data: item.id });
 										}}>
 										+
 									</button>
@@ -40,7 +40,7 @@ const Cart = (props) => {
 										onClick={() => {
 											dispatch({
 												type: '수량감소',
-												payload: { name: 'kim' },
+												data: item.id,
 											});
 										}}>
 										-

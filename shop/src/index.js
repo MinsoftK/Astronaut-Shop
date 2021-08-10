@@ -30,24 +30,30 @@ const alert = (state = btn_alert, action) => {
 };
 
 let reduxData = [
-	{ id: 0, name: '멋진신발', remain: 2 },
-	{ id: 1, name: '나이키신발', remain: 3 },
+	{ id: 0, name: '조던 신발', remain: 2 },
+	{ id: 1, name: '나이키 신발', remain: 3 },
 ];
 let cart = [];
 const remainReducer = (state = reduxData, action) => {
 	if (action.type === '수량증가') {
 		let copy = [...state];
-		copy[0].remain++;
+		copy[action.data].remain++;
 		return copy;
 	} else if (action.type === '수량감소') {
 		let copy = [...state];
 		if (copy[0].remain < 1) copy[0].remain = 0;
-		else copy[0].remain--;
+		else copy[action.data].remain--;
 		return copy;
 	} else if (action.type === '항목추가') {
-		let copy = [...state];
-		copy.push(action.payload);
-		return copy;
+		let found = state.findIndex((a) => {
+			return a.name === action.name;
+		});
+		if (found >= 0) {
+		} else {
+			let copy = [...state];
+			copy.push(action.payload);
+			return copy;
+		}
 	} else {
 		return state;
 	}
