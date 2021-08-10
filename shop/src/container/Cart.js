@@ -1,8 +1,15 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 
 const Cart = (props) => {
+	let state = useSelector(
+		(state) =>
+			//redux안에 있던 모든 state
+			state.remainReducer
+	);
+	let dispatch = useDispatch();
+	console.log('state', state);
 	return (
 		<>
 			<Table striped bordered hover>
@@ -15,7 +22,7 @@ const Cart = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{props.state.map((item, i) => {
+					{state.map((item, i) => {
 						return (
 							<tr key={i}>
 								<td>{item.id}</td>
@@ -25,13 +32,13 @@ const Cart = (props) => {
 								<td>
 									<button
 										onClick={() => {
-											props.dispatch({ type: '수량증가' });
+											dispatch({ type: '수량증가' });
 										}}>
 										+
 									</button>
 									<button
 										onClick={() => {
-											props.dispatch({
+											dispatch({
 												type: '수량감소',
 												payload: { name: 'kim' },
 											});
@@ -58,12 +65,12 @@ const Cart = (props) => {
 		</>
 	);
 };
-const 함수명 = (state) => {
-	console.log('state', state);
-	return {
-		state: state.remainReducer,
-		alert: state.alert,
-	};
-};
-export default connect(함수명)(Cart);
-// export default Cart;
+// const 함수명 = (state) => {
+// 	console.log('state', state);
+// 	return {
+// 		state: state.remainReducer,
+// 		alert: state.alert,
+// 	};
+// };
+// export default connect(함수명)(Cart);
+export default Cart;
