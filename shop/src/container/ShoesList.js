@@ -12,9 +12,7 @@ import ShoesItem from '../component/ShoesItem';
 import Navigator from '../component/Navbar';
 
 const ShoesList = (props) => {
-	console.log(props);
 	console.log('props.shoes', props.shoes);
-
 	let [shoesNum, setShoesNum] = useState(Object.keys(Data).length); //남자 상품의 개수
 	let [wshoesNum, setWShoesNum] = useState(Object.keys(Data2).length); //여자 상품의 개수
 	let [btndisable, setBtnDisable] = useState(false); //상품의 개수가 넘어가면 남자카테고리 더보기 버튼 비활성화

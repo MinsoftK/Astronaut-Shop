@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 function ShoesItem(props) {
-	console.log(props);
 	let history = useHistory();
 	let src =
 		props.sex === 'womanshoes'
@@ -14,7 +13,7 @@ function ShoesItem(props) {
 		<div
 			className="col-md-4"
 			onClick={() => {
-				console.log({ src });
+				console.log('src', { src });
 				history.push(src);
 			}}>
 			<img src={props.shoes.imageUrl} width="100%"></img>

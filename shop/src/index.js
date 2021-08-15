@@ -33,7 +33,7 @@ let reduxData = [
 	{ id: 0, name: '조던 신발', remain: 2 },
 	{ id: 1, name: '나이키 신발', remain: 3 },
 ];
-let cart = [];
+
 const remainReducer = (state = reduxData, action) => {
 	if (action.type === '수량증가') {
 		let copy = [...state];
@@ -45,10 +45,16 @@ const remainReducer = (state = reduxData, action) => {
 		else copy[action.data].remain--;
 		return copy;
 	} else if (action.type === '항목추가') {
-		let found = state.findIndex((a) => {
-			return a.name === action.name;
+		let found = state.find((a) => {
+			//a는 state안의 아이템
+			console.log('action', action.payload.name);
+			console.log('a', a.name);
+			return a.name === action.payload.name;
 		});
 		if (found >= 0) {
+			let copy = [...state];
+			copy[found].remain++;
+			return copy;
 		} else {
 			let copy = [...state];
 			copy.push(action.payload);
