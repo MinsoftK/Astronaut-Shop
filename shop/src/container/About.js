@@ -121,10 +121,19 @@ const About = (props) => {
 						배송정보
 					</Nav.Link>
 				</Nav.Item>
+				<Nav.Item>
+					<Nav.Link
+						eventKey="link-2"
+						onClick={() => {
+							setSwitchOn(false);
+							setTab(2);
+						}}>
+						환불정보
+					</Nav.Link>
+				</Nav.Item>
 			</Nav>
-			<CSSTransition in={true} className="wow" timeout={500}>
-				<TabContent tab={tab} setSwitchOn={setSwitchOn} />
-			</CSSTransition>
+
+			<TabContent tab={tab} setSwitchOn={setSwitchOn} />
 		</>
 	);
 };
@@ -133,9 +142,11 @@ const TabContent = (props) => {
 	useEffect(() => {
 		props.setSwitchOn(true);
 	});
-	if (props.tab === 0) return <div>0번째 내용입니다.</div>;
-	else if (props.tab === 1) return <div>1번째 내용입니다.</div>;
-	else return <div>2번째 내용입니다.</div>;
+	if (props.tab === 0)
+		return <div style={{ padding: '100px' }}>상품 설명란</div>;
+	else if (props.tab === 1)
+		return <div style={{ padding: '100px' }}>배송정보에 관련된 창</div>;
+	else return <div style={{ padding: '100px' }}>2번째 내용입니다.</div>;
 };
 
 const Remain = (props) => {
