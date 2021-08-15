@@ -45,12 +45,11 @@ const remainReducer = (state = reduxData, action) => {
 		else copy[action.data].remain--;
 		return copy;
 	} else if (action.type === '항목추가') {
-		let found = state.find((a) => {
-			//a는 state안의 아이템
-			console.log('action', action.payload.name);
-			console.log('a', a.name);
+		let found = state.findIndex((a) => {
+			//reduxData의 상품 이름과 payload에 일치하는 아이템의 idx 반환
 			return a.name === action.payload.name;
 		});
+		console.log('중복되는 상품 idx', found);
 		if (found >= 0) {
 			let copy = [...state];
 			copy[found].remain++;
@@ -64,6 +63,7 @@ const remainReducer = (state = reduxData, action) => {
 		return state;
 	}
 };
+
 let store = createStore(combineReducers({ remainReducer, alert }));
 
 ReactDOM.render(
