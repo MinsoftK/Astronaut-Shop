@@ -9,7 +9,7 @@ const Cart = (props) => {
 			state.remainReducer
 	);
 	let dispatch = useDispatch();
-	console.log('state', state);
+	console.log('훅을 이용해 redux state 가져오기', state);
 	return (
 		<>
 			<Table striped bordered hover>

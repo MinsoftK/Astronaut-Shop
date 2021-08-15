@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import './About.scss';
 
@@ -21,7 +21,6 @@ let Boxtitle = styled.h4`
 `;
 
 const About = (props) => {
-	console.log('상품 클릭 이벤트', props);
 	let { id } = useParams();
 	let history = useHistory();
 	let [alert, setAlert] = useState(1);
@@ -32,9 +31,10 @@ const About = (props) => {
 		? props.wshoes.find((item) => item.id === parseInt(id))
 		: props.shoes.find((item) => item.id === parseInt(id));
 
+	//reudx 파트
+	let dispatch = useDispatch();
 	//findItem이 계속 2번씩 렌더링 된다. useEffect 활용하기.
 	// console.log(findItem);
-
 	useEffect(() => {
 		console.log('test');
 		let Timer = setTimeout(() => {
@@ -70,7 +70,7 @@ const About = (props) => {
 						<button
 							className="btn btn-danger"
 							onClick={() => {
-								props.dispatch({
+								dispatch({
 									type: '항목추가',
 									payload: {
 										id: findItem.id,
@@ -142,11 +142,4 @@ const Remain = (props) => {
 	return <h5>재고 :{props.remain} </h5>;
 };
 
-const redux = (state) => {
-	console.log(state);
-	return {
-		state: state,
-	};
-};
-
-export default connect(redux)(About);
+export default About;
