@@ -57,7 +57,7 @@ const Cart = (props) => {
 										}}>
 										-
 									</Button>
-									{item.quan}
+									{' ' + item.quan + ' '}
 									<Button
 										variant="info"
 										onClick={() => {
