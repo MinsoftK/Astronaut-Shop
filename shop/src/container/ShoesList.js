@@ -1,5 +1,5 @@
 //바꾸기 전
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, lazy, Suspense, useEffect } from 'react';
 import axios from 'axios';
 
 /* Data */
@@ -18,7 +18,6 @@ let ShoesItem = lazy(() => {
 });
 
 const ShoesList = (props) => {
-	console.log('props.shoes', props.shoes);
 	let [shoesNum, setShoesNum] = useState(Object.keys(Data).length); //남자 상품의 개수
 	let [wshoesNum, setWShoesNum] = useState(Object.keys(Data2).length); //여자 상품의 개수
 	let [btndisable, setBtnDisable] = useState(false); //상품의 개수가 넘어가면 남자카테고리 더보기 버튼 비활성화
@@ -27,6 +26,10 @@ const ShoesList = (props) => {
 		<LoadingOutlined style={{ fontSize: 40, marginTop: '13rem' }} spin />
 	);
 
+	useEffect(() => {
+		console.log('props.shoes', props.shoes);
+		console.log('더보기 버튼 클릭', props); // shoes 데이터만큼 반복된다.
+	}, [props, btndisable, wbtndisable]);
 	/************** 렌더링 관련 컴포넌트 **************/
 	//props.num이 0이면 남자 화면 렌더링
 	const Man = () => {
@@ -69,7 +72,6 @@ const ShoesList = (props) => {
 	};
 	//더보기 버튼 UI  남자, 여자 버튼의 각각의 State를 props로 받는다.
 	const ButtonUI = (props) => {
-		console.log('더보기 버튼 클릭', props); // shoes 데이터만큼 반복된다.
 		return (
 			<Button
 				disabled={props.whosebtn}

@@ -35,7 +35,7 @@ let reduxData = [
 const remainReducer = (state = reduxData, action) => {
 	if (action.type === '수량증가') {
 		let copy = [...state];
-		console.log('action.data', action.data);
+		console.log(action.type, 'action.data', action.data);
 		if (copy[action.data].quan < copy[action.data].remain) {
 			//항목의 주문수량이 재고 수량보다 작을 경우에만
 			copy[action.data].quan++;
@@ -49,7 +49,7 @@ const remainReducer = (state = reduxData, action) => {
 		return copy;
 	} else if (action.type === '수량감소') {
 		let copy = [...state];
-		console.log('action.data', action.data);
+		console.log(action.type, 'action.data', action.data);
 		if (copy[action.data].quan < 1) copy[action.data].quan = 0;
 		else copy[action.data].quan--;
 		return copy;

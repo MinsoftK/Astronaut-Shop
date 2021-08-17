@@ -27,18 +27,21 @@ const About = (props) => {
 	let [tab, setTab] = useState('');
 	let [switchOn, setSwitchOn] = useState(false);
 	let [goCartPage, setGoCartPage] = useState(false);
+	let [itemPrice, setItemPrice] = useState(0);
 	let findItem = props.num
 		? props.wshoes.find((item) => item.id === parseInt(id))
 		: props.shoes.find((item) => item.id === parseInt(id));
-	let itemPrice = findItem.price
-		.toString()
-		.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
-	console.log(itemPrice);
 	//reudx 파트
 	let dispatch = useDispatch();
+
 	//findItem이 계속 2번씩 렌더링 된다. useEffect 활용하기.
 	// console.log(findItem);
 	useEffect(() => {
+		let itemPrice = findItem.price
+			.toString()
+			.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+		setItemPrice(itemPrice);
+		console.log(itemPrice);
 		console.log('test');
 		let Timer = setTimeout(() => {
 			setAlert(0);

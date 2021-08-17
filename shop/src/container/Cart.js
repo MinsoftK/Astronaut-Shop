@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Table, Button } from 'react-bootstrap';
-import { Checkbox, Divider } from 'antd';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { Checkbox } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import './Cart.css';
-const Cart = (props) => {
+const Cart = memo((props) => {
 	let state = useSelector(
 		(state) =>
 			//redux안에 있던 모든 state
 			state.remainReducer
 	);
 	let dispatch = useDispatch();
-	console.log('훅을 이용해 redux state 가져오기', state);
 	let [pay, setPay] = useState(0);
 	let total = 0;
 
 	useEffect(() => {
+		console.log('훅을 이용해 redux state 가져오기', state);
+		console.log('state', state);
 		setPay(total);
-	}, [pay]);
+	}, []);
 	function onChange(e) {
 		console.log(`checked = ${e.target.checked}`);
 	}
@@ -35,7 +36,6 @@ const Cart = (props) => {
 				</thead>
 				<tbody>
 					{state.map((item, i) => {
-						console.log('state', state);
 						total += item.price * item.quan;
 						return (
 							<tr key={i}>
@@ -101,7 +101,7 @@ const Cart = (props) => {
 			</Button>
 		</>
 	);
-};
+});
 // const 함수명 = (state) => {
 // 	console.log('state', state);
 // 	return {
