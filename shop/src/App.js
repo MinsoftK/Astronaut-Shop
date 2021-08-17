@@ -86,7 +86,7 @@ const App = () => {
 						<Cart></Cart>
 					</Suspense>
 				</Route>
-				<Route path="/description">
+				<Route path="/afterservice">
 					<Suspense fallback={<Spin indicator={antIcon} />}>
 						<AfterService></AfterService>
 					</Suspense>
