@@ -76,8 +76,10 @@ const About = (props) => {
 										id: findItem.id,
 										sex: props.num,
 										name: findItem.title,
-										remain: 1,
-										url: findItem.imageUrl,
+										remain: findItem.remain,
+										quan: 1,
+										imageUrl: findItem.imageUrl,
+										price: findItem.price,
 									},
 								});
 								history.push('/cart');

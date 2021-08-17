@@ -11,19 +11,11 @@ import { combineReducers, createStore } from 'redux';
 import Data from './Data/ShoesData';
 import Data2 from './Data/ShoesData2';
 
-let btn_alert = true;
-
-const alert = (state = btn_alert, action) => {
-	if (action.type === '알림닫기') {
-		return !alert;
-	}
-	return state;
-};
-
 let reduxData = [
 	{
 		id: 0,
 		name: '조던 신발',
+		quan: 1,
 		remain: 2,
 		price: 154000,
 		imageUrl:
@@ -32,6 +24,7 @@ let reduxData = [
 	{
 		id: 1,
 		name: '나이키 신발',
+		quan: 2,
 		remain: 3,
 		price: 160000,
 		imageUrl:
@@ -43,13 +36,18 @@ const remainReducer = (state = reduxData, action) => {
 	if (action.type === '수량증가') {
 		let copy = [...state];
 		console.log('action.data', action.data);
-		copy[action.data].remain++;
+		if (copy[action.data].quan < copy[action.data].remain) {
+			//항목의 주문수량이 재고 수량보다 작을 경우에만
+			copy[action.data].quan++;
+		} else {
+			alert('재고 수량이 부족합니다!');
+		}
 		return copy;
 	} else if (action.type === '수량감소') {
 		let copy = [...state];
 		console.log('action.data', action.data);
-		if (copy[action.data].remain < 1) copy[action.data].remain = 0;
-		else copy[action.data].remain--;
+		if (copy[action.data].quan < 1) copy[action.data].quan = 0;
+		else copy[action.data].quan--;
 		return copy;
 	} else if (action.type === '항목추가') {
 		let found = state.findIndex((a) => {
@@ -59,7 +57,7 @@ const remainReducer = (state = reduxData, action) => {
 		console.log('중복되는 상품 idx', found);
 		if (found >= 0) {
 			let copy = [...state];
-			copy[found].remain++;
+			copy[found].quan++;
 			return copy;
 		} else {
 			let copy = [...state];
@@ -70,7 +68,7 @@ const remainReducer = (state = reduxData, action) => {
 		return state;
 	}
 };
-let store = createStore(combineReducers({ remainReducer, alert }));
+let store = createStore(combineReducers({ remainReducer }));
 
 ReactDOM.render(
 	<React.StrictMode>
