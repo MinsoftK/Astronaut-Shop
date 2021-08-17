@@ -26,8 +26,8 @@ const Cart = memo((props) => {
 			<Table className="cart-display-item" bordered>
 				<thead>
 					<tr>
-						<th>#</th>
-						<th>image</th>
+						<th>선택</th>
+						<th>상품이미지</th>
 						<th>상품명</th>
 						<th>수량</th>
 						<th>결제금액</th>
@@ -86,19 +86,21 @@ const Cart = memo((props) => {
 							</tr>
 						);
 					})}
-					<tr>
-						<td>총결제금액</td>
-						<td>
-							{'₩ ' +
-								pay.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') +
-								'원'}
-						</td>
-					</tr>
 				</tbody>
 			</Table>
-			<Button variant="primary" style={{ marginTop: '20px' }}>
-				결제
-			</Button>
+			<div className="payment">
+				<span>총 결제금액 : </span>
+				<span>
+					{'₩ ' +
+						pay.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') +
+						'원'}
+				</span>
+				<div>
+					<Button variant="primary" style={{ marginTop: '20px' }}>
+						결제
+					</Button>
+				</div>
+			</div>
 		</>
 	);
 });
