@@ -7,9 +7,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 /* component container */
 import Navigator from './component/Navbar';
 import MainPage from './container/MainPage';
-import Astronaut from './container/Astronaut';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+
+// import ShoesList from './container/ShoesList';
+// import About from './container/About';
+// import Cart from './container/Cart';
+// import AfterService from './container/AfterService';
+
 let ShoesList = lazy(() => {
 	return import('./container/ShoesList');
 });
@@ -20,9 +25,9 @@ let About = lazy(() => {
 let Cart = lazy(() => {
 	return import('./container/Cart');
 });
-// import ShoesList from './container/ShoesList';
-// import About from './container/About';
-// import Cart from './container/Cart';
+let AfterService = lazy(() => {
+	return import('./container/AfterService');
+});
 
 /* data */
 import Data from './Data/ShoesData';
@@ -82,7 +87,9 @@ const App = () => {
 					</Suspense>
 				</Route>
 				<Route path="/description">
-					<Astronaut></Astronaut>
+					<Suspense fallback={<Spin indicator={antIcon} />}>
+						<AfterService></AfterService>
+					</Suspense>
 				</Route>
 			</Switch>
 		</div>
