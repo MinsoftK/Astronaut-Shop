@@ -11,15 +11,6 @@ import { combineReducers, createStore } from 'redux';
 import Data from './Data/ShoesData';
 import Data2 from './Data/ShoesData2';
 
-// let reduxData = [
-// 	{ Data },
-// 	{ Data2 },
-// 	[
-// 		{ id: 0, name: '멋진신발', remain: 2 },
-// 		{ id: 1, name: '나이키신발', remain: 3 },
-// 	],
-// ];
-
 let btn_alert = true;
 
 const alert = (state = btn_alert, action) => {
@@ -30,8 +21,22 @@ const alert = (state = btn_alert, action) => {
 };
 
 let reduxData = [
-	{ id: 0, name: '조던 신발', remain: 2 },
-	{ id: 1, name: '나이키 신발', remain: 3 },
+	{
+		id: 0,
+		name: '조던 신발',
+		remain: 2,
+		price: 154000,
+		imageUrl:
+			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHhyiZtZ6lAAas106pmvCAk1WBWjBSsaSwWg&usqp=CAU',
+	},
+	{
+		id: 1,
+		name: '나이키 신발',
+		remain: 3,
+		price: 160000,
+		imageUrl:
+			'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB3gpm9aeMg3Uu8LPaLiJ78wvqvTTYl4uwgHOahv9uZI9LCkLItChJvIwu4VBJIIbh-aaCu00&usqp=CAc',
+	},
 ];
 
 const remainReducer = (state = reduxData, action) => {
