@@ -37,11 +37,13 @@ let reduxData = [
 const remainReducer = (state = reduxData, action) => {
 	if (action.type === '수량증가') {
 		let copy = [...state];
+		console.log('action.data', action.data);
 		copy[action.data].remain++;
 		return copy;
 	} else if (action.type === '수량감소') {
 		let copy = [...state];
-		if (copy[0].remain < 1) copy[0].remain = 0;
+		console.log('action.data', action.data);
+		if (copy[action.data].remain < 1) copy[action.data].remain = 0;
 		else copy[action.data].remain--;
 		return copy;
 	} else if (action.type === '항목추가') {
@@ -63,7 +65,6 @@ const remainReducer = (state = reduxData, action) => {
 		return state;
 	}
 };
-
 let store = createStore(combineReducers({ remainReducer, alert }));
 
 ReactDOM.render(

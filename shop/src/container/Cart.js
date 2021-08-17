@@ -32,7 +32,7 @@ const Cart = (props) => {
 								<td>
 									<button
 										onClick={() => {
-											dispatch({ type: '수량증가', data: item.id });
+											dispatch({ type: '수량증가', data: i });
 										}}>
 										+
 									</button>
@@ -40,7 +40,7 @@ const Cart = (props) => {
 										onClick={() => {
 											dispatch({
 												type: '수량감소',
-												data: item.id,
+												data: i,
 											});
 										}}>
 										-

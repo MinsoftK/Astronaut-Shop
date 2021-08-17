@@ -76,7 +76,7 @@ const About = (props) => {
 										id: findItem.id,
 										sex: props.num,
 										name: findItem.title,
-										remain: findItem.remain,
+										remain: 1,
 										url: findItem.imageUrl,
 									},
 								});
