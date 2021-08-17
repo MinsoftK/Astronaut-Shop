@@ -19,7 +19,7 @@ function ShoesItem(props) {
 				console.log('src', { src });
 				history.push(src);
 			}}>
-			<img src={props.shoes.imageUrl} width="100%"></img>
+			<img loading="lazy" src={props.shoes.imageUrl} width="100%"></img>
 			<h4>{props.shoes.title}</h4>
 			<h5>₩ {itemPrice}</h5>
 		</div>

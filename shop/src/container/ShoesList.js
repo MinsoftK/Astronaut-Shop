@@ -1,5 +1,5 @@
 //바꾸기 전
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import axios from 'axios';
 
 /* Data */
@@ -8,8 +8,14 @@ import Data2 from '../Data/ShoesData2';
 
 /* component */
 import { Button } from 'antd';
-import ShoesItem from '../component/ShoesItem';
 import Navigator from '../component/Navbar';
+
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+
+let ShoesItem = lazy(() => {
+	return import('../component/ShoesItem');
+});
 
 const ShoesList = (props) => {
 	console.log('props.shoes', props.shoes);
@@ -17,6 +23,9 @@ const ShoesList = (props) => {
 	let [wshoesNum, setWShoesNum] = useState(Object.keys(Data2).length); //여자 상품의 개수
 	let [btndisable, setBtnDisable] = useState(false); //상품의 개수가 넘어가면 남자카테고리 더보기 버튼 비활성화
 	let [wbtndisable, setWBtnDisable] = useState(false); //상품의 개수가 넘어가면 여자 카테고리 더보기 버튼 비활성화
+	const antIcon = (
+		<LoadingOutlined style={{ fontSize: 40, marginTop: '13rem' }} spin />
+	);
 
 	/************** 렌더링 관련 컴포넌트 **************/
 	//props.num이 0이면 남자 화면 렌더링
@@ -24,12 +33,18 @@ const ShoesList = (props) => {
 		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
 		return (
 			<div className="row">
-				{props.shoes.map((item, i) => {
-					//컴포넌트 반복
-					return (
-						<ShoesItem shoes={item} num={i} sex="manshoes" key={i}></ShoesItem>
-					);
-				})}
+				<Suspense fallback={<Spin indicator={antIcon} />}>
+					{props.shoes.map((item, i) => {
+						//컴포넌트 반복
+						return (
+							<ShoesItem
+								shoes={item}
+								num={i}
+								sex="manshoes"
+								key={i}></ShoesItem>
+						);
+					})}
+				</Suspense>
 			</div>
 		);
 	};
@@ -37,16 +52,18 @@ const ShoesList = (props) => {
 	const Woman = () => {
 		return (
 			<div className="row">
-				{props.wshoes.map((item, i) => {
-					//컴포넌트 반복
-					return (
-						<ShoesItem
-							shoes={item}
-							num={i}
-							key={i}
-							sex="womanshoes"></ShoesItem>
-					);
-				})}
+				<Suspense fallback={<Spin indicator={antIcon} />}>
+					{props.wshoes.map((item, i) => {
+						//컴포넌트 반복
+						return (
+							<ShoesItem
+								shoes={item}
+								num={i}
+								key={i}
+								sex="womanshoes"></ShoesItem>
+						);
+					})}
+				</Suspense>
 			</div>
 		);
 	};
