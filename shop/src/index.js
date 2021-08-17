@@ -40,7 +40,11 @@ const remainReducer = (state = reduxData, action) => {
 			//항목의 주문수량이 재고 수량보다 작을 경우에만
 			copy[action.data].quan++;
 		} else {
-			alert('재고 수량이 부족합니다!');
+			alert(
+				`재고 수량이 부족합니다! 재고수량은 ${
+					copy[action.data].remain
+				}개 입니다.`
+			);
 		}
 		return copy;
 	} else if (action.type === '수량감소') {

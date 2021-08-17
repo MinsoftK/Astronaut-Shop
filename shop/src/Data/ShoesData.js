@@ -8,7 +8,7 @@ let Data = [
 		price: 148000,
 		imageUrl:
 			'https://github.com/MinsoftK/jsontest/blob/master/cshoes3.jpg?raw=true',
-		remain: 13,
+		remain: 5,
 	},
 	{
 		id: 1,
@@ -18,7 +18,7 @@ let Data = [
 		price: 163000,
 		imageUrl:
 			'https://github.com/MinsoftK/jsontest/blob/master/cshoes2.jpg?raw=true',
-		remain: 104,
+		remain: 4,
 	},
 	{
 		id: 2,
@@ -28,7 +28,7 @@ let Data = [
 		price: 163000,
 		imageUrl:
 			'https://github.com/MinsoftK/jsontest/blob/master/cshoes1.jpg?raw=true',
-		remain: 102,
+		remain: 10,
 	},
 	{
 		id: 3,
