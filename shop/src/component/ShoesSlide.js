@@ -5,10 +5,11 @@ import styled from 'styled-components';
 const Title = styled.h5`
 	color: white;
 `;
+const style = { width: '80%', height: '80%', margin: 'auto' };
 
 const ShoesSlide = (props) => {
 	return (
-		<Carousel style={{ width: '80%', height: '80%', margin: 'auto' }}>
+		<Carousel style={style}>
 			{props.img.map((url, i) => {
 				return (
 					<Carousel.Item key={i}>

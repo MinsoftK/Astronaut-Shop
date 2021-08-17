@@ -12,13 +12,13 @@ function ShoesItem(props) {
 	let itemPrice = props.shoes.price
 		.toString()
 		.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+	/** 최적화 **/
+	const onClick = () => {
+		console.log('src', { src });
+		history.push(src);
+	};
 	return (
-		<div
-			className="col-md-4"
-			onClick={() => {
-				console.log('src', { src });
-				history.push(src);
-			}}>
+		<div className="col-md-4" onClick={onClick}>
 			<img loading="lazy" src={props.shoes.imageUrl} width="100%"></img>
 			<h4>{props.shoes.title}</h4>
 			<h5>₩ {itemPrice}</h5>

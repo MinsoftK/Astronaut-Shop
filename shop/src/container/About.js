@@ -3,13 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import './About.scss';
-
 /** React bootstrap **/
 import { Nav } from 'react-bootstrap';
-
-/** transition 라이브러리 **/
-import { CSSTransition } from 'react-transition-group';
-
 /* box styled 컴포넌트 */
 let Box = styled.div`
 	padding: 30px;

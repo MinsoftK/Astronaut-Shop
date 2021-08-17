@@ -18,9 +18,9 @@ const Cart = memo((props) => {
 		console.log('state', state);
 		setPay(total);
 	}, []);
-	function onChange(e) {
+	const onChange = (e) => {
 		console.log(`checked = ${e.target.checked}`);
-	}
+	};
 	return (
 		<>
 			<Table className="cart-display-item" bordered>
