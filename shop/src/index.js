@@ -64,6 +64,10 @@ const remainReducer = (state = reduxData, action) => {
 			copy.push(action.payload);
 			return copy;
 		}
+	} else if (action.type === '항목삭제') {
+		let copy = [...state];
+		copy.splice(action.data, 1);
+		return copy;
 	} else {
 		return state;
 	}

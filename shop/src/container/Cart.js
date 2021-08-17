@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import { Table, Button } from 'react-bootstrap';
+import { Checkbox, Divider } from 'antd';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import './Cart.css';
 const Cart = (props) => {
@@ -12,7 +12,14 @@ const Cart = (props) => {
 	let dispatch = useDispatch();
 	console.log('훅을 이용해 redux state 가져오기', state);
 	let [pay, setPay] = useState(0);
-	useEffect(() => {}, [pay]);
+	let total = 0;
+
+	useEffect(() => {
+		setPay(total);
+	}, [pay]);
+	function onChange(e) {
+		console.log(`checked = ${e.target.checked}`);
+	}
 	return (
 		<>
 			<Table className="cart-display-item" bordered>
@@ -23,14 +30,18 @@ const Cart = (props) => {
 						<th>상품명</th>
 						<th>수량</th>
 						<th>결제금액</th>
+						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
 					{state.map((item, i) => {
 						console.log('state', state);
+						total += item.price * item.quan;
 						return (
 							<tr key={i}>
-								<td>{i}</td>
+								<td>
+									<Checkbox onChange={onChange}></Checkbox>
+								</td>
 								<td>
 									<img
 										style={{ width: '250px', height: '250px' }}
@@ -39,29 +50,50 @@ const Cart = (props) => {
 								<td>{item.name}</td>
 								<td>
 									<Button
-										variant="light"
+										variant="info"
 										onClick={() => {
 											dispatch({ type: '수량감소', data: i });
+											setPay(pay - item.price);
 										}}>
 										-
 									</Button>
 									{item.quan}
 									<Button
-										variant="light"
+										variant="info"
 										onClick={() => {
 											dispatch({ type: '수량증가', data: i });
+											setPay(pay + item.price);
 										}}>
 										+
 									</Button>
 								</td>
-								<td>{item.price}</td>
+								<td>
+									{'₩ ' +
+										item.price
+											.toString()
+											.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')}
+								</td>
+								<td>
+									<Button
+										variant="danger"
+										onClick={() => {
+											dispatch({ type: '항목삭제', data: i });
+											setPay(pay - item.price * item.quan);
+										}}>
+										X
+									</Button>
+								</td>
 							</tr>
 						);
 					})}
-				</tbody>
-				<tbody style={{ fontSize: '1.2rem' }}>
-					<td>총결제금액</td>
-					<td>{pay}</td>
+					<tr>
+						<td>총결제금액</td>
+						<td>
+							{'₩ ' +
+								pay.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') +
+								'원'}
+						</td>
+					</tr>
 				</tbody>
 			</Table>
 			<Button variant="primary" style={{ marginTop: '20px' }}>

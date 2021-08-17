@@ -30,7 +30,10 @@ const About = (props) => {
 	let findItem = props.num
 		? props.wshoes.find((item) => item.id === parseInt(id))
 		: props.shoes.find((item) => item.id === parseInt(id));
-
+	let itemPrice = findItem.price
+		.toString()
+		.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+	console.log(itemPrice);
 	//reudx 파트
 	let dispatch = useDispatch();
 	//findItem이 계속 2번씩 렌더링 된다. useEffect 활용하기.
@@ -64,7 +67,7 @@ const About = (props) => {
 					</div>
 					<div className="col-md-6 mt-4">
 						<h4 className="pt-5">{findItem.title}</h4>
-						<h4>₩ {findItem.price}</h4>
+						<h4>₩ {itemPrice}</h4>
 						<p>{findItem.description}</p>
 						<Remain remain={findItem.remain}> </Remain>
 						<button
