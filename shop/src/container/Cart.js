@@ -11,32 +11,28 @@ const Cart = memo((props) => {
 			state.remainReducer
 	);
 	let dispatch = useDispatch();
-	let [selectPay, setSelectPay] = useState(0); //선택한 전체 상품 가격
-	let [isselect, setIsSelect] = useState([]);
+	let [selectPay, setSelectPay] = useState(0); //선택한 전체 상품 가격을 저장하는 state
+	let [isselect, setIsSelect] = useState([]); //체크박스가 선택되었는지 저장하는 state
 	useEffect(() => {
 		console.log('훅을 이용해 redux state 가져오기', state);
 		console.log('state', state);
 
-		// setPay(total);
+		//렌더링될때 상품의 개수만큼 checkbox state를 저장할 obj 생성
 		let copy = [];
-		for (let i = 0; i < state.length; i++) {
-			copy.push(false);
-		}
+		for (let i = 0; i < state.length; i++) copy.push(false);
 		setIsSelect(copy);
-		console.log('copy', copy);
 	}, []);
 
-	//체크박스 체크시 pay에 해당 상품의 total 값을 더해야 한다.
+	//체크박스 체크시 state에 따라 총 상품금액 결정
 	const onChange = (e) => {
 		console.log(`checked = ${e.target.checked} , i = ${e.target.checkNumber}`);
-
 		let copy = [...isselect];
 		copy[e.target.checkNumber] = e.target.checked;
 		if (e.target.checked === true) {
-			console.log('true일 경우에');
+			//체크박스가 체크되었을때 상품 금액을 더해준다.
 			setSelectPay(selectPay + e.target.item.price * e.target.item.quan);
 		} else if (e.target.checked === false) {
-			console.log('false일 경우에');
+			//체크박스가 체크되었을때 상품 금액을 빼준다.
 			setSelectPay(selectPay - e.target.item.price * e.target.item.quan);
 		} else {
 			alert('잘못된 선택입니다.');
@@ -57,6 +53,7 @@ const Cart = memo((props) => {
 				</thead>
 				<tbody>
 					{state.map((item, i) => {
+						//redux의 상품들 (장바구니에 저장된 상품들)
 						let total = item.price * item.quan;
 						return (
 							<tr key={i}>
@@ -77,7 +74,6 @@ const Cart = memo((props) => {
 										variant="light"
 										onClick={() => {
 											dispatch({ type: '수량감소', data: i });
-											// if (isselect[i] === true) setPay(pay - item.price);
 										}}>
 										-
 									</Button>
@@ -86,8 +82,6 @@ const Cart = memo((props) => {
 										variant="light"
 										onClick={() => {
 											dispatch({ type: '수량증가', data: i });
-											// if (isselect[i] === true) setPay(pay + item.price);
-											// setPay(pay + item.price);
 										}}>
 										+
 									</Button>
