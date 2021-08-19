@@ -20,7 +20,7 @@ const Navigator = () => {
 						Cart
 					</Nav.Link>
 					<Nav.Link as={Link} to="/afterservice">
-						A/S
+						문의
 					</Nav.Link>
 				</Nav>
 			</Container>
