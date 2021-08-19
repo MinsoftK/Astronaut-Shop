@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
+//DB의 임시 데이터
 let reduxData = [
 	{
 		id: 0,
@@ -49,6 +50,7 @@ const remainReducer = (state = reduxData, action) => {
 			return a.name === action.payload.name;
 		});
 		console.log('중복되는 상품 idx', found);
+		//상품이 중복될 때 logic
 		if (found >= 0) {
 			let copy = [...state];
 			copy[found].quan++;

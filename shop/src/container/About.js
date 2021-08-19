@@ -20,28 +20,29 @@ const About = (props) => {
 	let history = useHistory();
 	let [alert, setAlert] = useState(1);
 	let [tab, setTab] = useState('');
-	let [switchOn, setSwitchOn] = useState(false);
-	let [goCartPage, setGoCartPage] = useState(false);
-	let [itemPrice, setItemPrice] = useState(0);
+	let [switchOn, setSwitchOn] = useState(false); //tab컨트롤을 위한 스위치 state
+	let [itemPrice, setItemPrice] = useState(0); //
+
+	// 남자상품이면 남자상품에서 id를 찾고, 여자상품이면 여자 상품에서 id를 찾는다.
 	let findItem = props.num
 		? props.wshoes.find((item) => item.id === parseInt(id))
 		: props.shoes.find((item) => item.id === parseInt(id));
 	//reudx 파트
 	let dispatch = useDispatch();
 
-	//findItem이 계속 2번씩 렌더링 된다. useEffect 활용하기.
-	// console.log(findItem);
 	useEffect(() => {
+		//찾은 상품의 가격 Format을 숫자로 바꿔준다.
 		let itemPrice = findItem.price
 			.toString()
 			.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 		setItemPrice(itemPrice);
-		console.log(itemPrice);
-		console.log('test');
+
+		//타이머 설정으로 alert 창 컨트롤
 		let Timer = setTimeout(() => {
 			setAlert(0);
 		}, 4000);
-		//컴포넌트가 사라질때 실행할 코드는 return
+
+		//컴포넌트가 사라질때 실행할 코드 return
 		return function getout() {
 			console.log('함수종료');
 			clearTimeout(Timer);
@@ -73,6 +74,7 @@ const About = (props) => {
 							onClick={() => {
 								dispatch({
 									type: '항목추가',
+									//redux에 보내는 payload
 									payload: {
 										id: findItem.id,
 										sex: props.num,
