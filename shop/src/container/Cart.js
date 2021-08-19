@@ -11,8 +11,11 @@ const Cart = memo((props) => {
 			state.remainReducer
 	);
 	let dispatch = useDispatch();
+
 	let [selectPay, setSelectPay] = useState(0); //선택한 전체 상품 가격을 저장하는 state
 	let [isselect, setIsSelect] = useState([]); //체크박스가 선택되었는지 저장하는 state
+
+	//처음 렌더링될 때
 	useEffect(() => {
 		console.log('훅을 이용해 redux state 가져오기', state);
 		console.log('state', state);
@@ -27,12 +30,14 @@ const Cart = memo((props) => {
 	const onChange = (e) => {
 		console.log(`checked = ${e.target.checked} , i = ${e.target.checkNumber}`);
 		let copy = [...isselect];
+		//copy의 checkNumber 인덱스 값을 변경해준다.
 		copy[e.target.checkNumber] = e.target.checked;
+
 		if (e.target.checked === true) {
-			//체크박스가 체크되었을때 상품 금액을 더해준다.
+			//체크박스가 체크되었을때 해당 상품 총 금액을 더해준다.
 			setSelectPay(selectPay + e.target.item.price * e.target.item.quan);
 		} else if (e.target.checked === false) {
-			//체크박스가 체크되었을때 상품 금액을 빼준다.
+			//체크박스가 체크되었을때 해당 상품 총 금액을 빼준다.
 			setSelectPay(selectPay - e.target.item.price * e.target.item.quan);
 		} else {
 			alert('잘못된 선택입니다.');
@@ -65,7 +70,7 @@ const Cart = memo((props) => {
 								</td>
 								<td>
 									<img
-										style={{ width: '250px', height: '250px' }}
+										style={{ width: '220px', height: '220px' }}
 										src={item.imageUrl}></img>
 								</td>
 								<td>{item.name}</td>

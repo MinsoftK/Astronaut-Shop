@@ -89,7 +89,6 @@ const ShoesList = (props) => {
 	//axios로 추가데이터 받아오기 num:0 남자 num:1 여자
 	const fetchData = (props) => {
 		console.log('axios 시작', props);
-
 		props.num
 			? axios // i === 1일때 여자 카테고리 더보기 버튼 클릭시
 					.get('https://minsoftk.github.io/jsontest/test' + props.num + '.json')

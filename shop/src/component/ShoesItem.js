@@ -5,10 +5,14 @@ import { Link, useHistory } from 'react-router-dom';
 
 function ShoesItem(props) {
 	let history = useHistory();
+
+	//전달받은 props가 남자상품인지 여자상품인지엔 따라 url 설정
 	let src =
 		props.sex === 'womanshoes'
 			? '/womanshoes/' + props.shoes.id
 			: '/manshoes/' + props.shoes.id;
+
+	//props의 신발가격 ',' 포맷처리
 	let itemPrice = props.shoes.price
 		.toString()
 		.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');

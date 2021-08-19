@@ -21,7 +21,7 @@ const About = (props) => {
 	let [alert, setAlert] = useState(1);
 	let [tab, setTab] = useState('');
 	let [switchOn, setSwitchOn] = useState(false); //tab컨트롤을 위한 스위치 state
-	let [itemPrice, setItemPrice] = useState(0); //
+	let [itemPrice, setItemPrice] = useState(0); //, 붙인 가격 포맷을 저장하는 state
 
 	// 남자상품이면 남자상품에서 id를 찾고, 여자상품이면 여자 상품에서 id를 찾는다.
 	let findItem = props.num
