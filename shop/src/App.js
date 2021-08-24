@@ -10,11 +10,6 @@ import MainPage from './container/MainPage';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
-// import ShoesList from './container/ShoesList';
-// import About from './container/About';
-// import Cart from './container/Cart';
-// import AfterService from './container/AfterService';
-
 let ShoesList = lazy(() => {
 	return import('./container/ShoesList');
 });
