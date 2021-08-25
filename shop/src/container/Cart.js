@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Cart.css';
 
 const Cart = memo((props) => {
-	let state = useSelector(
+	let reduxstate = useSelector(
 		(state) =>
 			//redux안에 있던 모든 state
 			state.remainReducer
@@ -17,25 +17,25 @@ const Cart = memo((props) => {
 	let [totalPay, setTotalPay] = useState(0); //선택한 상품의 총 결제 금액을 저장
 	//처음 렌더링될 때
 	useEffect(() => {
-		console.log('훅을 이용해 redux state 가져오기', state);
-		console.log('state', state);
+		console.log('훅을 이용해 redux state 가져오기', reduxstate);
+		console.log('state', reduxstate);
 
 		//렌더링될때 상품의 개수만큼 checkbox state를 저장할 obj 생성
 		let copybox = [];
 		let copypay = [];
-		for (let i = 0; i < state.length; i++) {
+		for (let i = 0; i < reduxstate.length; i++) {
 			copybox.push(false); //선택 박스 false 초기화
-			copypay.push(state[i].price * state[i].quan); // 상품 각각의 결제가격 초기화
+			copypay.push(reduxstate[i].price * reduxstate[i].quan); // 상품 각각의 결제가격 초기화
 		}
 		setIsSelect(copybox);
 		setSelectPay(copypay);
 	}, []);
 
-	//선택된 상품이나 가격이 변할 때, 재렌더링
+	//선택된 상품이나 가격이 변할 때, 총 결제금액 렌더링
 	useEffect(() => {
-		console.log('선택박스 변화', isselect);
+		console.log('박스 선택 값', isselect);
 		let total = 0;
-		for (let i = 0; i < state.length; i++) {
+		for (let i = 0; i < reduxstate.length; i++) {
 			if (isselect[i] === true) {
 				total += selectPay[i];
 			}
@@ -56,8 +56,7 @@ const Cart = memo((props) => {
 	const onClickBtn = (i) => {
 		//상품의 개수가 1보다 크고, 상품이 선택되었을 때만 가격을 변경해준다.
 		let pay = [...selectPay];
-		pay[i] = state[i].quan * state[i].price;
-		console.log(pay);
+		pay[i] = reduxstate[i].quan * reduxstate[i].price;
 		setSelectPay(pay);
 	};
 
@@ -75,7 +74,7 @@ const Cart = memo((props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{state.map((item, i) => {
+					{reduxstate.map((item, i) => {
 						//redux의 상품들 (장바구니에 저장된 상품들)
 						let total = item.price * item.quan;
 						return (
