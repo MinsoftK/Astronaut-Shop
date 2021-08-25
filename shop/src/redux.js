@@ -63,6 +63,7 @@ const remainReducer = (state = reduxData, action) => {
 		let copy = [...state];
 		console.log(action.type, 'action.data', action.data);
 		copy.splice(action.data, 1);
+		console.log(copy);
 		return copy;
 	} else {
 		return state;

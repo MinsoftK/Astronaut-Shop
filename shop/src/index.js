@@ -5,11 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { combineReducers, createStore } from 'redux';
 
 /** Date **/
-import Data from './Data/ShoesData';
-import Data2 from './Data/ShoesData2';
+
 import store from './redux';
 
 ReactDOM.render(
