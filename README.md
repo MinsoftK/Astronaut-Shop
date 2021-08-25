@@ -25,10 +25,9 @@
 ## `Front-end`
 
 - React
-- npm
-- ant-design, boot-strap
+- Redux
+- ant-design, react-bootstrap
 - styled-component
-- React Developer Tool
 - Visual Studio Code
 
 </br>
@@ -110,7 +109,7 @@
 
 ### 👉 [전체 code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
 
-<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme3.png?raw=true" width="800" height="600"/></center>
+<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme3.png?raw=true" width="800" height="800"/></center>
 
 - 그림과 같이 상품 상세정보창에서 장바구니에 추가 버튼을 클릭하면, 장바구니 페이지에 추가가 된다. 이미 전달된 상세페이지에서 Cart로의 Data 전달은 상당히 까다롭다. 그래서 Redux라는 상태 관리 툴을 이용해 관리했다. 👉 [redux code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/redux.js)
 
@@ -289,7 +288,7 @@ const fetchData = (i) => {
 
 <br/>
 
-# 더보기 버튼 클릭시, 무한 상품 로딩
+# 상품 더보기 버튼 클릭시, 무한 상품 로딩
 
 - 더보기 버튼을 눌렀을 때, 5.1에서처럼 axios모듈을 이용하여 json 데이터를 받아온다. 이때 상품을 불러와도 더보기 버튼이 비활성화되지 않아 무한으로 상품이 추가되는 오류가 있었다. 또한 남자, 여자 카테고리에서 더보기 버튼이 같은 state를 공유하고 있었다. 그래서 남자, 여자 상품 각각의 결과에 대한 버튼 활성화를 관리할 수 있게 state 변수를 2개 만들어줬다.
 
@@ -352,20 +351,22 @@ const fetchData = (i) => {
 </details>
 
 <details>
-  <summary> 5.3. 총 결제금액 표시 문제</summary>
+  <summary> 5.3. 주문 결제 금액 표시 문제</summary>
   <div markdown="3">
-  
-  # 총 결제금액 표시 문제
+<br/>
+
+# 총 결제금액 표시 문제
 
 ## 👉 [ 코드 전체 보기](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/Cart.js#L30)
 
-처음엔 Cart에 등록된 모든 상품의 수량과 금액에 따라 총 결제 금액을 표시하게 했다. 하지만 대부분의 쇼핑몰에서는 상품을 선택할 수 있는 기능이 있었다. 따라서 상품을 선택할 수 있는 기능을 만들려고하니 문제가 생겼다.
+기존의 코드에선 장바구니에 추가된 모든 상품의 총 결제금액을 미리 state 변수가 가지고 있었다. 하지만 상품을 선택 기능을 추가할 때, 기존의 코드를 수정해야 했다.
 
-기존에는 상품의 선택없이 수량을 증가하면 total 값을 증가시킴으로 정상적인 값을 출력할 수 있었다. 하지만 상품을 선택하면 해당 금액만을 포함시켜야 하므로 기존의 짠 코드를 적용할 수는 없었다. state로 선택했을 시 값을 관리하고 true, false에 따라 총 결제금액에 포함시키도록 짜야 했다.
+처음에 고민했던 부부은 장바구니에 추가 되어있는 상품마다 checked가 됬는지 안됐는지, state 변수를 만들어야 했다. 그리고 useEffect로 선택이 해제되었을때 총 금액을 표시하려 했다. 그리고 버튼을 클릭했을때 기존의 setPay 한 부분들을 수정해야 했다. 하지만 그렇게 짜려면 `{state.map ...}` 함수 선언문 밖에서 처리를 해야했다. 그렇게 짜려하니 redux와 꼬여 `Too many re-renders. React limits the number of renders to prevent an infinite loop.` 오류가 발생하게 됐고, 코드가 복잡해지고 부자연스러워서 해결하기 어려웠다.
 
-처음에 고민했던 지점이 선택된 상품을 알아야 했으므로 상품마다 checked가 됬는지 안됐는지, state 변수를 만들어야 했다. 그리고 useEffect로 선택이 해제되었을때 총 금액을 표시하려 했다. 그리고 버튼을 클릭했을때 기존의 setPay 한 부분들을 수정해야 했다. 하지만 그렇게 짜려면 `{state.map ...}` 함수 선언문 밖에서 처리를 해야했다. 그렇게 짜려하니 redux와 꼬여서 계속 `too many rendering~~` 오류가 발생하게 됐고, 어려웠다. 또한 코드가 복잡해지고 부자연스러웠다.
+그러다 redux의 data를 가지고 오는 state.map 반복문 안에서 checkbox의 상태가 변할때 같이 값을 적용시키는게 어떨까? 생각을 했다. 그래서 아래와 같이 체크박스의 상태가 변했을 때 상태에 따라서 선택된 상품의 가격인 `selectPay`의 state를 변경 시켜줬다. 이후 훨씬 깔끔하게 코드를 짤 수 있었고, 정상적인 동작을 확인할 수 있었다.
 
-그래서 redux의 data를 가지고 오는 state.map 반복문 안에서 checkbox의 상태가 변할때 같이 값을 적용시키는게 어떨까? 생각을 했다. 그래서 아래와 같이 체크박스의 상태가 변했을 때 상태에 따라서 선택된 상품의 가격인 `selectPay`의 state를 변경 시켜줬다. 이후 정상적인 동작을 확인할 수 있었다.
+<br/>
+<br/>
 
 > 기존 코드
 
@@ -391,7 +392,26 @@ const fetchData = (i) => {
 </Button>;
 ```
 
-- 수정된 코드
+<br/>
+
+> 수정된 코드
+
+위의 수량 버튼을 클릭했을때마다 결제금액을 수정하는 것을 없애고, 체크박스가 선택 되었을 때, 총 결제금액을 업데이트 해줬다. 이를 위해선 처음에 렌더링 될 때, 장바구니에 담긴 상품의 개수만큼 체크가 되었는지 상태를 관리할 state변수가 필요했다. 그래서 아래와 같이 useEffect를 이용해 state변수를 만들어줬다.
+👉 [ 해당 코드 부분 확인](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/Cart.js#L19)
+
+```js
+useEffect(() => {
+	//렌더링될때 상품의 개수만큼 checkbox state를 저장할 obj 생성
+	let copy = [];
+	for (let i = 0; i < state.length; i++) copy.push(false);
+	setIsSelect(copy);
+}, []);
+```
+
+<br/>
+* 상품이 선택됐을 때, 체크박스 변경 이벤트가 발생한다. 아래 코드처럼 처음 렌더링될때 만들어진 obj를 변경시켜준다.
+
+👉 [ 해당 코드 부분 확인](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/Cart.js#L30)
 
 ```js
 const onChange = (e) => {
@@ -412,24 +432,268 @@ const onChange = (e) => {
 };
 ```
 
-```js
+<br/>
+    </div>
+    </details>
 
+<details>
+  <summary> 5.4. 여자 신발 데이터가 바인딩 되야하는데 남자 신발이 바인딩되는 문제</summary>
+  <div markdown="4">
+
+<br/>
+
+# 여자 신발 데이터가 바인딩 되야하는데 남자 신발이 바인딩되는 문제
+
+## 👉 [ 코드 전체 보기](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/ShoesList.js#L20)
+
+상품들을 클릭했을때 ShoesDetail 컴포넌트를 호출해야하는데 어떻게 ShoesList에 있는 Data를 넘길 것인가?
+
+1. 남자, 여자 신발 컴포넌트를 아예 따로 만들어서 전달
+
+2. ShoesList에서 남자 여자 카테고리 선택에 따라 ShoesItem 자식 컴포넌트에 props를 달리 넘겨주기. ShoesList에서 num을 넘겨줘서 ShoesList에서 0이면 남자 Data를 1이면 여자 데이터를 넣어서 export하게 만들었다.
+
+결국 정리하자면 man, woman 상품의 카테고리마다 다른 페이지에서 상품들이 렌더링되게 만들고 싶었다. 그래서 남자, 여자 신발의 데이터 변수를 따로 만들어줬다. App에서 ShoesList에 남자면 num:0 , 여자면 num:1을 props로 넘겨준다. ShoesList에서는 Man에 따른 상품을 map으로 뿌려주는 컴포넌트와 Woman일때 상품을 뿌려주는 경우 2가지로 구성했다. 하지만 num에 따라서 다른 데이터를 입력해줘서 렌더링 할 수 있을거라 생각했지만 `Too many re-renders. React limits the number of renders to prevent an infinite loop.` 오류가 떴다.
+
+> 기존 코드
+
+```js
+let [shoes, setShoes] = useState(Data);
+{
+	props.num === 1 ? setShoes(Data2) : setShoes(Data);
+}
 ```
 
+<br/>
+
+> 수정된 코드
+
+렌더링 되고 있는 과정에서 렌더링에 영향을 미치는 `Shoes` state 변수를 수정해서 오류가 생겼다. 이를 해결하기 위해서 각각의 UI 창을 만들어서 해결했다. `props.num`이 1이면 `<Woman>` 컴포넌트를 반환하고, 0이면 `<man>` 컴포넌트를 반환한다.
+
+map을 써야될 때 단일 컴포넌트가 아니면 작동이 되지 않는다 그래서 새로운 modal 창을 만들어서 map에서 return하게 해주고 있다. 왜 안되는지는 이유를 알지 못했다. 하나의 컴포넌트만을 return해야 되는 것 같다. JSX문법에 맞춰 작성해도 삼항연산자 안에서 여러 개의 태그를 감싸고 있다면, 자바스크립트 엔진에서 parsing 에러가 일어나는 것 같다. 따라서 아래처럼 각각의 UI를 컴포넌트로 만들어서 삼항연산자에서 return하게 해줬다.
+
+👉 [ 해당 코드 부분 확인](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/ShoesList.js#L35)
+
+```js
+//props.num이 0이면 남자 화면 렌더링
+const Man = () => {
+	//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
+	return (
+		<div className="row">
+			<Suspense fallback={<Spin indicator={antIcon} />}>
+				{props.shoes.map((item, i) => {
+					//컴포넌트 반복
+					return (
+						<ShoesItem shoes={item} num={i} sex="manshoes" key={i}></ShoesItem>
+					);
+				})}
+			</Suspense>
+		</div>
+	);
+};
+//props.num이 1이면 여자 화면 렌더링
+const Woman = () => {
+	return (
+		<div className="row">
+			<Suspense fallback={<Spin indicator={antIcon} />}>
+				{props.wshoes.map((item, i) => {
+					//컴포넌트 반복
+					return (
+						<ShoesItem
+							shoes={item}
+							num={i}
+							key={i}
+							sex="womanshoes"></ShoesItem>
+					);
+				})}
+			</Suspense>
+		</div>
+	);
+};
+
+(...)
+
+return (
+		<>
+			<Navigator></Navigator>
+			<div className="container">
+				<div className="row">
+					{props.num === 1 ? <Woman></Woman> : <Man></Man>}
+				</div>
+			</div>
+		</>
+	);
+```
+
+<br/>
+
+</div>
+</details>
+
+<details>
+  <summary> 5.5. 장바구니에 해당 상품이 존재하는데 중복으로 상품이 생성되는 문제</summary>
+  <div markdown="5">
+
+<br/>
+
+# 장바구니에 상품이 존재하는데 중복으로 추가되는 문제
+
+payload로 넘겨준 데이터와 redux 데이터를 비교해서 같은 상품의 이름이 존재한다면 해당 idx를 found에 저장한다. found가 0보다 큰 경우라면(존재한다면) 개수를 증가시켜준다. 0보다 작을경우에는 그대로 `push`를 써서 copy obj에 추가해준다.
+👉 [ 코드 전체 보기](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/redux.js#L26)
+
+```js
+else if (action.type === '항목추가') {
+	let found = state.findIndex((a) => {
+		//reduxData의 상품 이름과 payload에 일치하는 아이템의 idx 반환
+		return a.name === action.payload.name;
+	});
+	console.log('중복되는 상품 idx', found);
+	//상품이 중복될 때 logic
+	if (found >= 0) {
+		let copy = [...state];
+		copy[found].quan++;
+		return copy;
+	} else {
+		let copy = [...state];
+		copy.push(action.payload);
+		return copy;
+	}
+```
+
+<br/>
+
+</div>
+</details>
+
+<br/><br/>
+
+# 6. 기타 트러블슈팅
+
+<details>
+  <summary> 6.1. 반복문으로 컴포넌트 호출시 Warning</summary>
+  <div markdown="1">
+
+## `Warning: Each child in a list should have a unique "key" prop.`
+
+리액트에서는 DOM 엘리먼트와 컴포넌트간의 관계를 key props를 통해서 판단한다. 그래서 idx로 key값이 입력되는건 권장되지 않는다. `<div key={text}>` 를 넣어줌으로써 오류를 해결할 수 있었다. map 또는 반목문을 돌렸을 경우 key를 입력받는 것을 권장한다.  
+https://sentry.io/answers/unique-key-prop/
+
+</div>
+</details>
+
+<details>
+  <summary> 6.2. 상품의 리스트 반복문 만드는 과정에서: Cannot read property 'imageUrl' of undefined</summary>
+  <div markdown="2">
+
+## `Cannot read property 'imageUrl' of undefined`
+
+부모의 state를 자식에 넘겨야하는데 나는 이상한 변수들을 props로 넘기고 있었다. 그래서 state 변수인 shoes를 그대로 ShoesItem이라는 컴포넌트에 넘겨줬고 shoes state에 상품 정보들이 객체로 담겨 있는 것을 확인할 수 있었다. 그럼에도 shoesItem 컴포넌트가 제대로 렌더링 되지 않고 있었다. shoesItem에서 console.log 를 찍어봐도 전혀 props를 인식하지 못했다. props를 잘못 넘겨주는 구간을 console.log로 찾아 해결했다.
+
+</div>
+</details>
+
+<details>
+  <summary> 6.3. 렌더링시 SCSS 버전 오류 </summary>
+  <div markdown="3">
+
+## `Node Sass version 5.0.0 is incompatible with ^4.0.0. `
+
+- 기존의 CRA로 만들어진 프로젝트는 scss 5.0 버전과 충돌 발생
+
+```
+//node-sass 삭제
+$ yarn remove node-sass
+//node-sass 4.14.0버전 설치
+$ yarn add node-sass@4.14.0
+```
+
+https://guswnl0610.github.io/react/react-sass-error/
+
+</div>
+</details>
+<details>
+  <summary> 6.4. ShoesList 자체에 onClick이벤트가 먹히지 않는 문제. </summary>
+  <div markdown="4">
+
+## 컴포넌트에서는 HTML 특성인 onClick이벤트를 작성할 수 없다.
+
+버튼처럼 이벤트를 작성할 수 없는 곳에서도 <Link>나 history를 사용해서 해결할 수 있었다. history를 이용하면 더욱 깔끔하게 사용할 수 있다.
+
+</div>
+</details>
+<details>
+  <summary> 6.5. 내장함수 filter를 사용했을 때 '===' 사용 문제  </summary>
+  <div markdown="5">
+
+## '==' '===' 는 다르다
+
+useParmas() 훅을 이용할때 반환되는 id와 props에 들어있는 item의 id가 일치하는가?
+`===`를 사용했을때 데이터 타입까지 비교한다. params의 id값은 string이므로 parseInt를 통해 int로 바꿔준다.
+
+```js
+let filterItem = props.shoes.filter((item) => item.id == id);
+
+let filterItem = props.shoes.filter((item) => item.id === parseInt(id));
+```
+
+https://minsoftk.tistory.com/64  
+https://minsoftk.tistory.com/65
+
+</div>
+</details>
+
+<details>
+<summary> 6.6. 여자카테고리에서 상품을 클릭했을때 남자들 상품이 바인딩 되는 오류</summary>
+  <div markdown="6">
+  
   <br/>
 
-- <br/>
-  </div>
-  </details>
+props.sex 가 여성 카테고리일 경우 "womanshoes"로 넘어오는데 "woman"과 비교한다. 이를 "womanshoes"로 바꿔줬다.
 
-# 6. 핵심 트러블슈팅
+> 기존코드
+
+```js
+(./component/ShoesItem.js)
+let src =
+		props.sex === 'woman'
+			? '/womanshoes/' + props.shoes.id
+			: '/manshoes/' + props.shoes.id;
+```
+
+> 수정코드
+
+```js
+(./component/ShoesItem.js)
+let src =
+		props.sex === 'womanshoes'
+			? '/womanshoes/' + props.shoes.id
+			: '/manshoes/' + props.shoes.id;
+```
+
+  </div>
+</details>
+
+<details>
+<summary> 6.7. bootstrap css 적용 오류</summary>
+  <div markdown="7">
+<br/>
+
+Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 white로 수정해버려, bootstrap css가 적용이 되지 않았다.  
+ 전체 a태그를 수정해버리는 코드를 삭제하고 `.className a { }` 로 수정
+<br/>
+
+</div>
+</details>
+
+<br/><br/>
 
 ## 보완점
 
-- 상품 선택 이후 수량을 변경했을 때, 결제금액이 최신화 되지 않는 문제
-- 전체선택 기능 추가하기
-- Node.js와 MongoDB를 활용해 백엔드를 연결중에 있다. 연결한 이후 '결제' 기능을 추가해 전체 Data를 수정한다.
-- 장바구니에 넣기 전에 재고가 0일때 경우
+- 전체 선택 기능.
+- 상품 선택 이후 수량을 변경했을 때, 결제금액이 최신화 되지 않는 문제.
+- Node.js와 MongoDB를 활용해 백엔드를 연결중. 연결한 이후 '결제' 기능을 추가해 전체 Data를 수정한다.(데이터 옮기기)
+- 장바구니에 넣기 전에 재고가 0인 경우 검증.
+- 로그인 기능
+
   <br/>
   <br/>
 
@@ -439,6 +703,7 @@ const onChange = (e) => {
 
 - [개발일지1](https://minsoftk.tistory.com/66)
 - [개발일지2](https://minsoftk.tistory.com/67?category=872236)
+
   <br/>
   <br/>
 
@@ -451,6 +716,23 @@ const onChange = (e) => {
 
 <hr/>
 
-- 5.1. CORS
-  https://developer.mozilla.org/ko/docs/Web/HTTP/CORS
+- 5.1. CORS  
+  https://developer.mozilla.org/ko/docs/Web/HTTP/CORS  
   https://evan-moon.github.io/2020/05/21/about-cors/
+
+- 5.4. Map  
+  https://lktprogrammer.tistory.com/121  
+  https://mjn5027.tistory.com/80
+
+- 6.1.  
+  https://sentry.io/answers/unique-key-prop/
+
+- 6.3  
+  https://guswnl0610.github.io/react/react-sass-error/
+- 6.4  
+  https://lannstark.tistory.com/122  
+  https://gongbu-ing.tistory.com/45  
+  [history 파라미터 같이 보내기](http://lab.naminsik.com/4008)
+- 6.5  
+   https://minsoftk.tistory.com/64  
+  https://minsoftk.tistory.com/65
