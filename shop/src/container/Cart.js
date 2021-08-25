@@ -45,7 +45,6 @@ const Cart = memo((props) => {
 
 	//체크된 상품의 총 상품금액 업데이트
 	const onChange = (e) => {
-		console.log(e);
 		console.log(`checked = ${e.target.checked} , i = ${e.target.checkNumber}`);
 
 		//copy의 checkNumber 인덱스 값을 변경해준다.

@@ -8,7 +8,7 @@ import Data2 from '../Data/ShoesData2';
 
 /* component */
 import { Button } from 'antd';
-
+import LazyIcon from '../App';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
@@ -21,9 +21,6 @@ const ShoesList = (props) => {
 	let [wshoesNum, setWShoesNum] = useState(Object.keys(Data2).length); //여자 상품의 개수
 	let [btndisable, setBtnDisable] = useState(false); //상품의 개수가 넘어가면 남자카테고리 더보기 버튼 비활성화
 	let [wbtndisable, setWBtnDisable] = useState(false); //상품의 개수가 넘어가면 여자 카테고리 더보기 버튼 비활성화
-	const antIcon = (
-		<LoadingOutlined style={{ fontSize: 40, marginTop: '13rem' }} spin />
-	);
 
 	useEffect(() => {
 		console.log('props.shoes', props.shoes);
@@ -35,7 +32,7 @@ const ShoesList = (props) => {
 		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
 		return (
 			<div className="row">
-				<Suspense fallback={<Spin indicator={antIcon} />}>
+				<Suspense fallback={<Spin indicator={LazyIcon} />}>
 					{props.shoes.map((item, i) => {
 						//컴포넌트 반복
 						return (
@@ -54,7 +51,7 @@ const ShoesList = (props) => {
 	const Woman = () => {
 		return (
 			<div className="row">
-				<Suspense fallback={<Spin indicator={antIcon} />}>
+				<Suspense fallback={<Spin indicator={LazyIcon} />}>
 					{props.wshoes.map((item, i) => {
 						//컴포넌트 반복
 						return (

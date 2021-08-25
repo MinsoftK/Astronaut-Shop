@@ -31,15 +31,14 @@ import addData from './Data/addManShoes';
 import addData2 from './Data/addManShoes';
 
 const App = () => {
-	let IconStyle = { fontSize: 50, marginTop: '13rem' };
+	let [shoes, setShoes] = useState(Data);
+	let [wshoes, setWShoes] = useState(Data2);
+	let IconStyle = { fontSize: 50, marginTop: '40vh' };
 	const antIcon = (
 		<div className="loadingIcon">
 			<LoadingOutlined style={IconStyle} spin />
 		</div>
 	);
-	let [shoes, setShoes] = useState(Data);
-	let [wshoes, setWShoes] = useState(Data2);
-
 	return (
 		<div className="App">
 			<div className="no-display">화면이 너무 작습니다. </div>
@@ -91,4 +90,13 @@ const App = () => {
 	);
 };
 
-export default App;
+const LazyIcon = () => {
+	let IconStyle = { fontSize: 50, marginTop: '40vh' };
+	return (
+		<div className="loadingIcon">
+			<LoadingOutlined style={IconStyle} spin />
+		</div>
+	);
+};
+
+export default { App, LazyIcon };

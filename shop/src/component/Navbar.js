@@ -19,9 +19,9 @@ const Navigator = () => {
 					<Nav.Link as={Link} to="/cart">
 						Cart
 					</Nav.Link>
-					<Nav.Link as={Link} to="/afterservice">
+					{/* <Nav.Link as={Link} to="/afterservice">
 						문의
-					</Nav.Link>
+					</Nav.Link> */}
 				</Nav>
 			</Container>
 		</Navbar>

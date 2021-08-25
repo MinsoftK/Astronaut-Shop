@@ -220,6 +220,8 @@ const onChange = (e) => {
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme4(lazy-before).png?raw=true" width="600" height="600"/></center>
 
+<br/>
+
 > lazy loading 적용 후
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme5(lazy-after).png?raw=true" width="600" height="400"/></center>
@@ -227,17 +229,23 @@ const onChange = (e) => {
 <br/>
 <br/>
 
-- React dev tool을 이용해 시간을 측정해서 렌더링 최적화에 효과가 있는지 비교해봤다. lazy loading 적용 이후 memo를 사용했을 때도 렌더링 시간을 측정해봤다. meme는 장바구니 페이지에서 사용했다. 그 이유는 수량을 조절할때, 리렌더링 되는 부분이 많았기 때문이다.
+- React dev tool을 이용해 시간을 측정해서 렌더링 최적화에 효과가 있는지 비교해봤다. lazy loading 적용 이후 memo를 사용했을 때도 렌더링 시간을 측정해봤다. memo는 장바구니 페이지에서 사용했다. 그 이유는 수량을 조절할때, 리렌더링 되는 부분이 많았기 때문이다.
 
-  > memo 적용 전
+<br/>
+
+> memo 적용 전
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme7(memo-before).png?raw=true" width="600" height="400"/></center>
+
+<br/>
 
 > memo 적용 후
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme6(memo-after).png?raw=true" width="600" height="400"/></center>
 
-- memo를 사용했을 때, 큰 차이가 없이 렌더링 되는 경우도 있었다. 하지만 추가되는 상품들이 추가가 될 때마다 memo를 체감할 수 있다. lazy loading처럼 큰 속도 향상은 볼 수 없었다.
+<br/>
+
+- memo를 사용했을 때, 큰 차이가 없이 렌더링 되는 경우도 있었다. 평균적으로 전체 렌더링 시간은 감소했다. 다만 lazy loading처럼 큰 속도 향상은 볼 수 없었다.
 
 <br/>
 
@@ -259,8 +267,9 @@ const onChange = (e) => {
 
 - 원인은 github에서 JSON 파일을 제대로 안 만들어서였다. JSON을 배포해줄 서버를 가지고 있어야 하는데 프론트엔드 개발 중 서버를 만들어 확인하기란 상당히 까다로웠다. 그래서 프론트엔드 환경에서만 확인할 수 있는 방법을 찾아야 했다. 그러나 정보가 많이 없어서 찾기 힘들었지만 stackoverflow에서 [단서](https://stackoverflow.com/questions/29612800/load-json-from-github-file)를 얻을 수 있었다. 여러 가지를 찾아본 결과, github에서 JSON을 불러오려면 해당 repository가 배포되어 있어야 한다는 것을 알았다. 그래서 JSON을 배포할 수 있는 [Repository](https://github.com/MinsoftK/jsontest)를 따로 만들어줘서 해결할 수 있었다.
 
-https://blog.naver.com/PostView.naver?blogId=dnvld1&logNo=222039760747&redirect=Dlog&widgetTypeCall=true&directAccess=false  
-https://tried.tistory.com/m/76
+[참고1](https://blog.naver.com/PostView.naver?blogId=dnvld1&logNo=222039760747&redirect=Dlog&widgetTypeCall=true&directAccess=false)
+
+[참고2](https://tried.tistory.com/m/76)
 
 > axios 모듈
 
@@ -323,19 +332,19 @@ const fetchData = (i) => {
 
 ```js
 const fetchData = (i) => {
-		i
-			? axios // i === 1일때 여자 카테고리 더보기 버튼 클릭시
-					.get('https://minsoftk.github.io/jsontest/test' + i + '.json')
-					.then((result) => {
-						let newObj = [...wshoes, ...result.data]; //데이터 합치기
-						setWShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
-						if (newObj.length >= wshoesNum) setWBtnDisable('true'); //합친 데이터의 길이가 더 크다면 여자 카테고리 버튼 비활성화
-						setWShoes(newObj);
-						console.log(btndisable);
-					})
-					.catch(() => {
-						console.log('실패');
-					})
+i
+	? axios // i === 1일때 여자 카테고리 더보기 버튼 클릭시
+			.get('https://minsoftk.github.io/jsontest/test' + i + '.json')
+			.then((result) => {
+				let newObj = [...wshoes, ...result.data]; //데이터 합치기
+				setWShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
+				if (newObj.length >= wshoesNum) setWBtnDisable('true'); //합친 데이터의 길이가 더 크다면 여자 카테고리 버튼 비활성화
+				setWShoes(newObj);
+				console.log(btndisable);
+			})
+			.catch(() => {
+				console.log('실패');
+			})
 (...)
 ```
 
@@ -442,13 +451,13 @@ const onChange = (e) => {
 
   - ShoesList에서 남자 여자 카테고리 선택에 따라 ShoesItem 자식 컴포넌트에 props를 달리 넘겨주기. ShoesList에서 num을 넘겨줘서 ShoesList에서 0이면 남자 Data를 1이면 여자 데이터를 넣어서 export 하게 만들었다.
 
-* 결국 정리하자면 man, woman 상품의 카테고리마다 다른 페이지에서 상품들이 렌더링 되게 만들고 싶었다. 그래서 남자, 여자 신발의 데이터 변수를 따로 만들어줬다. App에서 ShoesList에 남자면 num:0 , 여자면 num:1을 props로 넘겨준다. ShoesList에서는 Man에 따른 상품을 map으로 뿌려주는 컴포넌트와 Woman일 때 상품을 뿌려주는 경우 2가지로 구성했다. 하지만 num에 따라서 다른 데이터를 입력해줘서 렌더링 할 수 있을 거라 생각했지만 `Too many re-renders. React limits the number of renders to prevent an infinite loop.` 오류가 떴다.
+* 결국 정리하자면 man, woman 상품의 카테고리마다 다른 페이지에서 상품들이 렌더링 되게 만들고 싶었다. 그래서 남자, 여자 신발의 데이터 변수를 따로 만들어줬다. App에서 ShoesList에 남자면 num:0 , 여자면 num:1을 props로 넘겨준다. ShoesList에서는 Man에 따른 상품을 map으로 뿌려주는 컴포넌트와 Woman일 때 상품을 뿌려주는 경우 2가지로 구성했다. 하지만 num에 따라서 다른 데이터를 입력해줘서 렌더링 할 수 있을 거라 생각했지만 `Too many re-renders. React limits the number of renders to prevent an infinite loop.` 오류가 발생했다.
 
 <br/>
 
 > 변경된 코드
 
-- 렌더링 되는 과정에서 렌더링에 영향을 미치는 `Shoes` state 변수를 수정해서 오류가 생겼다. 이를 해결하기 위해서 각각의 UI 창을 만들어서 해결했다. `props.num`이 1이면 `컴포넌트를 반환하고, 0이면` 컴포넌트를 반환한다.
+- 렌더링 되는 과정에서 렌더링에 영향을 미치는 `Shoes` state 변수를 수정해서 오류가 생겼다. 이를 해결하기 위해서 각각의 UI 창을 만들어서 해결했다. `props.num`이 1이면 컴포넌트를 반환하고, 0이면 컴포넌트를 반환한다.
 
 - map을 써야 될 때 단일 컴포넌트가 아니면 작동이 되지 않는다고 해서 새로운 modal 창을 만들어서 map에서 return 하게 해주고 있다. 왜 안되는지는 이유를 알지 못했다. 하나의 컴포넌트만을 return 해야 되는 것 같다. JSX 문법에 맞춰 작성해도 삼항 연산자 안에서 여러 개의 태그를 감싸고 있다면, 자바스크립트 엔진에서 parsing 에러가 일어나는 것 같다. 따라서 아래처럼 각각의 UI를 컴포넌트로 만들어서 삼항 연산자에서 return 하게 해줬다.
 
@@ -518,8 +527,7 @@ return (
 
 ## 중복으로 추가되는 문제
 
-- payload로 넘겨준 데이터와 redux 데이터를 비교해서 같은 상품의 이름이 존재한다면 해당 idx를 found에 저장한다. found가 0보다 큰 경우라면(존재한다면) 개수를 증가시켜준다. 0보다 작을경우에는 그대로 `push`를 써서 copy obj에 추가해준다.  
-  👉 [ 해당 코드 ](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/redux.js#L26)
+- payload로 넘겨준 데이터와 redux 데이터를 비교해서 같은 상품의 이름이 존재한다면 해당 idx를 found에 저장한다. found가 0보다 큰 경우라면(존재한다면) 개수를 증가시켜준다. 0보다 작을경우에는 그대로 `push`를 써서 copy obj에 추가해준다. 👉 [ 해당 코드 ](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/redux.js#L26)
 
 ```js
 else if (action.type === '항목추가') {
@@ -548,6 +556,7 @@ else if (action.type === '항목추가') {
 <details>
 <summary> 5.6. 장바구니 상품 체크 후, 수량 변경시 오류, 음수 나오는 오류</summary>
 <div markdown="6">
+
 <br/>
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme9.png?raw=true" width="800" height="600"/></center>
@@ -586,32 +595,34 @@ const onChange = (e) => {
 
 </details>
 
-- redux 데이터와 state데이터가 혼합되면서 이해하기도 어려웠고, 잦은 오류가 발생했다. 그래서 새로운 방법으로 코드를 변경했다. 아래는 코드를 변경하면서 고려한 점이다.
+- redux 데이터와 state데이터가 혼합되면서 계속 오류가 발생했지만, 어디서 오류가 발생하는지 찾기도 어려웠고 이해하기도 어려웠다. 그래서 새로운 코드로 변경했다. 아래는 코드를 변경하면서 고려한 점이다.
 
-  - 각각 상품의 결제 금액을 배열로 상태변수로 관리한다.
-  - 상품 선택 버튼을 눌렀을 때, reducer함수로 payload가 전달이 된다. 전달이 된 후, 리렌더링 되므로 **장바구니 페이지에서 redux의 상태를 reduxstate란 이름으로 가져온다.** 따라서 reduxstate의 수량과 가격을 활용해 상품의 결제 금액의 배열을 저장하는 state변수를 업데이트 한다.
+  - 각각 상품의 결제 금액을 배열인 상태 변수로 관리한다.
+  - 상품 선택 버튼을 눌렀을 때, reducer함수로 payload가 전달된다. 이후 현재 코드에서 **장바구니 페이지에 redux의 상태를 reduxstate란 이름으로 가져오고 있다.** 따라서 기존의 state변수들을 활용하지 말고 불러진 reduxstate의 수량과 가격을 바로 활용해 상품의 결제 금액의 배열을 저장하는 state변수에 업데이트 해준다.
   - 체크 박스가 선택 여부에 따라 총 결제 금액을 구해준다.
 
 <br/>
 
-- 👉 [ 변경된 코드 원본 ](https://github.com/MinsoftK/astronaut-shop/blob/6f5a851647893dec98c3a2cd70353b3dcd5be541/shop/src/container/Cart.js#L19)
+👉 [ 변경된 코드 원본 ](https://github.com/MinsoftK/astronaut-shop/blob/6f5a851647893dec98c3a2cd70353b3dcd5be541/shop/src/container/Cart.js#L19)
+
+> 변경된 코드
 
 ```js
 //처음 렌더링될 때
 useEffect(() => {
-		console.log('훅을 이용해 redux state 가져오기', reduxstate);
-		console.log('state', reduxstate);
+	console.log('훅을 이용해 redux state 가져오기', reduxstate);
+	console.log('state', reduxstate);
 
-		//렌더링될때 상품의 개수만큼 checkbox state를 저장할 obj 생성
-		let copybox = [];
-		let copypay = [];
-		for (let i = 0; i < reduxstate.length; i++) {
-			copybox.push(false); //선택 박스 false 초기화
-			copypay.push(reduxstate[i].price * reduxstate[i].quan); // 상품 각각의 결제가격 초기화
-		}
-		setIsSelect(copybox);
-		setSelectPay(copypay);
-	}, []);
+	//렌더링될때 상품의 개수만큼 checkbox state를 저장할 obj 생성
+	let copybox = [];
+	let copypay = [];
+	for (let i = 0; i < reduxstate.length; i++) {
+		copybox.push(false); //선택 박스 false 초기화
+		copypay.push(reduxstate[i].price * reduxstate[i].quan); // 상품 각각의 결제가격 초기화
+	}
+	setIsSelect(copybox);
+	setSelectPay(copypay);
+}, []);
 //선택된 상품이나 가격이 변할 때, 재렌더링
 useEffect(() => {
 	console.log('선택박스 변화', isselect);
@@ -626,27 +637,32 @@ useEffect(() => {
 
 //체크된 상품의 총 상품금액 업데이트
 const onChange = (e) => {
-console.log(e);
-console.log(`checked = ${e.target.checked} , i = ${e.target.checkNumber}`);
+	console.log(e);
+	console.log(`checked = ${e.target.checked} , i = ${e.target.checkNumber}`);
 
-    //copy의 checkNumber 인덱스 값을 변경해준다.
-    let copy = [...isselect];
-    copy[e.target.checkNumber] = e.target.checked;
-    setIsSelect(copy);
-
+	//copy의 checkNumber 인덱스 값을 변경해준다.
+	let copy = [...isselect];
+	copy[e.target.checkNumber] = e.target.checked;
+	setIsSelect(copy);
 };
 const onClickBtn = (i) => {
-//상품의 개수가 1보다 크고, 상품이 선택되었을 때만 가격을 변경해준다.
-let pay = [...selectPay];
-pay[i] = state[i].quan \* state[i].price;
-console.log(pay);
-setSelectPay(pay);
+	//상품의 개수가 1보다 크고, 상품이 선택되었을 때만 가격을 변경해준다.
+	let pay = [...selectPay];
+	pay[i] = state[i].quan * state[i].price;
+	console.log(pay);
+	setSelectPay(pay);
 };
-
 ```
 
+- 코드를 정리하자면, `useEffect`를 이용해 처음 렌더링 될때 상품의 개수와 가격을 저장하는 state 변수를 선언한다.
+- 상품의 수량과 체크박스의 변경이 일어나면, 체크박스가 `true`인 상품의 새로운 총 결제금액을 다시 업데이트한다. (2번째 useEffect 코드부분)
+- 체크되었을 때, 체크박스의 상태를 업데이트 해준다.
+- 수량 `+`, `-` 버튼을 클릭했을 때, 새로운 상품 금액을 state 변수에 업데이트 해준다.
+
+<br/>
+
 </div>
-</details>
+     </details>
 
 <br/><br/>
 
@@ -779,6 +795,7 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 - Node.js와 MongoDB를 활용해 백엔드를 연결중. 연결한 이후 '결제' 기능을 추가해 전체 Data를 수정한다.(데이터 옮기기)
 - 장바구니에 넣기 전에 재고가 0인 경우 검증.
 - 로그인 기능.
+- 문의 페이지에 채팅기능 추가해보기
 
   <br/>
   <br/>
