@@ -155,7 +155,7 @@ const TabContent = (props) => {
 };
 
 const Remain = (props) => {
-	return <h5>재고 :{props.remain} </h5>;
+	return <h5>재고 : {props.remain} </h5>;
 };
 
 export default About;
