@@ -70,6 +70,7 @@ const ShoesList = (props) => {
 			</div>
 		);
 	};
+
 	//더보기 버튼 UI  남자, 여자 버튼의 각각의 State를 props로 받는다.
 	const ButtonUI = (props) => {
 		return (
