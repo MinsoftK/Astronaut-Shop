@@ -105,7 +105,7 @@
 <div markdown="3">
 <br/>
 
-# 장바구니
+## 장바구니
 
 ### 👉 [전체 code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
 
@@ -149,11 +149,11 @@
 <div markdown="4">
 <br/>
 
-# 상품 선택 결제 기능
+## 상품 선택 결제 기능
 
 ### 👉 [전체 code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
 
-<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme7.png?raw=true" width="800" height="600"/></center>
+<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme8.png?raw=true" width="800" height="600"/></center>
 
 - 장바구니에서 상품을 선택하면 상품이 실시간으로 업데이트 된다. 👉 [checkbox 전체 코드 보기](https://github.com/MinsoftK/astronaut-shop/blob/6e469964e4a983b527d0525eae5f622bd2c4e05f/shop/src/container/Cart.js#L30)
 
@@ -199,12 +199,12 @@ const onChange = (e) => {
   </div>
   </details>
 
- <details>
+<details>
 <summary> 4.5. 렌더링 최적화</summary>
 <div markdown="5">
 <br/>
 
-# 렌더링 최적화
+## 렌더링 최적화
 
 ### 👉 [lazy loading code보기](https://github.com/MinsoftK/astronaut-shop/blob/6e469964e4a983b527d0525eae5f622bd2c4e05f/shop/src/App.js#L13)
 
@@ -246,13 +246,13 @@ const onChange = (e) => {
 
 # 5. 주요 트러블슈팅
 
- <details>
+<details>
   <summary> 5.1. json을 통해 Data 받아올 때, CORS 오류</summary>
   <div markdown="1">
 
-<br/>
+    <br/>
 
-# json을 통해 Data 받아올 때, CORS 오류
+## json을 통해 Data 받아올 때, CORS 오류
 
 - 초기 환경에서 DB가 없어서 로컬환경을 이용해 axios 모듈을 통해서 github에 올려진 json파일을 받아오려 했다. 하지만 `Access to XMLHttpRequest at 'https://github.com/MinsoftK/react/blob/main/shop/src/Data/addManShoes.json' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.` 오류가 발생했다. CORS 오류에 대해서 찾아봤는데 왜 CORS 오류가 발생하는지 이해하기 어려웠다.
 
@@ -282,13 +282,14 @@ const fetchData = (i) => {
 
 </div>
 </details>
+
 <details>
   <summary> 5.2. 더보기 버튼 클릭시, 무한 상품 로딩 문제</summary>
   <div markdown="2">
 
 <br/>
 
-# 상품 더보기 버튼 클릭시, 무한 상품 로딩
+## 상품 더보기 버튼 클릭시, 무한 상품 로딩
 
 - 더보기 버튼을 눌렀을 때, 5.1에서처럼 axios모듈을 이용하여 json 데이터를 받아온다. 이때 상품을 불러와도 더보기 버튼이 비활성화되지 않아 무한으로 상품이 추가되는 오류가 있었다. 또한 남자, 여자 카테고리에서 더보기 버튼이 같은 state를 공유하고 있었다. 그래서 남자, 여자 상품 각각의 결과에 대한 버튼 활성화를 관리할 수 있게 state 변수를 2개 만들어줬다.
 
@@ -355,7 +356,7 @@ const fetchData = (i) => {
   <div markdown="3">
 <br/>
 
-# 총 결제금액 표시 문제
+## 총 결제금액 표시 문제
 
 ## 👉 [ 코드 전체 보기](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/Cart.js#L30)
 
@@ -442,7 +443,7 @@ const onChange = (e) => {
 
 <br/>
 
-# 여자 신발 데이터가 바인딩 되야하는데 남자 신발이 바인딩되는 문제
+## 여자 신발 데이터가 바인딩 되야하는데 남자 신발이 바인딩되는 문제
 
 ## 👉 [ 코드 전체 보기](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/ShoesList.js#L20)
 
@@ -530,12 +531,12 @@ return (
 </details>
 
 <details>
-  <summary> 5.5. 장바구니에 해당 상품이 존재하는데 중복으로 상품이 생성되는 문제</summary>
+  <summary>5.5. 장바구니에 해당 상품이 존재하는데 중복으로 상품이 생성되는 문제</summary>**
   <div markdown="5">
 
 <br/>
 
-# 장바구니에 상품이 존재하는데 중복으로 추가되는 문제
+## 장바구니에 상품이 존재하는데 중복으로 추가되는 문제
 
 payload로 넘겨준 데이터와 redux 데이터를 비교해서 같은 상품의 이름이 존재한다면 해당 idx를 found에 저장한다. found가 0보다 큰 경우라면(존재한다면) 개수를 증가시켜준다. 0보다 작을경우에는 그대로 `push`를 써서 copy obj에 추가해준다.
 👉 [ 코드 전체 보기](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/redux.js#L26)
@@ -561,6 +562,14 @@ else if (action.type === '항목추가') {
 
 <br/>
 
+</div>
+</details>
+
+<details>
+<summary> 5.6. 선택된 상품 수량 변경할때 적용 안되는 오류, 음수 나오는 오류</summary>
+<div markdown="6">
+<br/>
+<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme9.png?raw=true" width="600" height="400"/></center>
 </div>
 </details>
 
