@@ -34,6 +34,7 @@ const Cart = memo((props) => {
 	//선택된 상품이나 가격이 변할 때, 총 결제금액 렌더링
 	useEffect(() => {
 		console.log('박스 선택 값', isselect);
+		console.log('state', state);
 		let total = 0;
 		for (let i = 0; i < reduxstate.length; i++) {
 			if (isselect[i] === true) {
