@@ -8,7 +8,6 @@ import Data2 from '../Data/ShoesData2';
 
 /* component */
 import { Button } from 'antd';
-import Navigator from '../component/Navbar';
 
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';

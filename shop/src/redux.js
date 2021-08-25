@@ -1,4 +1,3 @@
-import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
 
 //DB의 임시 데이터

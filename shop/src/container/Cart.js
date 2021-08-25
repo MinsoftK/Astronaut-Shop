@@ -88,7 +88,8 @@ const Cart = memo((props) => {
 								<td>
 									<img
 										style={{ width: '220px', height: '220px' }}
-										src={item.imageUrl}></img>
+										src={item.imageUrl}
+										alt="..."></img>
 								</td>
 								<td>{item.name}</td>
 								<td>
