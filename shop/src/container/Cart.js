@@ -12,37 +12,55 @@ const Cart = memo((props) => {
 	);
 	let dispatch = useDispatch();
 
-	let [selectPay, setSelectPay] = useState(0); //선택한 전체 상품 가격을 저장하는 state
+	let [selectPay, setSelectPay] = useState(0); //각각의 상품 가격을 저장하는 state
 	let [isselect, setIsSelect] = useState([]); //체크박스가 선택되었는지 저장하는 state
-
+	let [totalPay, setTotalPay] = useState(0); //선택한 상품의 총 결제 금액을 저장
 	//처음 렌더링될 때
 	useEffect(() => {
 		console.log('훅을 이용해 redux state 가져오기', state);
 		console.log('state', state);
 
 		//렌더링될때 상품의 개수만큼 checkbox state를 저장할 obj 생성
-		let copy = [];
-		for (let i = 0; i < state.length; i++) copy.push(false);
-		setIsSelect(copy);
+		let copybox = [];
+		let copypay = [];
+		for (let i = 0; i < state.length; i++) {
+			copybox.push(false); //선택 박스 false 초기화
+			copypay.push(state[i].price * state[i].quan); // 상품 각각의 결제가격 초기화
+		}
+		setIsSelect(copybox);
+		setSelectPay(copypay);
 	}, []);
 
-	//체크박스 체크시 state에 따라 총 상품금액 결정
-	const onChange = (e) => {
-		console.log(`checked = ${e.target.checked} , i = ${e.target.checkNumber}`);
-		let copy = [...isselect];
-		//copy의 checkNumber 인덱스 값을 변경해준다.
-		copy[e.target.checkNumber] = e.target.checked;
-
-		if (e.target.checked === true) {
-			//체크박스가 체크되었을때 해당 상품 총 금액을 더해준다.
-			setSelectPay(selectPay + e.target.item.price * e.target.item.quan);
-		} else if (e.target.checked === false) {
-			//체크박스가 체크되었을때 해당 상품 총 금액을 빼준다.
-			setSelectPay(selectPay - e.target.item.price * e.target.item.quan);
-		} else {
-			alert('잘못된 선택입니다.');
+	//선택된 상품이나 가격이 변할 때, 재렌더링
+	useEffect(() => {
+		console.log('선택박스 변화', isselect);
+		let total = 0;
+		for (let i = 0; i < state.length; i++) {
+			if (isselect[i] === true) {
+				total += selectPay[i];
+			}
 		}
+		setTotalPay(total);
+	}, [isselect, selectPay, totalPay]);
+
+	//체크된 상품의 총 상품금액 업데이트
+	const onChange = (e) => {
+		console.log(e);
+		console.log(`checked = ${e.target.checked} , i = ${e.target.checkNumber}`);
+
+		//copy의 checkNumber 인덱스 값을 변경해준다.
+		let copy = [...isselect];
+		copy[e.target.checkNumber] = e.target.checked;
+		setIsSelect(copy);
 	};
+	const onClickBtn = (i) => {
+		//상품의 개수가 1보다 크고, 상품이 선택되었을 때만 가격을 변경해준다.
+		let pay = [...selectPay];
+		pay[i] = state[i].quan * state[i].price;
+		console.log(pay);
+		setSelectPay(pay);
+	};
+
 	return (
 		<>
 			<Table className="cart-display-item" bordered>
@@ -78,7 +96,11 @@ const Cart = memo((props) => {
 									<Button
 										variant="light"
 										onClick={() => {
-											dispatch({ type: '수량감소', data: i });
+											dispatch({
+												type: '수량감소',
+												data: i,
+											});
+											onClickBtn(i);
 										}}>
 										-
 									</Button>
@@ -86,7 +108,9 @@ const Cart = memo((props) => {
 									<Button
 										variant="light"
 										onClick={() => {
+											console.log('isselect[i]', isselect[i], i);
 											dispatch({ type: '수량증가', data: i });
+											onClickBtn(i);
 										}}>
 										+
 									</Button>
@@ -114,9 +138,8 @@ const Cart = memo((props) => {
 			<div className="payment">
 				<span>총 결제금액 : </span>
 				<span>
-					{selectPay
-						.toString()
-						.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') + '원'}
+					{totalPay.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') +
+						'원'}
 				</span>
 				<div>
 					<Button variant="danger" style={{ marginTop: '20px' }}>

@@ -41,7 +41,7 @@ const remainReducer = (state = reduxData, action) => {
 	} else if (action.type === '수량감소') {
 		let copy = [...state];
 		console.log(action.type, 'action.data', action.data);
-		if (copy[action.data].quan < 1) copy[action.data].quan = 0;
+		if (copy[action.data].quan - 1 === 0) copy[action.data].quan = 1;
 		else copy[action.data].quan--;
 		return copy;
 	} else if (action.type === '항목추가') {
