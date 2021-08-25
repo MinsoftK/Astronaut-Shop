@@ -255,15 +255,18 @@ const onChange = (e) => {
   <summary> 5.1. json을 통해 Data 받아올 때, CORS 오류</summary>
   <div markdown="1">
 
-    <br/>
+<br/>
 
-## json을 통해 Data 받아올 때, CORS 오류
+## github에서 json을 통해 Data 받아올 때, CORS 오류
 
-- 초기 환경에서 DB가 없어서 로컬환경을 이용해 axios 모듈을 통해서 github에 올려진 JSON 파일을 받아오려 했다. 하지만 `Access to XMLHttpRequest at 'https://github.com/MinsoftK/react/blob/main/shop/src/Data/addManShoes.json' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.` 오류가 발생했다. CORS 오류에 대해서 찾아봤는데 왜 CORS 오류가 발생하는지 이해하기 어려웠다.
+- 서버가 없어서 로컬환경을 이용해 axios 모듈을 통해서 github에 올려진 JSON 파일을 받아오려 했다. 하지만 `Access to XMLHttpRequest at 'https://github.com/MinsoftK/react/blob/main/shop/src/Data/addManShoes.json' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.` 오류가 발생했다.
 
 - 원인은 github에서 JSON 파일을 제대로 안 만들어서였다. JSON을 배포해줄 서버를 가지고 있어야 하는데 프론트엔드 개발 중 서버를 만들어 확인하기란 상당히 까다로웠다. 그래서 프론트엔드 환경에서만 확인할 수 있는 방법을 찾아야 했다. 그러나 정보가 많이 없어서 찾기 힘들었지만 stackoverflow에서 [단서](https://stackoverflow.com/questions/29612800/load-json-from-github-file)를 얻을 수 있었다. 여러 가지를 찾아본 결과, github에서 JSON을 불러오려면 해당 repository가 배포되어 있어야 한다는 것을 알았다. 그래서 JSON을 배포할 수 있는 [Repository](https://github.com/MinsoftK/jsontest)를 따로 만들어줘서 해결할 수 있었다.
 
-  > axios 모듈
+https://blog.naver.com/PostView.naver?blogId=dnvld1&logNo=222039760747&redirect=Dlog&widgetTypeCall=true&directAccess=false  
+https://tried.tistory.com/m/76
+
+> axios 모듈
 
 ```js
 const fetchData = (i) => {
@@ -804,8 +807,10 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 <hr/>
 
 - 5.1. CORS  
-  https://developer.mozilla.org/ko/docs/Web/HTTP/CORS  
-  https://evan-moon.github.io/2020/05/21/about-cors/
+   https://developer.mozilla.org/ko/docs/Web/HTTP/CORS  
+   https://evan-moon.github.io/2020/05/21/about-cors/  
+  https://blog.naver.com/PostView.naver?blogId=dnvld1&logNo=222039760747&redirect=Dlog&widgetTypeCall=true&directAccess=false  
+  https://tried.tistory.com/m/76
 
 - 5.4. Map  
   https://lktprogrammer.tistory.com/121  
