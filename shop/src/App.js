@@ -4,6 +4,7 @@ import React, { useState, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 /* component container */
 import Navigator from './component/Navbar';
 import MainPage from './container/MainPage';
@@ -27,15 +28,13 @@ let AfterService = lazy(() => {
 /* data */
 import Data from './Data/ShoesData';
 import Data2 from './Data/ShoesData2';
-import addData from './Data/addManShoes';
-import addData2 from './Data/addManShoes';
 
 const App = () => {
 	let [shoes, setShoes] = useState(Data);
 	let [wshoes, setWShoes] = useState(Data2);
 	let IconStyle = { fontSize: 50, marginTop: '40vh' };
 	const antIcon = (
-		<div className="loadingIcon">
+		<div>
 			<LoadingOutlined style={IconStyle} spin />
 		</div>
 	);
@@ -90,13 +89,4 @@ const App = () => {
 	);
 };
 
-const LazyIcon = () => {
-	let IconStyle = { fontSize: 50, marginTop: '40vh' };
-	return (
-		<div className="loadingIcon">
-			<LoadingOutlined style={IconStyle} spin />
-		</div>
-	);
-};
-
-export default { App, LazyIcon };
+export default App;

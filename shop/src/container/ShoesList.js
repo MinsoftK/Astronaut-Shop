@@ -1,4 +1,3 @@
-//바꾸기 전
 import React, { useState, lazy, Suspense, useEffect } from 'react';
 import axios from 'axios';
 
@@ -8,7 +7,6 @@ import Data2 from '../Data/ShoesData2';
 
 /* component */
 import { Button } from 'antd';
-import LazyIcon from '../App';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
@@ -22,6 +20,13 @@ const ShoesList = (props) => {
 	let [btndisable, setBtnDisable] = useState(false); //상품의 개수가 넘어가면 남자카테고리 더보기 버튼 비활성화
 	let [wbtndisable, setWBtnDisable] = useState(false); //상품의 개수가 넘어가면 여자 카테고리 더보기 버튼 비활성화
 
+	let IconStyle = { fontSize: 50, marginTop: '40vh' };
+	const antIcon = (
+		<div className="loadingIcon">
+			<LoadingOutlined style={IconStyle} spin />
+		</div>
+	);
+
 	useEffect(() => {
 		console.log('props.shoes', props.shoes);
 		console.log('더보기 버튼 클릭', props); // shoes 데이터만큼 반복된다.
@@ -32,7 +37,7 @@ const ShoesList = (props) => {
 		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
 		return (
 			<div className="row">
-				<Suspense fallback={<Spin indicator={LazyIcon} />}>
+				<Suspense fallback={<Spin indicator={antIcon} />}>
 					{props.shoes.map((item, i) => {
 						//컴포넌트 반복
 						return (
@@ -51,7 +56,7 @@ const ShoesList = (props) => {
 	const Woman = () => {
 		return (
 			<div className="row">
-				<Suspense fallback={<Spin indicator={LazyIcon} />}>
+				<Suspense fallback={<Spin indicator={antIcon} />}>
 					{props.wshoes.map((item, i) => {
 						//컴포넌트 반복
 						return (
