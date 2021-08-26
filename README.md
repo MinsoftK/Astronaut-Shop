@@ -38,7 +38,7 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 - 최상단인 APP에서부터 데이터를 자식 컴포넌트까지 뿌려준다.
 - Cart 컨테이너에선 redux로 상태 관리한다.
 - 현재의 데이터 흐름을 결정하게 된 내용의 [포스트](https://minsoftk.tistory.com/66)
-- 프로젝트를 시작할 때 백엔드없이 시작하다 보니 기존의 Data를 프로젝트의 JS 파일에서 받아온다. 그래서 현재 데이터의 수정이 불가하다. Node.js와 MongoDB를 활용해 백엔드를 연결 중에 있다. 연결한 이후 '결제' 기능을 추가해 Data를 수정한다.
+- 프로젝트를 시작할 때 백엔드없이 시작하다 보니 기존의 Data를 프로젝트의 JS 파일에서 받아온다. 그래서 현재 데이터의 수정이 불가하다. 백엔드를 연결 이후에 '결제' 기능을 추가해 Data를 수정할 계획
 
 <br/>
 <br/>
@@ -112,7 +112,7 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme3.png?raw=true" width="600" height="600"/></center>
 
-- 그림과 같이 상품 상세정보창에서 장바구니에 추가 버튼을 클릭하면, 장바구니 페이지에 추가가 된다. 이미 전달된 상세페이지에서 Cart로의 Data 전달은 상당히 까다롭다. 그래서 Redux 상태 관리 툴을 이용해 관리했다. 👉 [redux code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/redux.js)
+- 그림과 같이 상품 상세정보창에서 장바구니에 추가 버튼을 클릭하면, 장바구니 페이지에 추가가 된다. 상세페이지에서 장바구니 페이지로 Data 전달은 상당히 번거롭다. 그래서 Redux 상태 관리 툴을 이용해 관리했다. 👉 [redux code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/redux.js)
 
 ```js
 <button
@@ -256,12 +256,12 @@ const onChange = (e) => {
 # 5. 주요 트러블슈팅
 
 <details>
-  <summary> 5.1. json을 통해 Data 받아올 때, CORS 오류</summary>
+  <summary> 5.1. github에서 json Data 받아올 때, CORS 오류</summary>
   <div markdown="1">
 
 <br/>
 
-## github에서 json을 통해 Data 받아올 때, CORS 오류
+## github에서 json Data 받아올 때, CORS 오류
 
 - 서버가 없어서 로컬환경을 이용해 axios 모듈을 통해서 github에 올려진 JSON 파일을 받아오려 했다. 하지만 `Access to XMLHttpRequest at 'https://github.com/MinsoftK/react/blob/main/shop/src/Data/addManShoes.json' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.` 오류가 발생했다.
 
