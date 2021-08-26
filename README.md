@@ -112,7 +112,7 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme3.png?raw=true" width="600" height="600"/></center>
 
-- 그림과 같이 상품 상세정보창에서 장바구니에 추가 버튼을 클릭하면, 장바구니 페이지에 추가가 된다. 이미 전달된 상세페이지에서 Cart로의 Data 전달은 상당히 까다롭다. 그래서 Redux 상태 관리 툴을 이용해 관리했다. 👉 [redux code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/redux.js)
+- 그림과 같이 상품 상세정보창에서 장바구니에 추가 버튼을 클릭하면, 장바구니 페이지에 추가가 된다. 상세페이지에서 장바구니 페이지로 Data 전달은 상당히 번거롭다. 그래서 Redux 상태 관리 툴을 이용해 관리했다. 👉 [redux code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/redux.js)
 
 ```js
 <button
