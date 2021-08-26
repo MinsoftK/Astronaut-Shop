@@ -443,15 +443,7 @@ const onChange = (e) => {
 
 ## 여자 신발 데이터가 바인딩 되야하는데 남자 신발이 바인딩되는 문제
 
-## 👉 [ 해당 코드 ](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/ShoesList.js#L20)
-
-- 상품들을 클릭했을 때 ShoesDetail 컴포넌트를 호출해야 하는데 어떻게 ShoesList에 있는 Data를 넘길 것인가?
-
-  - 남자, 여자 신발 컴포넌트를 아예 따로 만들어서 전달
-
-  - ShoesList에서 남자 여자 카테고리 선택에 따라 ShoesItem 자식 컴포넌트에 props를 달리 넘겨주기. ShoesList에서 num을 넘겨줘서 ShoesList에서 0이면 남자 Data를 1이면 여자 데이터를 넣어서 export 하게 만들었다.
-
-* 결국 정리하자면 man, woman 상품의 카테고리마다 다른 페이지에서 상품들이 렌더링 되게 만들고 싶었다. 그래서 남자, 여자 신발의 데이터 변수를 따로 만들어줬다. App에서 ShoesList에 남자면 num:0 , 여자면 num:1을 props로 넘겨준다. ShoesList에서는 Man에 따른 상품을 map으로 뿌려주는 컴포넌트와 Woman일 때 상품을 뿌려주는 경우 2가지로 구성했다. 하지만 num에 따라서 다른 데이터를 입력해줘서 렌더링 할 수 있을 거라 생각했지만 `Too many re-renders. React limits the number of renders to prevent an infinite loop.` 오류가 발생했다.
+- man, woman 상품의 카테고리마다 다른 페이지에서 상품들이 렌더링 되게 만들고 싶었다. 그래서 남자, 여자 신발의 데이터 변수를 따로 만들어줬다. App에서 ShoesList에 남자면 num:0 , 여자면 num:1을 props로 넘겨준다. ShoesList에서는 Man에 따른 상품을 map으로 뿌려주는 컴포넌트와 Woman일 때 상품을 뿌려주는 경우 2가지로 구성했다. 하지만 num에 따라서 다른 데이터를 입력해줘서 렌더링 할 수 있을 거라 생각했지만 `Too many re-renders. React limits the number of renders to prevent an infinite loop.` 오류가 발생했다.
 
 <br/>
 
@@ -796,7 +788,8 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 * ~~상품 선택 이후 수량을 변경했을 때, 결제금액이 최신화 되지 않는 문제.~~ (21.08.26)
 
 - ~~장바구니에서 상품 삭제시 장바구니 list 업데이트 오류~~ (21.08.26)
-- 항목선택 state와 가격 state 합쳐서 관리하기
+- ~~항목선택 state와 가격 state 합쳐서 관리하기~~ (취소)
+- ~~상품 장바구니로 추가시 합친 State가 빈 배열로 변하는 문제~~ (useEffect 중복 문제로 State를 다시 나눠서 해결해야 했다.)
 - Node.js와 MongoDB를 활용해 백엔드를 연결중. 연결한 이후 '결제' 기능을 추가해 전체 Data를 수정한다.(데이터 옮기기)
 - 장바구니에 넣기 전에 재고가 0인 경우 검증.
 - 로그인 기능.
