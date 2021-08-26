@@ -15,6 +15,7 @@ const Cart = memo((props) => {
 	let [selectPay, setSelectPay] = useState(0); //각각의 상품 가격을 저장하는 state
 	let [isselect, setIsSelect] = useState([]); //체크박스가 선택되었는지 저장하는 state
 	let [totalPay, setTotalPay] = useState(0); //선택한 상품의 총 결제 금액을 저장
+	let [itemState, setItemState] = useState([]);
 	//처음 렌더링될 때
 	useEffect(() => {
 		console.log('훅을 이용해 redux state 가져오기', reduxstate);
@@ -34,7 +35,9 @@ const Cart = memo((props) => {
 	//선택된 상품이나 가격이 변할 때, 총 결제금액 렌더링
 	useEffect(() => {
 		console.log('박스 선택 값', isselect);
-		console.log('state', state);
+		console.log('상품 가격 값', selectPay);
+		console.log('reduxstate', reduxstate);
+
 		let total = 0;
 		for (let i = 0; i < reduxstate.length; i++) {
 			if (isselect[i] === true) {
@@ -42,7 +45,7 @@ const Cart = memo((props) => {
 			}
 		}
 		setTotalPay(total);
-	}, [isselect, selectPay, totalPay]);
+	}, [isselect, selectPay]);
 
 	//체크된 상품의 총 상품금액 업데이트
 	const onChange = (e) => {
@@ -59,7 +62,14 @@ const Cart = memo((props) => {
 		pay[i] = reduxstate[i].quan * reduxstate[i].price;
 		setSelectPay(pay);
 	};
-
+	const onDelete = (i) => {
+		let list = [...isselect];
+		let pay = [...selectPay];
+		list.splice(i, 1);
+		pay.splice(i, 1);
+		setIsSelect(list);
+		setSelectPay(pay);
+	};
 	return (
 		<>
 			<Table className="cart-display-item" bordered>
@@ -125,7 +135,7 @@ const Cart = memo((props) => {
 										variant="danger"
 										onClick={() => {
 											dispatch({ type: '항목삭제', data: i });
-											// setPay(pay - item.price * item.quan);
+											onDelete(i);
 										}}>
 										X
 									</Button>
