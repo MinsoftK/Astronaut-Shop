@@ -256,12 +256,12 @@ const onChange = (e) => {
 # 5. 주요 트러블슈팅
 
 <details>
-  <summary> 5.1. json을 통해 Data 받아올 때, CORS 오류</summary>
+  <summary> 5.1. github에서 json Data 받아올 때, CORS 오류</summary>
   <div markdown="1">
 
 <br/>
 
-## github에서 json을 통해 Data 받아올 때, CORS 오류
+## github에서 json Data 받아올 때, CORS 오류
 
 - 서버가 없어서 로컬환경을 이용해 axios 모듈을 통해서 github에 올려진 JSON 파일을 받아오려 했다. 하지만 `Access to XMLHttpRequest at 'https://github.com/MinsoftK/react/blob/main/shop/src/Data/addManShoes.json' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.` 오류가 발생했다.
 
