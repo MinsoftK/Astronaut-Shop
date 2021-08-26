@@ -57,11 +57,11 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme1.png?raw=true" width="800" height="600"/></center>
 
 - 프로젝트를 처음 시작할 때, 미리 Data를 json파일로 만들어놨다. 해당 데이터들을 다른 [github Repository](https://github.com/MinsoftK/jsontest/blob/master/test0.json)에 올려놨다. 여자상품인지 남자상품인지에 따라 다른 json파일을 axios 모듈로 받아온다. 해당 데이터를 기존의 데이터 obj에 추가해준다.  
-  👉 [code 확인](https://github.com/MinsoftK/astronaut-shop/blob/d84390fe076984f8b2f7c370e348df8a4862ec1b/shop/src/container/ShoesList.js#L90)
+  👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/d84390fe076984f8b2f7c370e348df8a4862ec1b/shop/src/container/ShoesList.js#L90)
 
 - 더 보기 버튼을 클릭했을 때, 만약 더는 진열할 상품이 없다면 더 보기 버튼을 비활성화시킨다. 남자, 여자 카테고리의 버튼의 state를 따로 관리한다.
 
-  👉 [code 확인](https://github.com/MinsoftK/astronaut-shop/blob/d84390fe076984f8b2f7c370e348df8a4862ec1b/shop/src/container/ShoesList.js#L100)
+  👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/d84390fe076984f8b2f7c370e348df8a4862ec1b/shop/src/container/ShoesList.js#L100)
 
   <br/>
   <br/>
@@ -73,7 +73,7 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 <div markdown="2">
 <br/>
 
-### 👉 [전체 code보기](https://github.com/MinsoftK/astronaut-shop/blob/d84390fe076984f8b2f7c370e348df8a4862ec1b/shop/src/component/ShoesItem.js#L16)
+### 👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/d84390fe076984f8b2f7c370e348df8a4862ec1b/shop/src/component/ShoesItem.js#L16)
 
 ```js
 (shop/src/component/ShoesItem.js)
@@ -108,7 +108,7 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 
 ## 장바구니
 
-### 👉 [전체 code](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
+### 👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme3.png?raw=true" width="600" height="600"/></center>
 
@@ -152,7 +152,7 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 
 ## 상품 선택 결제 기능
 
-### 👉 [ 해당 코드 ](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
+### 👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme8.png?raw=true" width="600" height="400"/></center>
 
@@ -220,7 +220,7 @@ const onChange = (e) => {
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme4(lazy-before).png?raw=true" width="600" height="600"/></center>
 
-<br/>
+<br/><br/>
 
 > lazy loading 적용 후
 
@@ -237,7 +237,7 @@ const onChange = (e) => {
 
 <center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme7(memo-before).png?raw=true" width="600" height="400"/></center>
 
-<br/>
+<br/><br/>
 
 > memo 적용 후
 
@@ -289,7 +289,7 @@ const fetchData = (i) => {
 };
 ```
 
-- 위와 같이 새로운 저장소 url로 json파일을 배포한 뒤, axios모듈로 데이터를 불러왔을 때 CORS 오류없이 정상적으로 동작하는 것을 확인할 수 있었다. 👉 [ 해당 코드 ](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/ShoesList.js#L91)
+- 위와 같이 새로운 저장소 url로 json파일을 배포한 뒤, axios모듈로 데이터를 불러왔을 때 CORS 오류없이 정상적으로 동작하는 것을 확인할 수 있었다. 👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/ba961917c6cc688e3da929653dd851c6ff4df634/shop/src/container/ShoesList.js#L91)
 
   <br/><br/>
 
@@ -328,7 +328,7 @@ const fetchData = (i) => {
 
 > 변경된 코드
 
-- 만약 기존의 데이터와 불러온 데이터를 합한 `newObj`의 길이가 여자상품의 개수보다 크거나 같다면 버튼을 비활성화 시킨다. 👉 [ 해당 코드 부분 ](https://github.com/MinsoftK/astronaut-shop/blob/f8f2b700e9fe171cacf5ad44edbb1ba525bda118/shop/src/container/ShoesList.js#L100)
+- 만약 기존의 데이터와 불러온 데이터를 합한 `newObj`의 길이가 여자상품의 개수보다 크거나 같다면 버튼을 비활성화 시킨다. 👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/f8f2b700e9fe171cacf5ad44edbb1ba525bda118/shop/src/container/ShoesList.js#L100)
 
 ```js
 const fetchData = (i) => {
@@ -562,6 +562,7 @@ else if (action.type === '항목추가') {
 <br/>
 
 - 해당 상품이 선택되었다면, 상품의 `수량 * 가격`을 `총 결제금액`에 더해준다.
+- 아래 함수는 상품의 수량을 조절했을 때, 발생하는 이벤트 함수
 
 ```js
 const onChange = (e) => {
@@ -595,11 +596,12 @@ const onChange = (e) => {
 
 <br/>
 
-👉 [ 변경된 코드 원본 ](https://github.com/MinsoftK/astronaut-shop/blob/6f5a851647893dec98c3a2cd70353b3dcd5be541/shop/src/container/Cart.js#L19)
+👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/6f5a851647893dec98c3a2cd70353b3dcd5be541/shop/src/container/Cart.js#L19)
 
 > 변경된 코드
 
 ```js
+//(shop / src / container/Cart.js)
 //처음 렌더링될 때
 useEffect(() => {
 	console.log('훅을 이용해 redux state 가져오기', reduxstate);
