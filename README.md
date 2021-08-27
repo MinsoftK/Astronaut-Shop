@@ -73,7 +73,8 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 <div markdown="2">
 <br/>
 
-### 👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/d84390fe076984f8b2f7c370e348df8a4862ec1b/shop/src/component/ShoesItem.js#L16)
+<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/ezgif.com-gif-maker2.gif?raw=true" width="800" height="600"/></center>
+- 하나의 상품의 클릭이벤트가 발생했을때, history 훅을 이용해 `src`로 이동하게 했다. 그러면 아래와 같이 해당 상품의 정보로 이동할 수 있다.
 
 ```js
 (shop/src/component/ShoesItem.js)
@@ -92,10 +93,6 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 (...)
 ```
 
-- 하나의 상품의 클릭이벤트가 발생했을때, history 훅을 이용해 `src`로 이동하게 했다. 그러면 아래와 같이 해당 상품의 정보로 이동할 수 있다.
-
-<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme2.png?raw=true" width="800" height="600"/></center>
-
 <br/><br/>
 
   </div>
@@ -110,10 +107,10 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 
 ### 👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
 
-<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme3.png?raw=true" width="600" height="600"/></center>
+<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/ezgif.com-gif-maker.gif?raw=true" width="600" height="600"/></center>
 
 - 그림과 같이 상품 상세정보창에서 장바구니에 추가 버튼을 클릭하면, 장바구니 페이지에 추가가 된다. 상세페이지에서 장바구니 페이지로 Data 전달은 상당히 번거롭다. 그래서 Redux 상태 관리 툴을 이용해 관리했다. 👉 [redux code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/redux.js)
-- 위의 장바구니에 추가 버튼을 눌르면 payload로 redux데이터에 해당 컴포넌트에서 props로 받아온 데이터를 넘겨준다.
+- 장바구니 추가 버튼을 눌르면 payload로 redux데이터에 해당 컴포넌트에서 props로 받아온 데이터를 넘겨준다.
 - 장바구니 페이지의 `+`, `-` 버튼을 눌를때마다 redux의 action으로 전달되어 해당 작업을 수행한다.
 
 ```js
