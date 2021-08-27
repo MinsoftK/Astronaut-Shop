@@ -15,11 +15,10 @@ const Cart = memo((props) => {
 	let [selectPay, setSelectPay] = useState(0); //각각의 상품 가격을 저장하는 state
 	let [isselect, setIsSelect] = useState([]); //체크박스가 선택되었는지 저장하는 state
 	let [totalPay, setTotalPay] = useState(0); //선택한 상품의 총 결제 금액을 저장
-	let [itemState, setItemState] = useState([]);
+
 	//처음 렌더링될 때
 	useEffect(() => {
-		console.log('훅을 이용해 redux state 가져오기', reduxstate);
-		console.log('state', reduxstate);
+		console.log('redux state 가져오기', reduxstate);
 
 		//렌더링될때 상품의 개수만큼 checkbox state를 저장할 obj 생성
 		let copybox = [];
@@ -34,9 +33,8 @@ const Cart = memo((props) => {
 
 	//선택된 상품이나 가격이 변할 때, 총 결제금액 렌더링
 	useEffect(() => {
-		console.log('박스 선택 값', isselect);
-		console.log('상품 가격 값', selectPay);
-		console.log('reduxstate', reduxstate);
+		console.log('체크박스 선택 list', isselect);
+		console.log('상품 가격 선택 list', selectPay);
 
 		let total = 0;
 		for (let i = 0; i < reduxstate.length; i++) {
@@ -160,6 +158,7 @@ const Cart = memo((props) => {
 		</>
 	);
 });
+// redux 훅 사용으로 인한 삭제
 // const 함수명 = (state) => {
 // 	console.log('state', state);
 // 	return {
