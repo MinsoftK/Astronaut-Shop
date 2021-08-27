@@ -35,17 +35,16 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 
 ![](https://github.com/MinsoftK/astronaut-shop/blob/master/flowchart3.png?raw=true)
 
-- 최상단인 APP에서부터 데이터를 자식 컴포넌트까지 뿌려준다.
-- Cart 컨테이너에선 redux로 상태 관리한다.
+- APP에서부터 데이터를 Props로 전달.
+- Cart 컨테이너에선 Redux로 상태 관리.
 - 현재의 데이터 흐름을 결정하게 된 내용의 [포스트](https://minsoftk.tistory.com/66)
-- 프로젝트를 시작할 때 백엔드없이 시작하다 보니 기존의 Data를 프로젝트의 JS 파일에서 받아온다. 그래서 현재 데이터의 수정이 불가하다. 백엔드를 연결 이후에 '결제' 기능을 추가해 Data를 수정할 계획
 
 <br/>
 <br/>
 
 # 4. 주요 기능
 
-기존의 쇼핑몰을 참고하여, 사용자들에게 편리한 기능들과 보기 좋은 UX를 제공하는 서비스를 개발을 중점으로 했습니다.
+기존의 쇼핑몰을 참고하여, 사용자들이 사용하기 편리한 기능들과 깔끔한 UI/UX를 제공하는 서비스를 개발을 중점으로 했습니다.
 
 <br/>
 
@@ -54,9 +53,9 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 <div markdown="1">
 <br/>
 
-<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme1.png?raw=true" width="800" height="600"/></center>
+<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme1.png?raw=true" width="600" height="400"/></center>
 
-- 프로젝트를 처음 시작할 때, 미리 Data를 json파일로 만들어놨다. 해당 데이터들을 다른 [github Repository](https://github.com/MinsoftK/jsontest/blob/master/test0.json)에 올려놨다. 여자상품인지 남자상품인지에 따라 다른 json파일을 axios 모듈로 받아온다. 해당 데이터를 기존의 데이터 obj에 추가해준다.  
+- 프로젝트를 처음 시작할 때, 미리 Data를 JSON 파일로 만들어놨다. 해당 데이터들을 다른 [github Repository](https://github.com/MinsoftK/jsontest/blob/master/test0.json)에 올려놨다. 여자상품인지 남자상품인지에 따라 다른 json파일을 axios 모듈로 받아온다. 해당 데이터를 기존의 데이터 obj에 추가해준다.  
   👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/d84390fe076984f8b2f7c370e348df8a4862ec1b/shop/src/container/ShoesList.js#L90)
 
 - 더 보기 버튼을 클릭했을 때, 만약 더는 진열할 상품이 없다면 더 보기 버튼을 비활성화시킨다. 남자, 여자 카테고리의 버튼의 state를 따로 관리한다.
@@ -73,8 +72,9 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 <div markdown="2">
 <br/>
 
-<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/ezgif.com-gif-maker2.gif?raw=true" width="800" height="600"/></center>
-- 하나의 상품의 클릭이벤트가 발생했을때, history 훅을 이용해 `src`로 이동하게 했다. 그러면 아래와 같이 해당 상품의 정보로 이동할 수 있다.
+<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/ezgif.com-gif-maker2.gif?raw=true" width="600" height="400"/></center>
+
+- 하나의 상품의 클릭이벤트가 발생했을때, history 훅을 이용해 `src`로 이동하게 했다. 그러면 그림과 같이 해당 상품의 정보로 이동할 수 있다.
 
 ```js
 (shop/src/component/ShoesItem.js)
@@ -105,13 +105,13 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 
 ## 장바구니
 
-### 👉 [ 코드 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
-
-<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/ezgif.com-gif-maker.gif?raw=true" width="600" height="600"/></center>
+<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/ezgif.com-gif-maker.gif?raw=true" width="600" height="400"/></center>
 
 - 그림과 같이 상품 상세정보창에서 장바구니에 추가 버튼을 클릭하면, 장바구니 페이지에 추가가 된다. 상세페이지에서 장바구니 페이지로 Data 전달은 상당히 번거롭다. 그래서 Redux 상태 관리 툴을 이용해 관리했다. 👉 [redux code보기](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/redux.js)
 - 장바구니 추가 버튼을 눌르면 payload로 redux데이터에 해당 컴포넌트에서 props로 받아온 데이터를 넘겨준다.
 - 장바구니 페이지의 `+`, `-` 버튼을 눌를때마다 redux의 action으로 전달되어 해당 작업을 수행한다.
+
+👉 [ 장바구니 페이지 코드 전체 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/container/Cart.js)
 
 ```js
 <button
@@ -219,7 +219,7 @@ const onClickBtn = (i) => {
 
 > lazy loading 적용 전
 
-<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme4(lazy-before).png?raw=true" width="600" height="600"/></center>
+<center><img src="https://github.com/MinsoftK/astronaut-shop/blob/master/shop/src/img/readme4(lazy-before).png?raw=true" width="600" height="400"/></center>
 
 <br/><br/>
 
