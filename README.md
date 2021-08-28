@@ -247,7 +247,22 @@ const onClickBtn = (i) => {
 <br/>
 
 - memo를 사용했을 때, 큰 차이가 없이 렌더링 되는 경우도 있었다. 평균적으로 전체 렌더링 시간은 감소했다. 다만 lazy loading처럼 큰 속도 향상은 볼 수 없었다.
+- 구글 크롬 부라우저에서는 native lazy loading을 지원한다. 해당 방식이 지원되면서, 개발자는 이미지에 loading 속성만 추가해주면 된다. `loading="lazy"` 뷰포트에서 일정한 거리에 닿을 때까지 로딩을 지연시킨다.
 
+```js
+<div className="col-md-4" onClick={onClick}>
+	<img
+		loading="lazy"
+		src={props.shoes.imageUrl}
+		width="100%"
+		alt="..."
+		style={{ height: '208px', width: '208px' }}></img>
+	<h4>{props.shoes.title}</h4>
+	<h5>₩ {itemPrice}</h5>
+</div>
+```
+
+[image lazy loading](https://helloinyong.tistory.com/297#title-2)
 <br/>
 
   </div>
@@ -903,7 +918,8 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 - ~~상품 선택 이후 수량을 변경했을 때, 결제금액이 최신화 되지 않는 오류~~ (21.08.26)
 - ~~장바구니에서 상품 삭제시 장바구니 list 업데이트 오류~~ (21.08.26)
 - ~~항목선택 state와 가격 state 합치기~~ (useEffect 오류로 취소)
-- ~~상품 장바구니로 추가시 합친 State가 빈 배열로 변하는 문제~~ (useEffect 중복 문제로 State를 다시 나눠서 해결해야 했다.)
+- ~~상품 장바구니로 추가시 합친 State가 빈 배열로 변하는 문제~~ (useEffect 중복으로 빈 배열로 렌더링.)
+- ~~상품들의 이미지가 로딩되기 전에 콘텐츠들이 밀려나는 오류~~ (21.08.28)
 - 장바구니에 넣기 전에 재고가 0인 경우 검증.
 - 상세페이지로 이동 후, 뒤로가기 눌렀을 때 버튼 비활성화가 풀리는 오류
 
@@ -959,3 +975,6 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 - 6.5  
    https://minsoftk.tistory.com/64  
   https://minsoftk.tistory.com/65
+
+- 7
+  [img lazy loading](https://helloinyong.tistory.com/297#title-2)
