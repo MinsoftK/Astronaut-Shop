@@ -48,6 +48,11 @@ const About = (props) => {
 			clearTimeout(Timer);
 		};
 	}, []);
+
+	//재고 개수가 0보다 작을때 버튼 클릭시 경고창
+	const remainAlert = () => {
+		alert('재고가 부족한 상품입니다.');
+	};
 	return (
 		<>
 			<div className="container">
@@ -85,7 +90,10 @@ const About = (props) => {
 										price: findItem.price,
 									},
 								});
-								history.push('/cart');
+								if (findItem.remain > 0) history.push('/cart');
+								else {
+									this.remainAlert();
+								}
 							}}>
 							장바구니에 추가
 						</button>

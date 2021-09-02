@@ -1,6 +1,6 @@
 .cart-display-item {
 	font-size: 1.2rem;
-	width: 85%;
+	width: 65%;
 	margin: auto;
 	text-align: center;
 	vertical-align: middle;
@@ -19,5 +19,15 @@
 	}
 	.payment {
 		display: none;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.cart-display-item {
+		font-size: 1.2rem;
+		width: 50%;
+		margin: auto;
+		text-align: center;
+		vertical-align: middle;
 	}
 }

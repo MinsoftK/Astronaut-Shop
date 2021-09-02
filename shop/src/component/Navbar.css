@@ -5,3 +5,7 @@
 .Navbar a:visited {
 	color: white;
 }
+
+.Navbar {
+	width: 100%;
+}

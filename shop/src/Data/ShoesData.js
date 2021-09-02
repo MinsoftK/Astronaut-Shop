@@ -8,7 +8,7 @@ let Data = [
 		price: 148000,
 		imageUrl:
 			'https://github.com/MinsoftK/jsontest/blob/master/cshoes3.jpg?raw=true',
-		remain: 5,
+		remain: 0,
 	},
 	{
 		id: 1,
