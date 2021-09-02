@@ -870,6 +870,8 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
   <div markdown="8">
 <br/>
 
+update 중...
+
 <br/>
 
 </div>
