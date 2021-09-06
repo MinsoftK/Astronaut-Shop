@@ -31,6 +31,10 @@ const ShoesList = (props) => {
 		console.log('props.shoes', props.shoes);
 		console.log('더보기 버튼 클릭', props); // shoes 데이터만큼 반복된다.
 	}, [props, btndisable, wbtndisable]);
+	useEffect(() => {
+		console.log(shoesNum);
+		console.log(wshoesNum);
+	}, [shoesNum, wshoesNum]);
 	/************** 렌더링 관련 컴포넌트 **************/
 	//props.num이 0이면 남자 화면 렌더링
 	const Man = () => {
