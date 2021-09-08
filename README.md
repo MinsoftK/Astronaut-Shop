@@ -737,18 +737,6 @@ const onClickBtn = (i) => {
 
 </details>
 
-<details>
-<summary> 6.8. onClick 이벤트에 alert를 넣었을 때 오류.</summary>
-  <div markdown="8">
-<br/>
-
-update 중...
-
-<br/>
-
-</div>
-</details>
-
 </div>
      </details>
 
@@ -877,6 +865,29 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 </div>
 </details>
 
+<details>
+<summary>6.8. 재고가 0일때 장바구니에 못담게 하기</summary>
+  <div markdown="8">
+<br/>
+<br/>
+
+- 처음엔 ShoesItem에서 재고가 0이라면 alert창을 뜨게 했지만, 만약 강제로 `http://localhost:3000/manshoes/0` 접속해서 장바구니 버튼을 눌렀을 경우를 막을 수가 없었다. 따라서 ShoesList에서 장바구니 버튼을 못 누르게 막아야 했다. 하지만 컴포넌트 단에서는 onClick 이벤트에 작성해도 문제가 없었는데, About 페이지에서는 alert() 함수를 인식하지 못했다.
+
+#### [해결 방안 탐색]
+
+- 왜 ShoesItem에서는 alert창 로직을 넣을 수 있는데 ShoesList엔 못넣을까 생각해봤다. 오류는 alert함수를 찾을 수 없다고 뜬다. 그러다 [stackoverflow](https://stackoverflow.com/questions/54058765/typeerror-alert-is-not-a-function) 글을 봤는데, 혹시 함수를 재정의하는 경우가 아닌지 확인하라는 글이였다. 그래서 내가 선언한 것들중 문제가 되는게 있는지 살펴봤다. 그러다 state 변수에 alert라고 정의해놓은 것을 확인했다...😂
+
+#### [해결방안 적용]
+
+- State 변수의 이름을 다른 이름으로 바꿔준 뒤, onClick 이벤트에서 재고가 0이라면 페이지 이동을 하지 않고 alert창을 띄어준다.
+
+<br/>
+
+<br/>
+
+</div>
+</details>
+
 <br/><br/>
 
 # 7. 개선
@@ -888,7 +899,7 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 - ~~항목선택 state와 가격 state 합치기~~ (useEffect 오류로 취소)
 - ~~상품 장바구니로 추가시 합친 State가 빈 배열로 변하는 문제~~ (useEffect 중복으로 빈 배열로 렌더링.)
 - ~~상품들의 이미지가 로딩되기 전에 콘텐츠들이 이미지 공간을 가지고 있지 않아 합쳐지는 오류~~ (21.08.28)
-- ~~장바구니에 넣기 전에 재고가 0인 경우 검증.~~ -> 트러블슈팅 6.8. (21.09.02)
+- ~~장바구니에 넣기 전에 재고가 0인 경우 검증. -> 트러블슈팅 6.8. (21.09.02)~~
 - 상세페이지로 이동 후, 뒤로가기 눌렀을 때 버튼 비활성화가 풀리는 오류
 - 작은 화면에서 결제화면 짤림 현상-> img-fuild 속성 추가 하지만 이미지가 보이지 않음.[react-responsive](https://velog.io/@st2702/%EB%B0%98%EC%9D%91%ED%98%95-%EC%9B%B9-Media-Query)에서 media query로 다른 table을 대신 넣어주기
 

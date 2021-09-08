@@ -18,7 +18,7 @@ let Boxtitle = styled.h4`
 const About = (props) => {
 	let { id } = useParams();
 	let history = useHistory();
-	let [alert, setAlert] = useState(1);
+	let [alerttime, setAlertTime] = useState(1);
 	let [tab, setTab] = useState('');
 	let [switchOn, setSwitchOn] = useState(false); //tab컨트롤을 위한 스위치 state
 	let [itemPrice, setItemPrice] = useState(0); //, 붙인 가격 포맷을 저장하는 state
@@ -39,7 +39,7 @@ const About = (props) => {
 
 		//타이머 설정으로 alert 창 컨트롤
 		let Timer = setTimeout(() => {
-			setAlert(0);
+			setAlertTime(0);
 		}, 4000);
 
 		//useEffect는 return값은 해당 effect가 더이상 실행할 필요가 없을 때 청소하는 용도.
@@ -92,7 +92,7 @@ const About = (props) => {
 								});
 								if (findItem.remain > 0) history.push('/cart');
 								else {
-									this.remainAlert();
+									alert('재고가 없습니다!');
 								}
 							}}>
 							장바구니에 추가
