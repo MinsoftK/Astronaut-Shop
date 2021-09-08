@@ -42,17 +42,17 @@ const About = (props) => {
 			setAlert(0);
 		}, 4000);
 
-		//컴포넌트가 사라질때 실행할 코드 return
+		//useEffect는 return값은 해당 effect가 더이상 실행할 필요가 없을 때 청소하는 용도.
+		//더 이상 실행할 필요가 없는 경우는 다음 두가지.
+		//1. 인자로 넘기는 배열이 바뀌어 effect가 달라져야할때
+		//2. 해당 컴포넌트가 unmount될 때.
+		//4초마다 반복되는 Timer를 해제시켜준다.
 		return function getout() {
 			console.log('함수종료');
 			clearTimeout(Timer);
 		};
 	}, []);
 
-	//재고 개수가 0보다 작을때 버튼 클릭시 경고창
-	const remainAlert = () => {
-		alert('재고가 부족한 상품입니다.');
-	};
 	return (
 		<>
 			<div className="container">

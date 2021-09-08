@@ -737,6 +737,18 @@ const onClickBtn = (i) => {
 
 </details>
 
+<details>
+<summary> 6.8. onClick 이벤트에 alert를 넣었을 때 오류.</summary>
+  <div markdown="8">
+<br/>
+
+update 중...
+
+<br/>
+
+</div>
+</details>
+
 </div>
      </details>
 
@@ -860,18 +872,6 @@ let src =
 
 Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 white로 수정해버려, bootstrap css가 적용이 되지 않았다.  
  전체 a태그를 수정해버리는 코드를 삭제하고 `.className a { }` 로 수정
-<br/>
-
-</div>
-</details>
-
-<details>
-<summary> 6.8. onClick 이벤트에 alert를 넣었을 때 오류.</summary>
-  <div markdown="8">
-<br/>
-
-update 중...
-
 <br/>
 
 </div>
