@@ -1,6 +1,6 @@
 /* eslint-disable */
 import './ShoesItem.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 function ShoesItem(props) {
@@ -19,7 +19,11 @@ function ShoesItem(props) {
 	/** 최적화 **/
 	const onClick = () => {
 		console.log('src', { src });
-		history.push(src);
+		if (props.shoes.remain > 0) {
+			history.push(src);
+		} else {
+			alert('재고가 부족합니다!');
+		}
 	};
 	return (
 		<div className="col-md-4" onClick={onClick}>
