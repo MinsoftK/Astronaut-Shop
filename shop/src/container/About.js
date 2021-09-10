@@ -94,14 +94,16 @@ const About = (props) => {
 								else {
 									alert('재고가 없습니다!');
 								}
-							}}>
+							}}
+						>
 							장바구니에 추가
 						</button>
 						<button
 							className="btn btn-danger"
 							onClick={() => {
 								history.goBack();
-							}}>
+							}}
+						>
 							뒤로가기
 						</button>
 					</div>
@@ -113,14 +115,16 @@ const About = (props) => {
 				fill
 				variant="pills"
 				defaultActiveKey="/home"
-				style={{ marginTop: '50px' }}>
+				style={{ marginTop: '50px' }}
+			>
 				<Nav.Item>
 					<Nav.Link
 						eventKey="link-0"
 						onClick={() => {
 							setSwitchOn(false);
 							setTab(0);
-						}}>
+						}}
+					>
 						상품 설명
 					</Nav.Link>
 				</Nav.Item>
@@ -130,7 +134,8 @@ const About = (props) => {
 						onClick={() => {
 							setSwitchOn(false);
 							setTab(1);
-						}}>
+						}}
+					>
 						배송정보
 					</Nav.Link>
 				</Nav.Item>
@@ -140,7 +145,8 @@ const About = (props) => {
 						onClick={() => {
 							setSwitchOn(false);
 							setTab(2);
-						}}>
+						}}
+					>
 						환불정보
 					</Nav.Link>
 				</Nav.Item>

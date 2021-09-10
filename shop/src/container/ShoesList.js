@@ -27,14 +27,32 @@ const ShoesList = (props) => {
 		</div>
 	);
 
+	//버튼의 비활성화 상태 session스토리지에 저장
 	useEffect(() => {
-		console.log('props.shoes', props.shoes);
-		console.log('더보기 버튼 클릭', props); // shoes 데이터만큼 반복된다.
-	}, [props, btndisable, wbtndisable]);
-	useEffect(() => {
-		console.log(shoesNum);
-		console.log(wshoesNum);
-	}, [shoesNum, wshoesNum]);
+		//버튼을 클릭했을때, saveBtnData 이후 temp에 true로 저장된다.
+		let temp = window.sessionStorage.getItem('btnstate');
+		console.log(temp);
+		if (temp.length === 0) {
+			console.log(temp);
+			const shoesLength = { manbtn: btndisable, womanbtn: wbtndisable };
+			window.sessionStorage.setItem('btnstate', JSON.stringify(shoesLength));
+		}
+	}, [btndisable, wbtndisable]);
+
+	// useEffect(() => {
+	// 	//버튼을 클릭했을때, saveBtnData 이후 temp에 true로 저장된다.
+	// 	saveBtnData();
+	// 	let temp = window.sessionStorage.getItem('btnstate');
+	// 	if (temp.manbtn)
+	// 	console.log('temp', temp);
+	// }, [btndisable, wbtndisable]);
+
+	// //버튼의 비활성화 상태 session스토리지에 저장
+	// const saveBtnData = () => {
+	// 	const shoesLength = { manbtn: false, womanbtn: false };
+	// 	window.sessionStorage.setItem('btnstate', JSON.stringify(shoesLength));
+	// };
+
 	/************** 렌더링 관련 컴포넌트 **************/
 	//props.num이 0이면 남자 화면 렌더링
 	const Man = () => {
@@ -49,7 +67,8 @@ const ShoesList = (props) => {
 								shoes={item}
 								num={i}
 								sex="manshoes"
-								key={i}></ShoesItem>
+								key={i}
+							></ShoesItem>
 						);
 					})}
 				</Suspense>
@@ -68,7 +87,8 @@ const ShoesList = (props) => {
 								shoes={item}
 								num={i}
 								key={i}
-								sex="womanshoes"></ShoesItem>
+								sex="womanshoes"
+							></ShoesItem>
 						);
 					})}
 				</Suspense>
@@ -85,7 +105,8 @@ const ShoesList = (props) => {
 				style={{ margin: '4rem' }}
 				onClick={() => {
 					fetchData(props.all);
-				}}>
+				}}
+			>
 				더보기
 			</Button>
 		);
@@ -99,7 +120,6 @@ const ShoesList = (props) => {
 			? axios // i === 1일때 여자 카테고리 더보기 버튼 클릭시
 					.get('https://minsoftk.github.io/jsontest/test' + props.num + '.json')
 					.then((result) => {
-						console.log(result);
 						let newObj = [...props.wshoes, ...result.data]; //데이터 합치기
 						setWShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
 						if (newObj.length >= wshoesNum) setWBtnDisable(true); //합친 데이터의 길이가 더 크다면 여자 카테고리 버튼 비활성화
