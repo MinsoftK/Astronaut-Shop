@@ -19,8 +19,8 @@ const ShoesList = (props) => {
 	let [wshoesNum, setWShoesNum] = useState(Object.keys(Data2).length); //여자 상품의 개수
 	let [btndisable, setBtnDisable] = useState(false); //상품의 개수가 넘어가면 남자카테고리 더보기 버튼 비활성화
 	let [wbtndisable, setWBtnDisable] = useState(false); //상품의 개수가 넘어가면 여자 카테고리 더보기 버튼 비활성화
-	let [renderMan, setRenderMan] = useState(0);
-	let [renderWoMan, setRenderWoMan] = useState(0);
+	let [renderMan, setRenderMan] = useState(0); //남자 상품의 렌더링 개수를 저장
+	let [renderWoMan, setRenderWoMan] = useState(0); //여자 상품의 렌더링 개수를 저장
 
 	let IconStyle = { fontSize: 50, marginTop: '40vh' };
 	const antIcon = (
@@ -28,31 +28,37 @@ const ShoesList = (props) => {
 			<LoadingOutlined style={IconStyle} spin />
 		</div>
 	);
-	useEffect(() => {
-		console.log(btndisable, wbtndisable);
-		console.log(renderMan);
-	}, [renderMan]);
 
-	//버튼의 비활성화 상태 session스토리지에 저장
+	//btndisable, wbtndisable 업데이트시
 	useEffect(() => {
-		let btnData = window.sessionStorage.getItem('btnstate');
-		btnData = JSON.parse(btnData);
-		// 만약 btnData가 null이라면 session에 먼저 저장한다.
-		if (!btnData) {
-			saveBtnData();
-		} else {
-			//null이 아닐때 session에 저장되어 있는 btn의 상태를 기존의 상태에 입력.
-			if (btnData.manbtn === true) setBtnDisable(true);
-			if (btnData.womanbtn === true) setWBtnDisable(true);
-		}
-		//session의 정보를 업데이트 하는 과정이 끝나면 변경된 btn의 상태들을 다시 session에 저장한다.
-		return saveBtnData();
+		//session storage에서 저장된 남자 여자 상품의 총길이를 각각 가져온다.
+		let manLength = window.sessionStorage.getItem('totalManShoesLen');
+		let womanLength = window.sessionStorage.getItem('totalWoManShoesLen');
+		manLength = JSON.parse(manLength);
+		womanLength = JSON.parse(womanLength);
+
+		// 가져온 데이터가 null이 아니고 각각의 렌더링된 상품의 개수보다 크거나 같다면, 버튼을 비활성화 시킨다.
+		if (manLength !== null && manLength.shoesNum >= renderMan)
+			setBtnDisable(true);
+		if (womanLength !== null && womanLength.wshoesNum >= renderWoMan)
+			setWBtnDisable(true);
 	}, [btndisable, wbtndisable]);
 
-	//버튼의 비활성화 상태 session스토리지에 저장
-	const saveBtnData = () => {
-		const shoesLength = { manbtn: btndisable, womanbtn: wbtndisable };
-		window.sessionStorage.setItem('btnstate', JSON.stringify(shoesLength));
+	//남자 상품 더보기 버튼 클릭시 axios에서 session storage로 저장하는 함수.
+	const saveshoeslen = (input) => {
+		const shoesLength = { shoesNum: input };
+		window.sessionStorage.setItem(
+			'totalManShoesLen',
+			JSON.stringify(shoesLength)
+		);
+	};
+	//여자 상품 더보기 버튼 클릭시 axios에서 session storage로 저장하는 함수.
+	const savewshoeslen = (input) => {
+		const shoesLength = { wshoesNum: input };
+		window.sessionStorage.setItem(
+			'totalWoManShoesLen',
+			JSON.stringify(shoesLength)
+		);
 	};
 
 	/************** 렌더링 관련 컴포넌트 **************/
@@ -80,6 +86,7 @@ const ShoesList = (props) => {
 	};
 	//props.num이 1이면 여자 화면 렌더링
 	const Woman = () => {
+		setRenderWoMan(props.wshoes.length);
 		return (
 			<div className="row">
 				<Suspense fallback={<Spin indicator={antIcon} />}>
@@ -126,6 +133,7 @@ const ShoesList = (props) => {
 						let newObj = [...props.wshoes, ...result.data]; //데이터 합치기
 						setWShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
 						if (newObj.length >= wshoesNum) setWBtnDisable(true); //합친 데이터의 길이가 더 크다면 여자 카테고리 버튼 비활성화
+						savewshoeslen(newObj.length);
 						if (props.num) props.setWShoes(newObj);
 						else props.setShoes(newObj);
 						console.log('axios 데이터 바인딩 성공');
@@ -139,6 +147,7 @@ const ShoesList = (props) => {
 						let newObj = [...props.shoes, ...result.data]; //데이터 합치기
 						setShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
 						if (newObj.length >= shoesNum) setBtnDisable(true); //합친 데이터의 길이가 더 크다면 남자 카테고리 버튼 비활성화
+						saveshoeslen(newObj.length);
 						props.setShoes(newObj);
 						console.log('axios 데이터 바인딩 성공');
 					})
