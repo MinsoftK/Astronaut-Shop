@@ -29,29 +29,26 @@ const ShoesList = (props) => {
 
 	//버튼의 비활성화 상태 session스토리지에 저장
 	useEffect(() => {
-		//버튼을 클릭했을때, saveBtnData 이후 temp에 true로 저장된다.
-		let temp = window.sessionStorage.getItem('btnstate');
-		console.log(temp);
-		if (temp.length === 0) {
-			console.log(temp);
-			const shoesLength = { manbtn: btndisable, womanbtn: wbtndisable };
-			window.sessionStorage.setItem('btnstate', JSON.stringify(shoesLength));
+		let btnData = window.sessionStorage.getItem('btnstate');
+		btnData = JSON.parse(btnData);
+
+		// 만약 btnData가 null이라면 session에 먼저 저장한다.
+		if (!btnData) {
+			saveBtnData();
+		} else {
+			//null이 아닐때 session에 저장되어 있는 btn의 상태를 기존의 상태에 입력.
+			if (btnData.manbtn === true) setBtnDisable(true);
+			if (btnData.womanbtn === true) setWBtnDisable(true);
 		}
+		//session의 정보를 업데이트 하는 과정이 끝나면 변경된 btn의 상태들을 다시 session에 저장한다.
+		return saveBtnData();
 	}, [btndisable, wbtndisable]);
 
-	// useEffect(() => {
-	// 	//버튼을 클릭했을때, saveBtnData 이후 temp에 true로 저장된다.
-	// 	saveBtnData();
-	// 	let temp = window.sessionStorage.getItem('btnstate');
-	// 	if (temp.manbtn)
-	// 	console.log('temp', temp);
-	// }, [btndisable, wbtndisable]);
-
-	// //버튼의 비활성화 상태 session스토리지에 저장
-	// const saveBtnData = () => {
-	// 	const shoesLength = { manbtn: false, womanbtn: false };
-	// 	window.sessionStorage.setItem('btnstate', JSON.stringify(shoesLength));
-	// };
+	//버튼의 비활성화 상태 session스토리지에 저장
+	const saveBtnData = () => {
+		const shoesLength = { manbtn: btndisable, womanbtn: wbtndisable };
+		window.sessionStorage.setItem('btnstate', JSON.stringify(shoesLength));
+	};
 
 	/************** 렌더링 관련 컴포넌트 **************/
 	//props.num이 0이면 남자 화면 렌더링
