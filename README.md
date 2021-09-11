@@ -760,13 +760,19 @@ const onClickBtn = (i) => {
 
 #### [해결 방안 탐색]
 
-- 이를 해결하려면 '뒤로 가기' 버튼을 눌러서 다시 컴포넌트가 렌더링이 되어도, state 값에 상품들의 리스트가 전체 리스트의 길이인지를 저장하고 있어야 한다. 하지만 렌더링이 될 때, 버튼의 활성화를 결정하려면 useEffect를 사용해야 한다. 하지만 Axios를 사용했을 때 추가된 상품과 전체 길이를 비교해서 버튼의 활성화 여부를 결정하는데, 이를 useEffect에 전부 작성해야 한다는 것이 너무 비효율적이라는 생각이 들었다. 그래서 여러 방법을 고민해보고 구글링을 해보았다. 그 결과 Session Storage를 이용하는 방법을 제시하고 있었다. Redux 을 사용하는 것도 방법이었지만, 개인적으로 코드의 길이 측면에서나 웹 브라우저의 storage를 이용하기 때문에 메모리 측면에서도 Session Storage를 이용하는 것이 더 효율적이라고 생각했다.
+- 이를 해결하려면 '뒤로 가기' 버튼을 눌러서 다시 컴포넌트가 렌더링이 되어도, state 값에 상품들의 리스트가 전체 리스트의 길이인지를 저장하고 있어야 한다. 하지만 렌더링이 될 때, 버튼의 활성화를 결정하려면 useEffect를 사용해야 한다. 하지만 Axios를 사용했을 때 추가된 상품과 전체 길이를 비교해서 버튼의 활성화 여부를 결정하는데, 이를 useEffect에 전부 작성해야 한다는 것이 너무 비효율적이라는 생각이 들었다. 그래서 여러 방법을 고민해보고 구글링을 해보았다.  
+  ~~그 결과 Session Storage를 이용하는 방법을 제시하고 있었다. Redux 을 사용하는 것도 방법이었지만, 개인적으로 코드의 길이 측면에서나 웹 브라우저의 storage를 이용하기 때문에 메모리 측면에서도 Session Storage를 이용하는 것이 더 효율적이라고 생각했다.~~
 
-* [reference1](https://lion-king.tistory.com/18), [reference2](https://www.phpschool.com/gnuboard4/bbs/board.php?bo_table=qna_html&wr_id=300154&sca=&sfl=wr_subject%7C%7Cwr_content&stx=history&sop=and) 모두 Session Storage를 이용하는 방법을 제시하고 있었다.
+* ~~[reference1](https://lion-king.tistory.com/18), [reference2](https://www.phpschool.com/gnuboard4/bbs/board.php?bo_table=qna_html&wr_id=300154&sca=&sfl=wr_subject%7C%7Cwr_content&stx=history&sop=and) 모두 Session Storage를 이용하는 방법을 제시하고 있었다.~~
+
+##### 방법 수정
+
+- session storage만을 활용했을 때, `더보기` 버튼을 컨트롤하는 것이 굉장히 어려웠다. 왜냐하면 새로고침을 눌렀을 때, 진열된 상품의 렌더링이 초기화 되지만 session storage의 값은 그대로라 초기 상태에서도 버튼이 비활성화가 되는 치명적인 오류가 있었다. 그래서 조금 더 효율적인 방법을 생각했는데, map을 써서 상품을 렌더링하는 컴포넌트에서 `렌더링 된 총 상품의 개수`를 셀 수 있었다. 그리고 기존의 axios 호출하는 부에서, 추가된 데이터의 `총 길이`를 재활용해 state에 저장할 수 있었다. 이를 활용해서 더욱 쉽게 코드를 짤 수 있을 것 같았다.
 
 #### [해결방안 적용]
 
-- 생각보다 어떻게 처리해야할지 까다로웠다. useEffect안에 session storage의 저장하는 코드를 작성했을 때, 바로 더보기 버튼의 상태가 session storage로 다시 저장이 되어 더보기 버튼의 상태를 보존할 수가 없었다. session storage에 저장하는 작업과 불러오는 작업을 useEffect내에서 어떻게 작업을 분리해야할지 고민을 많이 했다. 그러다 최근에 useEffect의 return을 다시 공부하게 된 계기가 있었는데, return을 활용해서 해결할 수 있었다. return을 활용하면 clean-up[언마운트 될 때 경우](https://ko.reactjs.org/docs/hooks-effect.html#explanation-why-effects-run-on-each-update)으로 사용할 수 있다. 언마운트 되면서 정리 되는 함수이다. 따라서 처음에 설정한 Effect의 특정값이 변경이 됐을 때, 더보기 버튼의 상태를 session storage에서 가져온다. 이후 return에서 session storage에 저장해주는 로직을 넣어주면 session storage에서 정보를 받아오고 저장하는 로직을 분리해서 작성할 수 있었다.
+- 더보기 버튼 클릭시, 상품이 추가되고 추가된 `총 길이`를 session storage에 저장한다. 이후 상세페이지에서 뒤로가기를 눌렀을 때, **session storage에 상품들의 총 길이가 저장되어있는지 확인한다.** 만약 session storage에서 가져온 정보가 null이라면, useState의 기본값인 'false'가 들어가서 버튼이 활성화가 된다. **하지만 session storage 값이 존재하고, 불러온 데이터의 값이 렌더링된 상품의 개수보다 크거나 같다면 버튼을 비활성화 시킨다.**  
+  이를 통해 기존의 session storage로만 구현해 비효율적이였던 코드와 상태 관리를 더욱 효율적으로 할 수 있게 됐다.
 
 <br/>
 
@@ -774,39 +780,7 @@ const onClickBtn = (i) => {
 <summary> 📙기존의 코드 펼치기</summary>
 <br/>
 
-- 기존의 방식으로는 컴포넌트가 마운트되면서 session storage에 바로 저장이 되어버려서 기존의 값을 잃는다.
-
-```js
-useEffect(() => {
-	//버튼을 클릭했을때, saveBtnData 이후 temp에 true로 저장된다.
-	saveBtnData();
-	let temp = window.sessionStorage.getItem('btnstate');
-	if (temp.manbtn) console.log('temp', temp);
-}, [btndisable, wbtndisable]);
-
-//버튼의 비활성화 상태 session스토리지에 저장
-const saveBtnData = () => {
-	const shoesLength = { manbtn: false, womanbtn: false };
-	window.sessionStorage.setItem('btnstate', JSON.stringify(shoesLength));
-};
-```
-
-</details>
-
-<br/>
-
-<details>
-<summary> 📘변경된 코드 펼치기</summary>
-
-<br/>
-
-👉 [ 원본 보기 ](https://github.com/minsoftk/astronaut-shop/blob/16ecf4a07dd35e1f7035cb98c0b0fdfe4ae369c4/shop/src/container/ShoesList.js#L31)
-
-<br/>
-
-> 변경된 코드
-
-- return을 활용해 로직을 나눠서 session storage에 저장할 수 있었다.
+- 기존의 방식으로는 useEffect의 return을 활용해 session storage에 저장하고 불러오는 로직을 나눠서 버튼의 비활성화 상태를 컨트롤했다. 하지만 굉장히 치명적인 오류들이 발생했고(새로고침을 했을 때, session 데이터로 인한 버튼 비활성화), 굉장히 비효율적이라는 생각이 많이 들었던 코드.
 
 ```js
 (./src/container/ShoesList.js)
@@ -826,6 +800,58 @@ useEffect(() => {
 	//session의 정보를 업데이트 하는 과정이 끝나면 변경된 btn의 상태들을 다시 session에 저장한다.
 	return saveBtnData();
 	}, [btndisable, wbtndisable]);
+```
+
+</details>
+
+<br/>
+
+<details>
+<summary> 📘변경된 코드 펼치기</summary>
+
+<br/>
+
+👉 [ 원본 보기 ](https://github.com/minsoftk/astronaut-shop/blob/16ecf4a07dd35e1f7035cb98c0b0fdfe4ae369c4/shop/src/container/ShoesList.js#L31)
+
+<br/>
+
+> 변경된 코드
+
+- 컴포넌트가 렌더링 될 때, useState의 기본 세팅 값인 false로 업데이트가 된다. 그때 useEffect가 호출되며, session에 저장된 데이터를 가져온다. 만약 가져온 데이터가 null이라면 기본 값인 `false`를 그대로 사용. 하지만 null이 아니고, 가져온 데이터가 렌더링된 상품의 개수인 `renderMan`, `renderWoMan`의 값보다 크거나 같다면 버튼을 비활성화 시킨다.
+
+```js
+(./src/container/ShoesList.js)
+	//btndisable, wbtndisable 업데이트시
+	useEffect(() => {
+		//session storage에서 저장된 남자 여자 상품의 총길이를 각각 가져온다.
+		let manLength = window.sessionStorage.getItem('totalManShoesLen');
+		let womanLength = window.sessionStorage.getItem('totalWoManShoesLen');
+		manLength = JSON.parse(manLength);
+		womanLength = JSON.parse(womanLength);
+
+		// 가져온 데이터가 null이 아니고 각각의 렌더링된 상품의 개수보다 크거나 같다면, 버튼을 비활성화 시킨다.
+		if (manLength !== null && manLength.shoesNum >= renderMan)
+			setBtnDisable(true);
+		if (womanLength !== null && womanLength.wshoesNum >= renderWoMan)
+			setWBtnDisable(true);
+	}, [btndisable, wbtndisable]);
+
+	//남자 상품 더보기 버튼 클릭시 axios에서 session storage로 저장하는 함수.
+	const saveshoeslen = (input) => {
+		const shoesLength = { shoesNum: input };
+		window.sessionStorage.setItem(
+			'totalManShoesLen',
+			JSON.stringify(shoesLength)
+		);
+	};
+	//여자 상품 더보기 버튼 클릭시 axios에서 session storage로 저장하는 함수.
+	const savewshoeslen = (input) => {
+		const shoesLength = { wshoesNum: input };
+		window.sessionStorage.setItem(
+			'totalWoManShoesLen',
+			JSON.stringify(shoesLength)
+		);
+	};
 ```
 
 <br/>
@@ -995,9 +1021,8 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 - ~~상품 장바구니로 추가시 합친 State가 빈 배열로 변하는 문제~~ (useEffect 중복으로 빈 배열로 렌더링.)
 - ~~상품들의 이미지가 로딩되기 전에 콘텐츠들이 이미지 공간을 가지고 있지 않아 합쳐지는 오류~~ (21.08.28)
 - ~~장바구니에 넣기 전에 재고가 0인 경우 검증. ->~~ 트러블슈팅 6.8. (21.09.02)
-- ~~상세페이지로 이동 후, 뒤로가기 눌렀을 때 버튼 비활성화가 풀리는 오류~~ 트러블슈팅 5.6. (21.09.12)
+- ~~상세페이지로 이동 후, 뒤로가기 눌렀을 때 버튼 비활성화가 풀리는 오류~~ (트러블슈팅 5.6. 생성) (21.09.12)
 - 작은 화면에서 결제화면 짤림 현상-> img-fuild 속성 추가 하지만 이미지가 보이지 않음.[react-responsive](https://velog.io/@st2702/%EB%B0%98%EC%9D%91%ED%98%95-%EC%9B%B9-Media-Query)에서 media query로 다른 table을 대신 넣어주기
-- 버튼 비활성화는 해결했지만, 새로고침시 session의 데이터는 유지 하지만 렌더링은 초기화 됨. 더보기 버튼이 활성화 되어야되는 경우에 활성화가 안되는 문제가 발생. 새로고침시 session 데이터 지우기.
 
 ## 7.2. 기능 추가
 
