@@ -19,6 +19,8 @@ const ShoesList = (props) => {
 	let [wshoesNum, setWShoesNum] = useState(Object.keys(Data2).length); //여자 상품의 개수
 	let [btndisable, setBtnDisable] = useState(false); //상품의 개수가 넘어가면 남자카테고리 더보기 버튼 비활성화
 	let [wbtndisable, setWBtnDisable] = useState(false); //상품의 개수가 넘어가면 여자 카테고리 더보기 버튼 비활성화
+	let [renderMan, setRenderMan] = useState(0);
+	let [renderWoMan, setRenderWoMan] = useState(0);
 
 	let IconStyle = { fontSize: 50, marginTop: '40vh' };
 	const antIcon = (
@@ -26,12 +28,15 @@ const ShoesList = (props) => {
 			<LoadingOutlined style={IconStyle} spin />
 		</div>
 	);
+	useEffect(() => {
+		console.log(btndisable, wbtndisable);
+		console.log(renderMan);
+	}, [renderMan]);
 
 	//버튼의 비활성화 상태 session스토리지에 저장
 	useEffect(() => {
 		let btnData = window.sessionStorage.getItem('btnstate');
 		btnData = JSON.parse(btnData);
-
 		// 만약 btnData가 null이라면 session에 먼저 저장한다.
 		if (!btnData) {
 			saveBtnData();
@@ -54,6 +59,7 @@ const ShoesList = (props) => {
 	//props.num이 0이면 남자 화면 렌더링
 	const Man = () => {
 		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
+		setRenderMan(props.shoes.length);
 		return (
 			<div className="row">
 				<Suspense fallback={<Spin indicator={antIcon} />}>
