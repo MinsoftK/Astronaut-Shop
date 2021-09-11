@@ -131,7 +131,8 @@ netlify [Demo 버전](https://priceless-davinci-7b8ea1.netlify.app/)
 			},
 		});
 		history.push('/cart');
-	}}>
+	}}
+>
 	장바구니에 추가
 </button>
 ```
@@ -256,7 +257,8 @@ const onClickBtn = (i) => {
 		src={props.shoes.imageUrl}
 		width="100%"
 		alt="..."
-		style={{ height: '208px', width: '208px' }}></img>
+		style={{ height: '208px', width: '208px' }}
+	></img>
 	<h4>{props.shoes.title}</h4>
 	<h5>₩ {itemPrice}</h5>
 </div>
@@ -671,7 +673,7 @@ const onChange = (e) => {
 <details>
 <summary> 📘변경된 코드 펼치기</summary>
 
-<br/>
+<br/><br/>
 
 👉 [ 원본 보기 ](https://github.com/MinsoftK/astronaut-shop/blob/6f5a851647893dec98c3a2cd70353b3dcd5be541/shop/src/container/Cart.js#L19)
 
@@ -731,6 +733,99 @@ const onClickBtn = (i) => {
 	console.log(pay);
 	setSelectPay(pay);
 };
+```
+
+<br/>
+
+</details>
+
+<br/><br/>
+
+</div>
+     </details>
+
+<details>
+<summary> 5.6. 더보기 버튼 비활성화 후, 상세페이지에서 뒤로가기 눌렀을 때 버튼이 활성화 되는 문제</summary>
+<div markdown="6">
+
+## 뒤로가기 클릭 시, 버튼이 활성화 되는 문제
+
+<br/>
+
+- 상품 리스트에서 더보기 버튼을 눌러서 상품을 추가한 뒤, 상세페이지로 들어가 뒤로가기를 눌렀을 때, 다시 더보기 버튼이 활성화 되는 문제가 발생했다.
+
+#### [원인 도출]
+
+- 상세페이지에서 뒤로가기를 눌렀을 때, 상품리스트 컴포넌트에서 초기 State 값으로 설정되고 있었다.
+
+#### [해결 방안 탐색]
+
+- 이를 해결하려면 '뒤로 가기' 버튼을 눌러서 다시 컴포넌트가 렌더링이 되어도, state 값에 상품들의 리스트가 전체 리스트의 길이인지를 저장하고 있어야 한다. 하지만 렌더링이 될 때, 버튼의 활성화를 결정하려면 useEffect를 사용해야 한다. 하지만 Axios를 사용했을 때 추가된 상품과 전체 길이를 비교해서 버튼의 활성화 여부를 결정하는데, 이를 useEffect에 전부 작성해야 한다는 것이 너무 비효율적이라는 생각이 들었다. 그래서 여러 방법을 고민해보고 구글링을 해보았다. 그 결과 Session Storage를 이용하는 방법을 제시하고 있었다. Redux 을 사용하는 것도 방법이었지만, 개인적으로 코드의 길이 측면에서나 웹 브라우저의 storage를 이용하기 때문에 메모리 측면에서도 Session Storage를 이용하는 것이 더 효율적이라고 생각했다.
+
+* [reference1](https://lion-king.tistory.com/18), [reference2](https://www.phpschool.com/gnuboard4/bbs/board.php?bo_table=qna_html&wr_id=300154&sca=&sfl=wr_subject%7C%7Cwr_content&stx=history&sop=and) 모두 Session Storage를 이용하는 방법을 제시하고 있었다.
+
+#### [해결방안 적용]
+
+- 생각보다 어떻게 처리해야할지 까다로웠다. useEffect안에 session storage의 저장하는 코드를 작성했을 때, 바로 더보기 버튼의 상태가 session storage로 다시 저장이 되어 더보기 버튼의 상태를 보존할 수가 없었다. session storage에 저장하는 작업과 불러오는 작업을 useEffect내에서 어떻게 작업을 분리해야할지 고민을 많이 했다. 그러다 최근에 useEffect의 return을 다시 공부하게 된 계기가 있었는데, return을 활용해서 해결할 수 있었다. return을 활용하면 clean-up[언마운트 될 때 경우](https://ko.reactjs.org/docs/hooks-effect.html#explanation-why-effects-run-on-each-update)으로 사용할 수 있다. 언마운트 되면서 정리 되는 함수이다. 따라서 처음에 설정한 Effect의 특정값이 변경이 됐을 때, 더보기 버튼의 상태를 session storage에서 가져온다. 이후 return에서 session storage에 저장해주는 로직을 넣어주면 session storage에서 정보를 받아오고 저장하는 로직을 분리해서 작성할 수 있었다.
+
+<br/>
+
+<details>
+<summary> 📙기존의 코드 펼치기</summary>
+<br/>
+
+- 기존의 방식으로는 컴포넌트가 마운트되면서 session storage에 바로 저장이 되어버려서 기존의 값을 잃는다.
+
+```js
+useEffect(() => {
+	//버튼을 클릭했을때, saveBtnData 이후 temp에 true로 저장된다.
+	saveBtnData();
+	let temp = window.sessionStorage.getItem('btnstate');
+	if (temp.manbtn) console.log('temp', temp);
+}, [btndisable, wbtndisable]);
+
+//버튼의 비활성화 상태 session스토리지에 저장
+const saveBtnData = () => {
+	const shoesLength = { manbtn: false, womanbtn: false };
+	window.sessionStorage.setItem('btnstate', JSON.stringify(shoesLength));
+};
+```
+
+</details>
+
+<br/>
+
+<details>
+<summary> 📘변경된 코드 펼치기</summary>
+
+<br/>
+
+👉 [ 원본 보기 ](https://github.com/minsoftk/astronaut-shop/blob/16ecf4a07dd35e1f7035cb98c0b0fdfe4ae369c4/shop/src/container/ShoesList.js#L31)
+
+<br/>
+
+> 변경된 코드
+
+- return을 활용해 로직을 나눠서 session storage에 저장할 수 있었다.
+
+```js
+(./src/container/ShoesList.js)
+//버튼의 비활성화 상태 session스토리지에 저장
+useEffect(() => {
+	let btnData = window.sessionStorage.getItem('btnstate');
+	btnData = JSON.parse(btnData);
+
+	// 만약 btnData가 null이라면 session에 먼저 저장한다.
+	if (!btnData) {
+		saveBtnData();
+	} else {
+		//null이 아닐때 session에 저장되어 있는 btn의 상태를 기존의 상태에 입력.
+		if (btnData.manbtn === true) setBtnDisable(true);
+		if (btnData.womanbtn === true) setWBtnDisable(true);
+	}
+	//session의 정보를 업데이트 하는 과정이 끝나면 변경된 btn의 상태들을 다시 session에 저장한다.
+	return saveBtnData();
+	}, [btndisable, wbtndisable]);
 ```
 
 <br/>
@@ -899,7 +994,7 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 - ~~항목선택 state와 가격 state 합치기~~ (useEffect 오류로 취소)
 - ~~상품 장바구니로 추가시 합친 State가 빈 배열로 변하는 문제~~ (useEffect 중복으로 빈 배열로 렌더링.)
 - ~~상품들의 이미지가 로딩되기 전에 콘텐츠들이 이미지 공간을 가지고 있지 않아 합쳐지는 오류~~ (21.08.28)
-- ~~장바구니에 넣기 전에 재고가 0인 경우 검증. -> 트러블슈팅 6.8. (21.09.02)~~
+- ~~장바구니에 넣기 전에 재고가 0인 경우 검증. ->~~ 트러블슈팅 6.8. (21.09.02)
 - 상세페이지로 이동 후, 뒤로가기 눌렀을 때 버튼 비활성화가 풀리는 오류
 - 작은 화면에서 결제화면 짤림 현상-> img-fuild 속성 추가 하지만 이미지가 보이지 않음.[react-responsive](https://velog.io/@st2702/%EB%B0%98%EC%9D%91%ED%98%95-%EC%9B%B9-Media-Query)에서 media query로 다른 table을 대신 넣어주기
 
@@ -942,8 +1037,13 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 - 5.4. Map  
   https://lktprogrammer.tistory.com/121  
   https://mjn5027.tistory.com/80
-- 5.6. Splice
+- 5.5. Splice
   https://im-developer.tistory.com/103
+
+- 5.6.
+  https://lion-king.tistory.com/18  
+  https://www.phpschool.com/gnuboard4/bbs/board.php?bo_table=qna_html&wr_id=300154&sca=&sfl=wr_subject||wr_content&stx=history&sop=and
+
 - 6.1.  
   https://sentry.io/answers/unique-key-prop/
 
