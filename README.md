@@ -811,7 +811,7 @@ useEffect(() => {
 
 <br/>
 
-👉 [ 원본 보기 ](https://github.com/minsoftk/astronaut-shop/blob/16ecf4a07dd35e1f7035cb98c0b0fdfe4ae369c4/shop/src/container/ShoesList.js#L31)
+👉 [ 원본 보기 ](https://github.com/minsoftk/astronaut-shop/blob/2e73b9871e4a9072ff9b36d21de823b765c79f7c/shop/src/container/ShoesList.js#L33)
 
 <br/>
 
