@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useEffect, useState, memo, useRef } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { Checkbox } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +15,8 @@ const Cart = memo((props) => {
 	let [selectPay, setSelectPay] = useState(0); //각각의 상품 가격을 저장하는 state
 	let [isselect, setIsSelect] = useState([]); //체크박스가 선택되었는지 저장하는 state
 	let [totalPay, setTotalPay] = useState(0); //선택한 상품의 총 결제 금액을 저장
-
+	let [allSelect, setAllSelect] = useState(false); //전체선택 기능
+	const checkBoxChange = useRef();
 	//처음 렌더링될 때
 	useEffect(() => {
 		console.log('redux state 가져오기', reduxstate);
@@ -27,6 +28,7 @@ const Cart = memo((props) => {
 			copybox.push(false); //선택 박스 false 초기화
 			copypay.push(reduxstate[i].price * reduxstate[i].quan); // 상품 각각의 결제가격 초기화
 		}
+		console.log(copybox);
 		setIsSelect(copybox);
 		setSelectPay(copypay);
 	}, []);
@@ -36,6 +38,13 @@ const Cart = memo((props) => {
 		console.log('체크박스 선택 list', isselect);
 		console.log('상품 가격 선택 list', selectPay);
 
+		// check된 상품의 체크 표시하기
+		// for (let i = 0; i < reduxstate.length; i++) {
+		// 	if (isselect[i] === true) {
+		// 	}
+		// }
+
+		// check 된 상품의 가격을 더하기
 		let total = 0;
 		for (let i = 0; i < reduxstate.length; i++) {
 			if (isselect[i] === true) {
@@ -45,10 +54,24 @@ const Cart = memo((props) => {
 		setTotalPay(total);
 	}, [isselect, selectPay]);
 
+	//상품 전체 선택
+	const onAllChange = (e) => {
+		console.log(checkBoxChange);
+		checkBoxChange.current.state.checked = e.target.checked;
+		console.log(checkBoxChange);
+		console.log(e);
+		let copy = [...isselect];
+		for (let i = 0; i < copy.length; i++) {
+			copy[i] = e.target.checked;
+		}
+		console.log(copy);
+		setIsSelect(copy);
+		setAllSelect(e.target.checked);
+	};
+
 	//체크된 상품의 총 상품금액 업데이트
 	const onChange = (e) => {
 		console.log(`checked = ${e.target.checked} , i = ${e.target.checkNumber}`);
-
 		//copy의 checkNumber 인덱스 값을 변경해준다.
 		let copy = [...isselect];
 		copy[e.target.checkNumber] = e.target.checked;
@@ -73,7 +96,11 @@ const Cart = memo((props) => {
 			<Table className="cart-display-item" bordered>
 				<thead>
 					<tr>
-						<th>선택</th>
+						<th>
+							전체선택
+							<br />
+							<Checkbox ref={checkBoxChange} onChange={onAllChange}></Checkbox>
+						</th>
 						<th>상품정보</th>
 						<th>상품명</th>
 						<th>수량</th>
@@ -91,13 +118,15 @@ const Cart = memo((props) => {
 									<Checkbox
 										checkNumber={i}
 										item={item}
-										onChange={onChange}></Checkbox>
+										onChange={onChange}
+									></Checkbox>
 								</td>
 								<td>
 									<img
 										style={{ height: '10rem', width: '10rem' }}
 										src={item.imageUrl}
-										alt="..."></img>
+										alt="..."
+									></img>
 								</td>
 								<td>{item.name}</td>
 								<td>
@@ -109,7 +138,8 @@ const Cart = memo((props) => {
 												data: i,
 											});
 											onClickBtn(i);
-										}}>
+										}}
+									>
 										-
 									</Button>
 									{' ' + item.quan + ' '}
@@ -119,7 +149,8 @@ const Cart = memo((props) => {
 											console.log('isselect[i]', isselect[i], i);
 											dispatch({ type: '수량증가', data: i });
 											onClickBtn(i);
-										}}>
+										}}
+									>
 										+
 									</Button>
 								</td>
@@ -134,7 +165,8 @@ const Cart = memo((props) => {
 										onClick={() => {
 											dispatch({ type: '항목삭제', data: i });
 											onDelete(i);
-										}}>
+										}}
+									>
 										X
 									</Button>
 								</td>

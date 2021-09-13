@@ -1,10 +1,13 @@
 .cart-display-item {
+	display: inline-block;
 	font-size: 1.2rem;
 	width: 65%;
 	margin: auto;
 	text-align: center;
+	justify-content: center;
 	vertical-align: middle;
 }
+
 .payment {
 	margin-top: 3rem;
 	background-color: #fafafa;
