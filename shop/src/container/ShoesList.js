@@ -133,9 +133,8 @@ const ShoesList = (props) => {
 						let newObj = [...props.wshoes, ...result.data]; //데이터 합치기
 						setWShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
 						if (newObj.length >= wshoesNum) setWBtnDisable(true); //합친 데이터의 길이가 더 크다면 여자 카테고리 버튼 비활성화
-						savewshoeslen(newObj.length);
-						if (props.num) props.setWShoes(newObj);
-						else props.setShoes(newObj);
+						savewshoeslen(newObj.length); // 길이를 session storage에 저장
+						props.setWShoes(newObj); //부모의 setState를 이용해 합쳐진 데이터 배열 저장.
 						console.log('axios 데이터 바인딩 성공');
 					})
 					.catch((e) => {
@@ -147,8 +146,8 @@ const ShoesList = (props) => {
 						let newObj = [...props.shoes, ...result.data]; //데이터 합치기
 						setShoesNum(Data.length + result.data.length); //원래 Data와 추가된 데이터의 길이
 						if (newObj.length >= shoesNum) setBtnDisable(true); //합친 데이터의 길이가 더 크다면 남자 카테고리 버튼 비활성화
-						saveshoeslen(newObj.length);
-						props.setShoes(newObj);
+						saveshoeslen(newObj.length); // 길이를 session storage에 저장
+						props.setShoes(newObj); //부모의 setState를 이용해 합쳐진 데이터 배열 저장.
 						console.log('axios 데이터 바인딩 성공');
 					})
 					.catch((e) => {
