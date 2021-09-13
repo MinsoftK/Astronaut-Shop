@@ -11,12 +11,12 @@ const Cart = memo((props) => {
 			state.remainReducer
 	);
 	let dispatch = useDispatch();
-
+	let checkBoxChange = useRef(null);
 	let [selectPay, setSelectPay] = useState(0); //각각의 상품 가격을 저장하는 state
 	let [isselect, setIsSelect] = useState([]); //체크박스가 선택되었는지 저장하는 state
 	let [totalPay, setTotalPay] = useState(0); //선택한 상품의 총 결제 금액을 저장
 	let [allSelect, setAllSelect] = useState(false); //전체선택 기능
-	const checkBoxChange = useRef();
+
 	//처음 렌더링될 때
 	useEffect(() => {
 		console.log('redux state 가져오기', reduxstate);
@@ -25,7 +25,9 @@ const Cart = memo((props) => {
 		let copybox = [];
 		let copypay = [];
 		for (let i = 0; i < reduxstate.length; i++) {
-			copybox.push(false); //선택 박스 false 초기화
+			if (allSelect) copybox.push(true);
+			//선택 박스 false 초기화
+			else copybox.push(false); //선택 박스 false 초기화
 			copypay.push(reduxstate[i].price * reduxstate[i].quan); // 상품 각각의 결제가격 초기화
 		}
 		console.log(copybox);
@@ -54,17 +56,25 @@ const Cart = memo((props) => {
 		setTotalPay(total);
 	}, [isselect, selectPay]);
 
+	useEffect(() => {
+		let temp = document.getElementsByClassName('ant-checkbox');
+		console.log(temp[0]);
+		temp[0].classList.add('test');
+		if (allSelect === true) {
+			let temp = document.getElementsByClassName('ant-checkbox');
+			for (let i = 1; i <= temp.length; i++) {
+				temp[i].classList.add('ant-checkbox-checked');
+			}
+		}
+		console.log(temp);
+	}, [allSelect]);
+
 	//상품 전체 선택
 	const onAllChange = (e) => {
-		console.log(checkBoxChange);
-		checkBoxChange.current.state.checked = e.target.checked;
-		console.log(checkBoxChange);
-		console.log(e);
 		let copy = [...isselect];
-		for (let i = 0; i < copy.length; i++) {
+		for (let i = 0; i < isselect.length; i++) {
 			copy[i] = e.target.checked;
 		}
-		console.log(copy);
 		setIsSelect(copy);
 		setAllSelect(e.target.checked);
 	};
@@ -99,7 +109,7 @@ const Cart = memo((props) => {
 						<th>
 							전체선택
 							<br />
-							<Checkbox ref={checkBoxChange} onChange={onAllChange}></Checkbox>
+							<Checkbox onChange={onAllChange}></Checkbox>
 						</th>
 						<th>상품정보</th>
 						<th>상품명</th>
@@ -108,7 +118,7 @@ const Cart = memo((props) => {
 						<th>삭제</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody ref={checkBoxChange}>
 					{reduxstate.map((item, i) => {
 						//redux의 상품들 (장바구니에 저장된 상품들)
 						let total = item.price * item.quan;

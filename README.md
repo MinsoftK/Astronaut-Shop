@@ -1026,7 +1026,7 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 
 ## 7.2. 기능 추가
 
-- 상품 전체 선택 기능 추가.
+- ~~상품 전체 선택 기능 추가.~~ (진행중)
 - 로그인 기능 추가.
 - 채팅기능 추가
 - [번들 사이즈 최적화](https://roseline.oopy.io/dev/optimize-bundle-size)
