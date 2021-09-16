@@ -1085,3 +1085,7 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 
 - 7
   [img lazy loading](https://helloinyong.tistory.com/297#title-2)
+
+- 7.2
+
+  [map 안에서 useRef](https://velog.io/@zerozoo-front/react-hooks-map-%EC%97%90%EC%84%9C-ref-%EB%A5%BC-%EC%A7%80%EC%A0%95%ED%95%98%EC%9E%90)

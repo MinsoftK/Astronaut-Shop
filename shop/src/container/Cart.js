@@ -10,8 +10,9 @@ const Cart = memo((props) => {
 			//redux안에 있던 모든 state
 			state.remainReducer
 	);
+
 	let dispatch = useDispatch();
-	let checkBoxChange = useRef(null);
+	let checkBoxChange = useRef([]);
 	let [selectPay, setSelectPay] = useState(0); //각각의 상품 가격을 저장하는 state
 	let [isselect, setIsSelect] = useState([]); //체크박스가 선택되었는지 저장하는 state
 	let [totalPay, setTotalPay] = useState(0); //선택한 상품의 총 결제 금액을 저장
@@ -40,12 +41,6 @@ const Cart = memo((props) => {
 		console.log('체크박스 선택 list', isselect);
 		console.log('상품 가격 선택 list', selectPay);
 
-		// check된 상품의 체크 표시하기
-		// for (let i = 0; i < reduxstate.length; i++) {
-		// 	if (isselect[i] === true) {
-		// 	}
-		// }
-
 		// check 된 상품의 가격을 더하기
 		let total = 0;
 		for (let i = 0; i < reduxstate.length; i++) {
@@ -56,17 +51,12 @@ const Cart = memo((props) => {
 		setTotalPay(total);
 	}, [isselect, selectPay]);
 
+	//전체선택이 되었을 때, ref에 입력된 상품들의 체크박스 상태를 수정한다.
 	useEffect(() => {
-		let temp = document.getElementsByClassName('ant-checkbox');
-		console.log(temp[0]);
-		temp[0].classList.add('test');
-		if (allSelect === true) {
-			let temp = document.getElementsByClassName('ant-checkbox');
-			for (let i = 1; i <= temp.length; i++) {
-				temp[i].classList.add('ant-checkbox-checked');
-			}
-		}
+		let temp = checkBoxChange.current;
 		console.log(temp);
+		console.log(temp[0].props);
+		for (let i = 0; i < temp.length; i++) {}
 	}, [allSelect]);
 
 	//상품 전체 선택
@@ -101,6 +91,7 @@ const Cart = memo((props) => {
 		setIsSelect(list);
 		setSelectPay(pay);
 	};
+
 	return (
 		<>
 			<Table className="cart-display-item" bordered>
@@ -118,7 +109,7 @@ const Cart = memo((props) => {
 						<th>삭제</th>
 					</tr>
 				</thead>
-				<tbody ref={checkBoxChange}>
+				<tbody>
 					{reduxstate.map((item, i) => {
 						//redux의 상품들 (장바구니에 저장된 상품들)
 						let total = item.price * item.quan;
@@ -126,6 +117,9 @@ const Cart = memo((props) => {
 							<tr key={i}>
 								<td>
 									<Checkbox
+										ref={(element) => {
+											checkBoxChange.current[i] = element;
+										}}
 										checkNumber={i}
 										item={item}
 										onChange={onChange}
