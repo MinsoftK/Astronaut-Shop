@@ -24,6 +24,9 @@ let Cart = lazy(() => {
 let AfterService = lazy(() => {
 	return import('./container/AfterService');
 });
+let Notfound = lazy(() => {
+	return import('./container/404');
+});
 
 /* data */
 import Data from './Data/ShoesData';
@@ -62,7 +65,8 @@ const App = () => {
 							shoes={shoes}
 							wshoes={wshoes}
 							setShoes={setShoes}
-							num={0}></ShoesList>
+							num={0}
+						></ShoesList>
 					</Suspense>
 				</Route>
 				<Route exact path="/womanshoes">
@@ -71,7 +75,8 @@ const App = () => {
 							shoes={shoes}
 							wshoes={wshoes}
 							setWShoes={setWShoes}
-							num={1}></ShoesList>
+							num={1}
+						></ShoesList>
 					</Suspense>
 				</Route>
 				<Route path="/cart">
@@ -82,6 +87,11 @@ const App = () => {
 				<Route path="/afterservice">
 					<Suspense fallback={<Spin indicator={antIcon} />}>
 						<AfterService></AfterService>
+					</Suspense>
+				</Route>
+				<Route path="*">
+					<Suspense fallback={<Spin indicator={antIcon} />}>
+						<Notfound></Notfound>
 					</Suspense>
 				</Route>
 			</Switch>
