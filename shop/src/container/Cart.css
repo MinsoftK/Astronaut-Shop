@@ -1,7 +1,7 @@
 .cart-display-item {
-	display: inline-block;
+	display: block;
 	font-size: 1.2rem;
-	width: 65%;
+	width: 50%;
 	margin: auto;
 	text-align: center;
 	justify-content: center;
