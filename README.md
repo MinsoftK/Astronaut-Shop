@@ -1015,16 +1015,16 @@ Navbar 컴포넌트를 불러오는데 Navbar.css에 a 태그 전체를 컬러 w
 <br/>
 <br/>
 
-- 처음에 Netlify를 Demo를 간단히 보여주는 용도로 만들어서 이런 오류들을 생각하지 못했다. 굉장히 사소한 부분이라고 생각했지만, 서비스를 제공하고 받는 입장에서 굉장히 중요하게 생각하는 부분이었다는 것을 깨달았다.
+- 처음에 Netlify를 Demo를 간단히 보여주는 용도로 만들어서 이런 오류들을 생각하지 못했다. SPA에서의 라우팅만을 생각해서 발생한 오류다.
 
 #### [해결 방안 탐색]
 
 - [Netlify Docs static route](https://docs.netlify.com/routing/overview/), [stackoverflow issue](https://stackoverflow.com/questions/58065603/netlify-renders-404-on-page-refresh-using-react-and-react-router)  
-  Netlify 공식 블로그에 내용이 설명돼 있었다. 하지만 가장 먼저 왜 Netlify에서 새로고침 오류가 발생하는지 이해해야 했다. 여러 글들을 읽어보면서 내린 결론은 다음과 같다. Netlify에서 내가 만든 SPA를 배포해주고 있지만 내 프로젝트의 `/index.html`을 배포해주고 있다. 그리고 그 `/index.html`에서는 React 라우팅이 되어있기 때문에, Netlify에서는 해당 주소로 새로 고침을 해도 `index.html`의 라우팅 설정을 이해하지 못한다. 따라서 Netlify는 해당 라우팅 정보를 모르기 때문에 `Page Not Found`를 표시한다.
+  Netlify 공식 블로그에 내용이 설명돼 있었다. 하지만 가장 먼저 왜 Netlify에서 새로고침시 오류가 발생하는지 이해해야 했다. 여러 글들을 읽어보면서 내린 결론은 다음과 같다. Netlify에서 내가 만든 SPA를 배포해주고 있지만 내 프로젝트의 `/index.html`을 배포해주고 있다. 그리고 그 `/index.html`에서는 React 라우팅이 입력되어 있다. 따라서 Netlify에서는 해당 url로 새로고침을 했을때, React의 라우팅 설정을 이해하지 못한다. 따라서 Netlify는 해당 라우팅 정보를 모르기 때문에 `Page Not Found`를 표시한다.
 
 #### [해결방안 적용]
 
-- 이를 해결하기 위해, Netlify에서 `_redirects` 파일을 만들어 Netlify에서 접근을 해도 SPA 라우팅이 가능하도록 연결을 시켜줬다. [Redirect options](https://docs.netlify.com/routing/redirects/redirect-options/), 이곳에서 다양한 명령어들을 확인할 수 있었다. 어떤 경로로 접속을 해도 `index.html`로 200의 status로 접속하라는 명령을 아래처럼 Netlify에 입력했다. 하지만 접근을 막아야 하는 404 Page를 띄우지 못하는 오류도 발생했다. 404 Page 라우팅도 index.html에 추가해줘야 한다.
+- 이를 해결하기 위해, Netlify에서 `_redirects` 파일을 만들어줬다. [Redirect options](https://docs.netlify.com/routing/redirects/redirect-options/), 이곳에서 다양한 명령어들을 확인할 수 있었다. 어떤 경로로 접속을 해도 `index.html`로 200의 status로 접속하라는 명령을 아래처럼 Netlify에 입력했다. 하지만 접근을 막아야 하는 404 Page를 띄우지 못하는 오류도 발생했다. 404 Page 라우팅도 index.html에 추가해줘야 한다.
 
 ```
 /*  /index.html  200
