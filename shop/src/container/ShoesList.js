@@ -29,11 +29,24 @@ const ShoesList = (props) => {
 		</div>
 	);
 
+	//session 데이터 가져오기
+	let manLength = window.sessionStorage.getItem('totalManShoesLen');
+	let womanLength = window.sessionStorage.getItem('totalWoManShoesLen');
+	manLength = JSON.parse(manLength);
+	womanLength = JSON.parse(womanLength);
+
 	// 페이지가 처음 렌더링 될때, props의 길이만큼 render에 입력
 	// 페이지가 새로고침 될 경우, return을 통해 session 데이터 삭제
 	useEffect(() => {
 		setRenderMan(props.shoes.length);
 		setRenderMan(props.wshoes.length);
+		//session storage에서 저장된 남자 여자 상품의 총길이를 각각 가져온다.
+
+		// 가져온 데이터가 null이 아니고 각각의 렌더링된 상품의 개수보다 크거나 같다면, 버튼을 비활성화 시킨다.
+		if (manLength !== null && manLength.shoesNum >= renderMan)
+			setBtnDisable(true);
+		if (womanLength !== null && womanLength.wshoesNum >= renderWoMan)
+			setWBtnDisable(true);
 
 		// 페이지가 새로고침 됐을 경우 session 데이터 삭제
 		let deleteSession = () => {
@@ -42,14 +55,10 @@ const ShoesList = (props) => {
 		};
 		return deleteSession();
 	}, []);
+
 	//btndisable, wbtndisable 업데이트시
 	useEffect(() => {
 		//session storage에서 저장된 남자 여자 상품의 총길이를 각각 가져온다.
-		let manLength = window.sessionStorage.getItem('totalManShoesLen');
-		let womanLength = window.sessionStorage.getItem('totalWoManShoesLen');
-		manLength = JSON.parse(manLength);
-		womanLength = JSON.parse(womanLength);
-
 		// 가져온 데이터가 null이 아니고 각각의 렌더링된 상품의 개수보다 크거나 같다면, 버튼을 비활성화 시킨다.
 		if (manLength !== null && manLength.shoesNum >= renderMan)
 			setBtnDisable(true);
