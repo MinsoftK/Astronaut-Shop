@@ -49,6 +49,16 @@ const App = () => {
 				<Route exact path="/">
 					<MainPage></MainPage>
 				</Route>
+				<Route path="/manshoes/*">
+					<Suspense fallback={<Spin indicator={antIcon} />}>
+						<Notfound></Notfound>
+					</Suspense>
+				</Route>
+				<Route path="/womanshoes/*">
+					<Suspense fallback={<Spin indicator={antIcon} />}>
+						<Notfound></Notfound>
+					</Suspense>
+				</Route>
 				<Route path="/manshoes/:id">
 					<Suspense fallback={<Spin indicator={antIcon} />}>
 						<About shoes={shoes} wshoes={wshoes} num={0}></About>
