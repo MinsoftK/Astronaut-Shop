@@ -29,6 +29,19 @@ const ShoesList = (props) => {
 		</div>
 	);
 
+	// 페이지가 처음 렌더링 될때, props의 길이만큼 render에 입력
+	// 페이지가 새로고침 될 경우, return을 통해 session 데이터 삭제
+	useEffect(() => {
+		setRenderMan(props.shoes.length);
+		setRenderMan(props.wshoes.length);
+
+		// 페이지가 새로고침 됐을 경우 session 데이터 삭제
+		let deleteSession = () => {
+			window.sessionStorage.removeItem('totalManShoesLen');
+			window.sessionStorage.removeItem('totalWoManShoesLen');
+		};
+		return deleteSession();
+	}, []);
 	//btndisable, wbtndisable 업데이트시
 	useEffect(() => {
 		//session storage에서 저장된 남자 여자 상품의 총길이를 각각 가져온다.
@@ -65,7 +78,6 @@ const ShoesList = (props) => {
 	//props.num이 0이면 남자 화면 렌더링
 	const Man = () => {
 		//클릭했을 때, 해당 상품의 about 컴포넌트로 보내야 한다.
-		setRenderMan(props.shoes.length);
 		return (
 			<div className="row">
 				<Suspense fallback={<Spin indicator={antIcon} />}>
@@ -85,8 +97,7 @@ const ShoesList = (props) => {
 		);
 	};
 	//props.num이 1이면 여자 화면 렌더링
-	const Woman = () => {
-		setRenderWoMan(props.wshoes.length);
+	const Woman = (item) => {
 		return (
 			<div className="row">
 				<Suspense fallback={<Spin indicator={antIcon} />}>
@@ -159,9 +170,9 @@ const ShoesList = (props) => {
 			<div className="container">
 				<div className="row">
 					{props.num === 1 ? (
-						<Woman shoes={props}></Woman>
+						<Woman shoes={props} setRenderWoMan={setRenderWoMan}></Woman>
 					) : (
-						<Man shoes={props}></Man>
+						<Man shoes={props} setRenderMan={setRenderMan}></Man>
 					)}
 				</div>
 				{props.num === 1 ? (
