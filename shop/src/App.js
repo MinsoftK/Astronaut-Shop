@@ -49,12 +49,12 @@ const App = () => {
 				<Route exact path="/">
 					<MainPage></MainPage>
 				</Route>
-				<Route exact path="/manshoes/:id">
+				<Route path="/manshoes/:id">
 					<Suspense fallback={<Spin indicator={antIcon} />}>
 						<About shoes={shoes} wshoes={wshoes} num={0}></About>
 					</Suspense>
 				</Route>
-				<Route exact path="/womanshoes/:id">
+				<Route path="/womanshoes/:id">
 					<Suspense fallback={<Spin indicator={antIcon} />}>
 						<About shoes={shoes} wshoes={wshoes} num={1}></About>
 					</Suspense>

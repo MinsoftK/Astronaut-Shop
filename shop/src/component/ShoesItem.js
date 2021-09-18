@@ -9,8 +9,8 @@ function ShoesItem(props) {
 	//전달받은 props가 남자상품인지 여자상품인지엔 따라 url 설정
 	let src =
 		props.sex === 'womanshoes'
-			? '/womanshoes/' + props.shoes.id
-			: '/manshoes/' + props.shoes.id;
+			? '/womanshoes/' + parseInt(props.shoes.id)
+			: '/manshoes/' + parseInt(props.shoes.id);
 
 	//props의 신발가격 ',' 포맷처리
 	let itemPrice = props.shoes.price
@@ -32,7 +32,8 @@ function ShoesItem(props) {
 				src={props.shoes.imageUrl}
 				width="100%"
 				alt="..."
-				style={{ height: '208px', width: '208px' }}></img>
+				style={{ height: '208px', width: '208px' }}
+			></img>
 			<h4>{props.shoes.title}</h4>
 			<h5>₩ {itemPrice}</h5>
 		</div>

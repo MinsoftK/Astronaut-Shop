@@ -30,7 +30,7 @@ const Notfound = () => {
 		//count가 0보다 클때
 		count > 0 && Count();
 		if (count === 0) {
-			history.goBack();
+			history.push('/');
 		}
 		//반복되는 Timer 해제
 		//Timer가 비동기로 처리된 뒤 마운트 해제될 때, cleartimeout 요청
@@ -41,7 +41,7 @@ const Notfound = () => {
 		<>
 			<PageBox>
 				<Page>
-					잘못된 페이지입니다! {count}초뒤에 이전 페이지로 이동합니다.
+					잘못된 페이지입니다! {count}초뒤에 메인 페이지로 이동합니다.
 				</Page>
 			</PageBox>
 		</>

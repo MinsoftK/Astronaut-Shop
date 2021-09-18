@@ -106,7 +106,7 @@ const ShoesList = (props) => {
 		);
 	};
 	//props.num이 1이면 여자 화면 렌더링
-	const Woman = (item) => {
+	const Woman = () => {
 		return (
 			<div className="row">
 				<Suspense fallback={<Spin indicator={antIcon} />}>
